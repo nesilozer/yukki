@@ -1,0 +1,345 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="Yukki's Corner - Home of a Shiba Inu Puppy"
+  description="Welcome to Yukki's Corner! Follow the adventures, stories, and daily life of Yukki, an adorable Shiba Inu puppy."
+>
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-text">
+        <h1 class="hero-title">Welcome to Yukki's Corner</h1>
+        <p class="hero-subtitle">Follow the adventures of an adorable Shiba Inu puppy</p>
+        <div class="hero-buttons">
+          <a href="/about" class="btn">Meet Yukki</a>
+          <a href="/gallery" class="btn btn-secondary">View Gallery</a>
+        </div>
+      </div>
+      <div class="hero-image">
+        <div class="image-wrapper">
+          <img
+            src="/yukki-relaxing-in-bed.webp"
+            alt="Yukki, a cute Shiba Inu puppy"
+            width="600"
+            height="800"
+            loading="eager"
+            decoding="async"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features section">
+    <div class="container">
+      <h2 class="section-title">Discover Yukki's World</h2>
+      <div class="features-grid">
+        <div class="feature-card card">
+          <div class="feature-icon">📸</div>
+          <h3>Photo Gallery</h3>
+          <p>Explore adorable photos of Yukki's daily adventures and special moments</p>
+          <a href="/gallery" class="feature-link">View Gallery →</a>
+        </div>
+
+        <div class="feature-card card">
+          <div class="feature-icon">📖</div>
+          <h3>Stories</h3>
+          <p>Read heartwarming stories and updates about Yukki's journey</p>
+          <a href="/stories" class="feature-link">Read Stories →</a>
+        </div>
+
+        <div class="feature-card card">
+          <div class="feature-icon">💡</div>
+          <h3>Puppy Tips</h3>
+          <p>Learn helpful tips and advice for raising a Shiba Inu puppy</p>
+          <a href="/tips" class="feature-link">Get Tips →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Preview Section -->
+  <section class="about-preview">
+    <div class="container">
+      <div class="about-preview-content">
+        <div class="about-preview-text">
+          <h2>Meet Yukki</h2>
+          <p>
+            Yukki is a spirited Shiba Inu puppy who loves to play, explore, and nap in cozy beds
+            surrounded by favorite toys. This website is dedicated to sharing Yukki's journey,
+            from playful moments to peaceful sleeps.
+          </p>
+          <p>
+            Whether you're a fellow Shiba Inu parent, considering getting a puppy, or just love
+            cute dogs, you'll find plenty to enjoy here!
+          </p>
+          <a href="/about" class="btn">Learn More About Yukki</a>
+        </div>
+        <div class="about-preview-stats">
+          <div class="stat-card">
+            <div class="stat-number">100+</div>
+            <div class="stat-label">Photos</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">50+</div>
+            <div class="stat-label">Stories</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">∞</div>
+            <div class="stat-label">Cuteness</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta section">
+    <div class="container">
+      <div class="cta-content card">
+        <h2>Stay Updated</h2>
+        <p>Want to keep up with Yukki's latest adventures? Get in touch!</p>
+        <a href="/contact" class="btn">Contact Us</a>
+      </div>
+    </div>
+  </section>
+
+  <style>
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(135deg, var(--color-secondary-light) 0%, var(--color-secondary) 100%);
+      padding: var(--space-4xl) 0;
+      overflow: hidden;
+    }
+
+    .hero-content {
+      max-width: var(--container-width);
+      margin: 0 auto;
+      padding: 0 var(--space-md);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-3xl);
+      align-items: center;
+    }
+
+    .hero-text {
+      padding: var(--space-lg);
+    }
+
+    .hero-title {
+      font-size: var(--font-size-5xl);
+      color: var(--color-primary);
+      margin-bottom: var(--space-lg);
+      line-height: 1.1;
+    }
+
+    .hero-subtitle {
+      font-size: var(--font-size-xl);
+      color: var(--color-text-light);
+      margin-bottom: var(--space-2xl);
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: var(--space-md);
+      flex-wrap: wrap;
+    }
+
+    .hero-image {
+      position: relative;
+    }
+
+    .image-wrapper {
+      position: relative;
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      box-shadow: var(--shadow-xl);
+      transform: rotate(2deg);
+      transition: transform var(--transition-base);
+    }
+
+    .image-wrapper:hover {
+      transform: rotate(0deg) scale(1.02);
+    }
+
+    .image-wrapper img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* Features Section */
+    .section-title {
+      text-align: center;
+      font-size: var(--font-size-4xl);
+      color: var(--color-primary);
+      margin-bottom: var(--space-3xl);
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: var(--space-xl);
+    }
+
+    .feature-card {
+      text-align: center;
+      transition: transform var(--transition-base);
+    }
+
+    .feature-card:hover {
+      transform: translateY(-8px);
+    }
+
+    .feature-icon {
+      font-size: 4rem;
+      margin-bottom: var(--space-md);
+    }
+
+    .feature-card h3 {
+      color: var(--color-accent);
+      margin-bottom: var(--space-md);
+    }
+
+    .feature-card p {
+      color: var(--color-text-light);
+      margin-bottom: var(--space-lg);
+    }
+
+    .feature-link {
+      color: var(--color-primary);
+      font-weight: 600;
+      transition: all var(--transition-fast);
+    }
+
+    .feature-link:hover {
+      color: var(--color-primary-dark);
+      text-decoration: underline;
+    }
+
+    /* About Preview Section */
+    .about-preview {
+      background-color: var(--color-white);
+      padding: var(--space-4xl) 0;
+    }
+
+    .about-preview-content {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: var(--space-3xl);
+      align-items: center;
+    }
+
+    .about-preview-text h2 {
+      color: var(--color-primary);
+      margin-bottom: var(--space-lg);
+    }
+
+    .about-preview-text p {
+      font-size: var(--font-size-lg);
+      line-height: 1.8;
+      color: var(--color-text-light);
+      margin-bottom: var(--space-lg);
+    }
+
+    .about-preview-stats {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+
+    .stat-card {
+      background: linear-gradient(135deg, var(--color-primary-light) 0%, var(--color-primary) 100%);
+      color: var(--color-white);
+      padding: var(--space-xl);
+      border-radius: var(--radius-lg);
+      text-align: center;
+      box-shadow: var(--shadow-md);
+    }
+
+    .stat-number {
+      font-size: var(--font-size-4xl);
+      font-weight: 700;
+      margin-bottom: var(--space-sm);
+    }
+
+    .stat-label {
+      font-size: var(--font-size-lg);
+      opacity: 0.9;
+    }
+
+    /* CTA Section */
+    .cta-content {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto;
+      background: linear-gradient(135deg, var(--color-secondary-light) 0%, var(--color-secondary) 100%);
+    }
+
+    .cta-content h2 {
+      color: var(--color-primary);
+      margin-bottom: var(--space-md);
+    }
+
+    .cta-content p {
+      font-size: var(--font-size-lg);
+      color: var(--color-text-light);
+      margin-bottom: var(--space-xl);
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 968px) {
+      .hero-content {
+        grid-template-columns: 1fr;
+        gap: var(--space-2xl);
+      }
+
+      .hero-text {
+        text-align: center;
+      }
+
+      .hero-buttons {
+        justify-content: center;
+      }
+
+      .image-wrapper {
+        max-width: 500px;
+        margin: 0 auto;
+      }
+
+      .about-preview-content {
+        grid-template-columns: 1fr;
+        gap: var(--space-2xl);
+      }
+
+      .about-preview-stats {
+        flex-direction: row;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        padding: var(--space-2xl) 0;
+      }
+
+      .hero-title {
+        font-size: var(--font-size-3xl);
+      }
+
+      .hero-subtitle {
+        font-size: var(--font-size-lg);
+      }
+
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .about-preview-stats {
+        flex-direction: column;
+      }
+    }
+  </style>
+</Layout>
