@@ -1,0 +1,142 @@
+---
+// Giscus Comments Component
+// GitHub Discussions-based commenting system with email notifications
+
+import { giscusConfig } from '../config/giscus';
+
+const { repo, repoId, category, categoryId } = giscusConfig;
+---
+
+<section class="comments-section">
+  <h2 class="comments-title">Comments</h2>
+
+  <div class="giscus-container">
+    <script
+      src="https://giscus.app/client.js"
+      data-repo={repo}
+      data-repo-id={repoId}
+      data-category={category}
+      data-category-id={categoryId}
+      data-mapping="pathname"
+      data-strict="0"
+      data-reactions-enabled="1"
+      data-emit-metadata="0"
+      data-input-position="top"
+      data-theme="noborder_light"
+      data-lang="en"
+      data-loading="lazy"
+      crossorigin="anonymous"
+      async>
+    </script>
+  </div>
+</section>
+
+<style>
+  .comments-section {
+    margin-top: var(--space-3xl);
+    padding-top: var(--space-2xl);
+    border-top: 2px solid var(--color-secondary);
+  }
+
+  .comments-title {
+    font-size: var(--font-size-2xl);
+    color: var(--color-primary);
+    margin-bottom: var(--space-xl);
+  }
+
+  .giscus-container {
+    background-color: var(--color-secondary-light);
+    padding: var(--space-xl);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+  }
+
+  /* Custom Giscus theme to match Shiba Inu palette */
+  .giscus-container :global(.giscus-frame) {
+    border-radius: var(--radius-md);
+  }
+
+  /* Override Giscus colors to match your theme */
+  :global(.giscus) {
+    --color-prettylights-syntax-comment: #666;
+    --color-prettylights-syntax-constant: var(--color-primary);
+    --color-prettylights-syntax-entity: var(--color-accent);
+    --color-prettylights-syntax-keyword: var(--color-primary);
+  }
+
+  @media (max-width: 768px) {
+    .giscus-container {
+      padding: var(--space-lg);
+    }
+  }
+</style>
+
+<!-- Custom CSS to theme Giscus with Shiba colors -->
+<style is:global>
+  /* Giscus custom theme matching Shiba palette */
+  .giscus, .giscus-frame {
+    width: 100%;
+  }
+
+  /* Comment styling */
+  .giscus .gsc-comment {
+    border-left: 3px solid #d4a574 !important;
+    background-color: #fef8f0 !important;
+    border-radius: 8px !important;
+  }
+
+  /* Input/Textarea */
+  .giscus .gsc-comment-box-textarea,
+  .giscus .gsc-reply-box-textarea {
+    background-color: #ffffff !important;
+    border: 2px solid #f5e6d3 !important;
+    border-radius: 8px !important;
+    font-family: inherit !important;
+  }
+
+  .giscus .gsc-comment-box-textarea:focus,
+  .giscus .gsc-reply-box-textarea:focus {
+    border-color: #d4a574 !important;
+  }
+
+  /* Buttons */
+  .giscus .gsc-comment-box-submit,
+  .giscus .gsc-reply-box-submit {
+    background-color: #d4a574 !important;
+    color: #ffffff !important;
+    border-radius: 8px !important;
+    font-weight: 600 !important;
+    transition: all 0.2s ease !important;
+  }
+
+  .giscus .gsc-comment-box-submit:hover,
+  .giscus .gsc-reply-box-submit:hover {
+    background-color: #c49563 !important;
+    transform: translateY(-2px) !important;
+  }
+
+  /* Author name */
+  .giscus .gsc-comment-author {
+    color: #d4a574 !important;
+    font-weight: 600 !important;
+  }
+
+  /* Timestamps */
+  .giscus .gsc-comment-header time {
+    color: #666 !important;
+  }
+
+  /* Reactions */
+  .giscus .gsc-reactions-count {
+    color: #d4a574 !important;
+  }
+
+  /* Links */
+  .giscus a {
+    color: #d4a574 !important;
+  }
+
+  .giscus a:hover {
+    color: #c49563 !important;
+  }
+</style>
