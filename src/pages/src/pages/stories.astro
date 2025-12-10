@@ -1,0 +1,199 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="Stories - Yukki's Corner"
+  description="Read heartwarming stories and updates about Yukki the Shiba Inu puppy"
+>
+  <div class="section">
+    <div class="container">
+      <div class="page-header">
+        <h1>Yukki's Stories</h1>
+        <p class="page-subtitle">Adventures, memories, and moments worth sharing</p>
+      </div>
+
+      <div class="stories-container">
+        <!-- Example story with link to full post -->
+        <article class="story-card card">
+          <div class="story-header">
+            <h2>A Cozy Day in Bed</h2>
+            <time class="story-date" datetime="2025-10-08">October 8, 2025</time>
+          </div>
+          <div class="story-image">
+            <img
+              src="/yukki-relaxing-in-bed.webp"
+              alt="Yukki relaxing in bed"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+          <div class="story-content">
+            <p>
+              Today was one of those perfect lazy days. After an energetic morning of playing
+              fetch and exploring the backyard, Yukki decided it was time for a well-deserved
+              nap. Surrounded by favorite toys, our little Shiba curled up in the coziest spot
+              and drifted off to dreamland.
+            </p>
+            <p>
+              It's moments like these that remind us why we love having Yukki in our lives.
+              The peaceful contentment on that furry face is absolutely priceless!
+            </p>
+            <a href="/stories/cozy-day" class="read-more">Read full story & comments →</a>
+          </div>
+        </article>
+
+        <!-- Placeholder stories -->
+        <article class="story-card card placeholder-card">
+          <div class="story-header">
+            <h2>Your Story Title Here</h2>
+            <time class="story-date">Date</time>
+          </div>
+          <div class="story-placeholder">
+            <span class="placeholder-icon">📖</span>
+            <p>Add your story here! Share memorable moments, funny incidents, or heartwarming experiences with Yukki.</p>
+          </div>
+        </article>
+
+        <article class="story-card card placeholder-card">
+          <div class="story-header">
+            <h2>Another Story Title</h2>
+            <time class="story-date">Date</time>
+          </div>
+          <div class="story-placeholder">
+            <span class="placeholder-icon">📖</span>
+            <p>Add your story here! Share memorable moments, funny incidents, or heartwarming experiences with Yukki.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .page-header {
+      text-align: center;
+      margin-bottom: var(--space-3xl);
+    }
+
+    .page-header h1 {
+      color: var(--color-primary);
+      font-size: var(--font-size-4xl);
+      margin-bottom: var(--space-md);
+    }
+
+    .page-subtitle {
+      font-size: var(--font-size-xl);
+      color: var(--color-text-light);
+    }
+
+    .stories-container {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2xl);
+    }
+
+    .story-card {
+      transition: transform var(--transition-base);
+    }
+
+    .story-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .story-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: var(--space-lg);
+      padding-bottom: var(--space-md);
+      border-bottom: 2px solid var(--color-secondary);
+    }
+
+    .story-header h2 {
+      color: var(--color-primary);
+      font-size: var(--font-size-2xl);
+      margin: 0;
+    }
+
+    .story-date {
+      color: var(--color-text-light);
+      font-size: var(--font-size-sm);
+      font-style: italic;
+    }
+
+    .story-image {
+      width: 100%;
+      max-width: 600px;
+      margin: 0 auto var(--space-xl);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+    }
+
+    .story-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .story-content {
+      line-height: 1.8;
+    }
+
+    .story-content p {
+      color: var(--color-text);
+      margin-bottom: var(--space-lg);
+      font-size: var(--font-size-lg);
+    }
+
+    .read-more {
+      color: var(--color-primary);
+      font-weight: 600;
+      transition: all var(--transition-fast);
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+    }
+
+    .read-more:hover {
+      color: var(--color-primary-dark);
+      text-decoration: underline;
+    }
+
+    /* Placeholder styles */
+    .story-placeholder {
+      padding: var(--space-3xl) var(--space-lg);
+      background: linear-gradient(135deg, var(--color-secondary-light) 0%, var(--color-secondary) 100%);
+      border-radius: var(--radius-md);
+      text-align: center;
+    }
+
+    .placeholder-icon {
+      font-size: 4rem;
+      display: block;
+      margin-bottom: var(--space-lg);
+      opacity: 0.5;
+    }
+
+    .story-placeholder p {
+      color: var(--color-text-light);
+      font-style: italic;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 768px) {
+      .story-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--space-sm);
+      }
+
+      .story-content p {
+        font-size: var(--font-size-base);
+      }
+    }
+  </style>
+</Layout>

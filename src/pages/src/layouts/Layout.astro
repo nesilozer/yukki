@@ -1,0 +1,357 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = "Welcome to Yukki's Corner - A Shiba Inu's journey" } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="container navbar-container">
+        <a href="/" class="logo">
+          <span class="logo-icon">🐕</span>
+          <span class="logo-text">Yukki's Corner</span>
+        </a>
+
+        <button class="menu-toggle" aria-label="Toggle menu" id="menuToggle">
+          <span class="hamburger"></span>
+        </button>
+
+        <ul class="nav-menu" id="navMenu">
+          <li><a href="/" class="nav-link">Home</a></li>
+          <li><a href="/about" class="nav-link">About Us</a></li>
+          <li><a href="/gallery" class="nav-link">Gallery</a></li>
+          <li><a href="/stories" class="nav-link">Stories</a></li>
+          <li><a href="/tips" class="nav-link">Tips</a></li>
+          <li><a href="/contact" class="nav-link">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-section">
+            <h3>Yukki's Corner</h3>
+            <p>Following the adventures of a Shiba Inu puppy</p>
+          </div>
+
+          <div class="footer-section">
+            <h4>Quick Links</h4>
+            <ul class="footer-links">
+              <li><a href="/">Home</a></li>
+              <li><a href="/about">About Us</a></li>
+              <li><a href="/gallery">Gallery</a></li>
+              <li><a href="/stories">Stories</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-section">
+            <h4>Connect</h4>
+            <div class="social-links">
+              <a href="#" aria-label="Instagram" class="social-link">📷</a>
+              <a href="#" aria-label="Twitter" class="social-link">🐦</a>
+              <a href="#" aria-label="Facebook" class="social-link">📘</a>
+              <a href="#" aria-label="YouTube" class="social-link">📹</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p>&copy; {new Date().getFullYear()} Yukki's Corner. Made with ❤️ for the best Shiba Inu.</p>
+        </div>
+      </div>
+    </footer>
+
+    <style>
+      /* Navbar Styles */
+      .navbar {
+        background-color: var(--color-white);
+        box-shadow: var(--shadow-md);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        height: var(--navbar-height);
+      }
+
+      .navbar-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 100%;
+        position: relative;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: var(--space-sm);
+        font-size: var(--font-size-xl);
+        font-weight: 700;
+        color: var(--color-text);
+        text-decoration: none;
+        font-family: var(--font-family-display);
+        transition: transform var(--transition-fast);
+      }
+
+      .logo:hover {
+        transform: scale(1.05);
+        color: var(--color-primary);
+      }
+
+      .logo-icon {
+        font-size: var(--font-size-3xl);
+      }
+
+      .menu-toggle {
+        display: none;
+        flex-direction: column;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: var(--space-sm);
+      }
+
+      .hamburger,
+      .hamburger::before,
+      .hamburger::after {
+        width: 25px;
+        height: 3px;
+        background-color: var(--color-text);
+        border-radius: var(--radius-sm);
+        transition: all var(--transition-base);
+      }
+
+      .hamburger {
+        position: relative;
+        display: block;
+      }
+
+      .hamburger::before,
+      .hamburger::after {
+        content: '';
+        position: absolute;
+        left: 0;
+      }
+
+      .hamburger::before {
+        top: -8px;
+      }
+
+      .hamburger::after {
+        bottom: -8px;
+      }
+
+      .menu-toggle.active .hamburger {
+        background-color: transparent;
+      }
+
+      .menu-toggle.active .hamburger::before {
+        transform: rotate(45deg);
+        top: 0;
+      }
+
+      .menu-toggle.active .hamburger::after {
+        transform: rotate(-45deg);
+        bottom: 0;
+      }
+
+      .nav-menu {
+        display: flex;
+        gap: var(--space-lg);
+        list-style: none;
+        align-items: center;
+      }
+
+      .nav-link {
+        color: var(--color-text);
+        font-weight: 500;
+        padding: var(--space-sm) var(--space-md);
+        border-radius: var(--radius-md);
+        transition: all var(--transition-fast);
+        position: relative;
+      }
+
+      .nav-link::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        width: 0;
+        height: 2px;
+        background-color: var(--color-primary);
+        transition: all var(--transition-fast);
+        transform: translateX(-50%);
+      }
+
+      .nav-link:hover {
+        color: var(--color-primary);
+        background-color: var(--color-secondary-light);
+      }
+
+      .nav-link:hover::after {
+        width: 80%;
+      }
+
+      /* Footer Styles */
+      .footer {
+        background-color: var(--color-secondary);
+        padding: var(--space-3xl) 0 var(--space-xl);
+        margin-top: var(--space-4xl);
+      }
+
+      .footer-content {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: var(--space-2xl);
+        margin-bottom: var(--space-xl);
+      }
+
+      .footer-section h3 {
+        color: var(--color-primary);
+        margin-bottom: var(--space-md);
+      }
+
+      .footer-section h4 {
+        color: var(--color-text);
+        font-size: var(--font-size-lg);
+        margin-bottom: var(--space-md);
+      }
+
+      .footer-section p {
+        color: var(--color-text-light);
+      }
+
+      .footer-links {
+        list-style: none;
+      }
+
+      .footer-links li {
+        margin-bottom: var(--space-sm);
+      }
+
+      .footer-links a {
+        color: var(--color-text-light);
+        transition: color var(--transition-fast);
+      }
+
+      .footer-links a:hover {
+        color: var(--color-primary);
+      }
+
+      .social-links {
+        display: flex;
+        gap: var(--space-md);
+      }
+
+      .social-link {
+        font-size: var(--font-size-2xl);
+        transition: transform var(--transition-fast);
+      }
+
+      .social-link:hover {
+        transform: scale(1.2);
+      }
+
+      .footer-bottom {
+        text-align: center;
+        padding-top: var(--space-xl);
+        border-top: 1px solid var(--color-secondary-dark);
+        color: var(--color-text-light);
+      }
+
+      /* Mobile Styles */
+      @media (max-width: 768px) {
+        .menu-toggle {
+          display: flex;
+        }
+
+        .nav-menu {
+          position: absolute;
+          top: var(--navbar-height);
+          left: 0;
+          right: 0;
+          flex-direction: column;
+          background-color: var(--color-white);
+          box-shadow: var(--shadow-lg);
+          padding: var(--space-lg);
+          gap: var(--space-sm);
+          transform: translateY(-100%);
+          opacity: 0;
+          visibility: hidden;
+          transition: all var(--transition-base);
+        }
+
+        .nav-menu.active {
+          transform: translateY(0);
+          opacity: 1;
+          visibility: visible;
+        }
+
+        .nav-link {
+          display: block;
+          width: 100%;
+          text-align: center;
+          padding: var(--space-md);
+        }
+
+        .footer-content {
+          grid-template-columns: 1fr;
+          gap: var(--space-xl);
+        }
+      }
+
+      /* Main content spacing */
+      main {
+        min-height: calc(100vh - var(--navbar-height) - 400px);
+      }
+    </style>
+
+    <script>
+      // Mobile menu toggle
+      const menuToggle = document.getElementById('menuToggle');
+      const navMenu = document.getElementById('navMenu');
+
+      menuToggle?.addEventListener('click', () => {
+        menuToggle.classList.toggle('active');
+        navMenu?.classList.toggle('active');
+      });
+
+      // Close menu when clicking outside
+      document.addEventListener('click', (e) => {
+        const target = e.target as HTMLElement;
+        if (!target.closest('.navbar-container')) {
+          menuToggle?.classList.remove('active');
+          navMenu?.classList.remove('active');
+        }
+      });
+
+      // Close menu when clicking a link
+      const navLinks = document.querySelectorAll('.nav-link');
+      navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          menuToggle?.classList.remove('active');
+          navMenu?.classList.remove('active');
+        });
+      });
+    </script>
+  </body>
+</html>
