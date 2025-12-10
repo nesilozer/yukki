@@ -2,14 +2,9 @@
 // Giscus Comments Component
 // GitHub Discussions-based commenting system with email notifications
 
-interface Props {
-  repo: string; // e.g., "username/repo-name"
-  repoId: string; // Get from giscus.app
-  category: string; // e.g., "Comments"
-  categoryId: string; // Get from giscus.app
-}
+import { giscusConfig } from '../config/giscus';
 
-const { repo, repoId, category, categoryId } = Astro.props;
+const { repo, repoId, category, categoryId } = giscusConfig;
 ---
 
 <section class="comments-section">

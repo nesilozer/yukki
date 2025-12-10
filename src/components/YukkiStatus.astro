@@ -1,0 +1,229 @@
+---
+// Polaroid-style "Yukki Right Now" widget
+import { yukkiStatus } from '../config/yukkiStatus';
+
+// Calculate time since last update
+function getTimeSince(date: Date): string {
+  const now = new Date();
+  const diffMs = now.getTime() - date.getTime();
+  const diffMins = Math.floor(diffMs / 60000);
+
+  if (diffMins < 60) return `${diffMins}min ago`;
+  const diffHours = Math.floor(diffMins / 60);
+  if (diffHours < 24) return `${diffHours}h ago`;
+  const diffDays = Math.floor(diffHours / 24);
+  return `${diffDays}d ago`;
+}
+
+const timeSince = getTimeSince(yukkiStatus.lastUpdated);
+---
+
+<aside class="yukki-status-widget">
+  <h3 class="widget-header">📸 Today's Snapshot</h3>
+
+  <div class="polaroid-card">
+    <!-- Photo area -->
+    <div class="photo-frame">
+      <img
+        src={yukkiStatus.photo}
+        alt={yukkiStatus.photoAlt}
+        width="220"
+        height="180"
+        loading="lazy"
+        decoding="async"
+      />
+
+      <!-- Speaker button -->
+      <button class="speaker-button" aria-label="Play Yukki's sound" id="yukkiSpeaker">
+        🔊
+      </button>
+    </div>
+
+    <!-- Polaroid caption area -->
+    <div class="polaroid-caption">
+      <p class="status-text">{yukkiStatus.status}</p>
+
+      {yukkiStatus.thought && (
+        <p class="thought-text">{yukkiStatus.thought}</p>
+      )}
+
+      {yukkiStatus.nextActivity && (
+        <p class="timer-text">⏰ Next: {yukkiStatus.nextActivity}</p>
+      )}
+
+      <p class="update-time">Updated {timeSince}</p>
+    </div>
+  </div>
+</aside>
+
+<!-- Audio element -->
+<audio id="yukkiStatusAudio" preload="auto">
+  <source src={yukkiStatus.soundFile} type="audio/mp4">
+</audio>
+
+<script>
+  // Speaker button functionality
+  const speakerBtn = document.getElementById('yukkiSpeaker');
+  const audio = document.getElementById('yukkiStatusAudio') as HTMLAudioElement;
+
+  if (speakerBtn && audio) {
+    speakerBtn.addEventListener('click', () => {
+      audio.currentTime = 0;
+      audio.play().catch((error) => {
+        console.log('Audio playback failed:', error);
+      });
+    });
+  }
+</script>
+
+<style>
+  /* Widget Container */
+  .yukki-status-widget {
+    width: 100%;
+    max-width: 350px;
+    margin: 2rem auto;
+  }
+
+  /* Header */
+  .widget-header {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #c77a4a;
+    text-align: center;
+    margin-bottom: 1rem;
+    letter-spacing: 0.3px;
+  }
+
+  /* Polaroid Card */
+  .polaroid-card {
+    background: #ffffff;
+    padding: 1rem;
+    border-radius: 4px;
+    box-shadow:
+      0 2px 4px rgba(0, 0, 0, 0.1),
+      0 4px 8px rgba(0, 0, 0, 0.08),
+      0 8px 16px rgba(0, 0, 0, 0.06);
+    transition: all 0.3s ease;
+    transform: rotate(0deg);
+  }
+
+  /* Photo Frame */
+  .photo-frame {
+    position: relative;
+    width: 100%;
+    height: 180px;
+    background: linear-gradient(135deg, #fef8f0 0%, #f5e6d3 100%);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 0.75rem;
+  }
+
+  .photo-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* Speaker Button */
+  .speaker-button {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(199, 122, 74, 0.9);
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .speaker-button:hover {
+    transform: scale(1.1);
+    background: rgba(199, 122, 74, 1);
+  }
+
+  .speaker-button:active {
+    transform: scale(0.95);
+  }
+
+  /* Polaroid Caption Area */
+  .polaroid-caption {
+    text-align: center;
+    padding-top: 0.5rem;
+  }
+
+  .status-text {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #333333;
+    margin-bottom: 0.25rem;
+  }
+
+  .thought-text {
+    font-size: 0.9rem;
+    color: #666666;
+    font-style: italic;
+    margin-bottom: 0.5rem;
+  }
+
+  .timer-text {
+    font-size: 0.85rem;
+    color: #888888;
+    margin-bottom: 0.25rem;
+  }
+
+  .update-time {
+    font-size: 0.75rem;
+    color: #999999;
+    margin-top: 0.5rem;
+  }
+
+  /* Desktop Styles */
+  @media (min-width: 1024px) {
+    .yukki-status-widget {
+      width: 260px;
+      max-width: 260px;
+      margin: 0;
+    }
+
+    .widget-header {
+      font-size: 1.2rem;
+    }
+
+    .polaroid-card {
+      transform: rotate(-2deg);
+    }
+
+    .polaroid-card:hover {
+      transform: rotate(0deg) translateY(-8px);
+      box-shadow:
+        0 4px 8px rgba(0, 0, 0, 0.12),
+        0 8px 16px rgba(0, 0, 0, 0.1),
+        0 12px 24px rgba(0, 0, 0, 0.08);
+    }
+
+    .photo-frame {
+      height: 180px;
+    }
+  }
+
+  /* Mobile Styles */
+  @media (max-width: 1023px) {
+    .yukki-status-widget {
+      width: 90%;
+      max-width: 350px;
+      margin: 2rem auto;
+    }
+
+    .polaroid-card {
+      transform: rotate(0deg);
+    }
+  }
+</style>
