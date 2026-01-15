@@ -25,7 +25,10 @@
       "Bash(git remote add:*)",
       "Bash(git count-objects:*)",
       "Bash(git gc:*)",
-      "Bash(git commit -m \"$\\(cat <<''EOF''\nYukki''s Corner - Shiba Inu blog with Russian translation\n\n- Complete Astro-based blog for Yukki the Shiba Inu\n- Russian language support with hreflang tags\n- Language switcher always visible on mobile\n- Blog post: Welcome Home Yukki \\(EN + RU\\)\n- Gallery, Tips, Contact, About pages\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")"
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nYukki''s Corner - Shiba Inu blog with Russian translation\n\n- Complete Astro-based blog for Yukki the Shiba Inu\n- Russian language support with hreflang tags\n- Language switcher always visible on mobile\n- Blog post: Welcome Home Yukki \\(EN + RU\\)\n- Gallery, Tips, Contact, About pages\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git remote set-url:*)",
+      "Bash(open https://github.com/nesilozer/yukki)",
+      "Bash(curl:*)"
     ]
   }
 }
