@@ -1,0 +1,151 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout
+  title="Блог - Уголок Юкки"
+  description="Читайте трогательные истории и новости о Юкки, щенке сиба-ину"
+  lang="ru"
+>
+  <div class="section">
+    <div class="container">
+      <div class="page-header">
+        <h1>Блог Юкки</h1>
+        <p class="page-subtitle">Приключения, воспоминания и моменты, которыми стоит поделиться</p>
+      </div>
+
+      <div class="stories-container">
+        <!-- Welcome Home Yukki -->
+        <article class="story-card card">
+          <div class="story-header">
+            <h2>Добро пожаловать домой, Юкки</h2>
+            <time class="story-date" datetime="2026-01-14">14 января 2026</time>
+          </div>
+          <div class="story-image">
+            <img
+              src="/shiba-inu-puppies-playing.webp"
+              alt="Четыре очаровательных щенка сиба-ину в питомнике Kolgerhouse"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+          <div class="story-content">
+            <p>
+              Моя девушка всегда мечтала о сиба-ину. Не просто "хотела" в обычном смысле.
+              Это была мечта всей её жизни. Та самая мечта, которая не угасает со временем.
+              Это трогательная история о том, как мы нашли и привезли домой Юкки из
+              питомника Kolgerhouse в Беларуси.
+            </p>
+            <a href="/ru/blog/welcome-home-yukki" class="read-more">Читать полностью →</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .page-header {
+      text-align: center;
+      margin-bottom: var(--space-3xl);
+    }
+
+    .page-header h1 {
+      color: var(--color-primary);
+      font-size: var(--font-size-4xl);
+      margin-bottom: var(--space-md);
+    }
+
+    .page-subtitle {
+      font-size: var(--font-size-xl);
+      color: var(--color-text-light);
+    }
+
+    .stories-container {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2xl);
+    }
+
+    .story-card {
+      transition: transform var(--transition-base);
+    }
+
+    .story-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .story-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: var(--space-lg);
+      padding-bottom: var(--space-md);
+      border-bottom: 2px solid var(--color-secondary);
+    }
+
+    .story-header h2 {
+      color: var(--color-primary);
+      font-size: var(--font-size-2xl);
+      margin: 0;
+    }
+
+    .story-date {
+      color: var(--color-text-light);
+      font-size: var(--font-size-sm);
+      font-style: italic;
+    }
+
+    .story-image {
+      width: 100%;
+      max-width: 600px;
+      margin: 0 auto var(--space-xl);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+    }
+
+    .story-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .story-content {
+      line-height: 1.8;
+    }
+
+    .story-content p {
+      color: var(--color-text);
+      margin-bottom: var(--space-lg);
+      font-size: var(--font-size-lg);
+    }
+
+    .read-more {
+      color: var(--color-primary);
+      font-weight: 600;
+      transition: all var(--transition-fast);
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+    }
+
+    .read-more:hover {
+      color: var(--color-primary-dark);
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      .story-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--space-sm);
+      }
+
+      .story-content p {
+        font-size: var(--font-size-base);
+      }
+    }
+  </style>
+</Layout>

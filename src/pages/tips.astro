@@ -1,0 +1,197 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="Puppy Tips - Yukki's Corner"
+  description="Helpful tips and advice for raising a Shiba Inu puppy"
+>
+  <div class="section">
+    <div class="container">
+      <div class="page-header">
+        <h1>Puppy Care Tips</h1>
+        <p class="page-subtitle">Lessons learned from raising Yukki</p>
+      </div>
+
+      <div class="tips-container">
+        <!-- Example tip -->
+        <article class="tip-card card">
+          <div class="tip-icon">🐕</div>
+          <h2>Understanding Shiba Inu Personality</h2>
+          <p>
+            Shiba Inus are known for their independent and spirited nature. They're incredibly
+            smart but can be stubborn. Early socialization and consistent training are key to
+            raising a well-behaved Shiba.
+          </p>
+          <ul class="tip-list">
+            <li>Start training early (8-12 weeks)</li>
+            <li>Use positive reinforcement techniques</li>
+            <li>Be patient and consistent</li>
+            <li>Respect their independent nature</li>
+          </ul>
+        </article>
+
+        <article class="tip-card card">
+          <div class="tip-icon">🍖</div>
+          <h2>Nutrition & Feeding</h2>
+          <p>
+            Proper nutrition is crucial for your Shiba Inu puppy's growth and development.
+            Choose high-quality puppy food and establish a consistent feeding schedule.
+          </p>
+          <ul class="tip-list">
+            <li>Feed 3-4 times daily for puppies under 6 months</li>
+            <li>Choose age-appropriate high-quality food</li>
+            <li>Avoid overfeeding to prevent obesity</li>
+            <li>Always provide fresh water</li>
+          </ul>
+        </article>
+
+        <article class="tip-card card">
+          <div class="tip-icon">🎾</div>
+          <h2>Exercise & Play</h2>
+          <p>
+            Shiba Inus are energetic dogs that need regular exercise and mental stimulation.
+            A tired Shiba is a happy Shiba!
+          </p>
+          <ul class="tip-list">
+            <li>Daily walks (at least 30-60 minutes)</li>
+            <li>Interactive toys for mental stimulation</li>
+            <li>Supervised playtime with other dogs</li>
+            <li>Safe, enclosed spaces for off-leash play</li>
+          </ul>
+        </article>
+
+        <article class="tip-card card">
+          <div class="tip-icon">✨</div>
+          <h2>Grooming Essentials</h2>
+          <p>
+            Shibas have a double coat that requires regular maintenance, especially during
+            shedding season (which happens twice a year).
+          </p>
+          <ul class="tip-list">
+            <li>Brush 2-3 times per week (daily during shedding)</li>
+            <li>Bathe every 3-4 months or as needed</li>
+            <li>Trim nails regularly</li>
+            <li>Clean ears weekly</li>
+          </ul>
+        </article>
+
+        <!-- Placeholder tips -->
+        <article class="tip-card card placeholder-card">
+          <div class="tip-placeholder">
+            <span class="placeholder-icon">💡</span>
+            <h3>Add Your Own Tips</h3>
+            <p>Share helpful advice and lessons you've learned from raising Yukki!</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .page-header {
+      text-align: center;
+      margin-bottom: var(--space-3xl);
+    }
+
+    .page-header h1 {
+      color: var(--color-primary);
+      font-size: var(--font-size-4xl);
+      margin-bottom: var(--space-md);
+    }
+
+    .page-subtitle {
+      font-size: var(--font-size-xl);
+      color: var(--color-text-light);
+    }
+
+    .tips-container {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+      gap: var(--space-xl);
+    }
+
+    .tip-card {
+      transition: transform var(--transition-base);
+    }
+
+    .tip-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .tip-icon {
+      font-size: 3rem;
+      margin-bottom: var(--space-md);
+    }
+
+    .tip-card h2 {
+      color: var(--color-primary);
+      font-size: var(--font-size-xl);
+      margin-bottom: var(--space-md);
+    }
+
+    .tip-card p {
+      color: var(--color-text);
+      line-height: 1.8;
+      margin-bottom: var(--space-lg);
+    }
+
+    .tip-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .tip-list li {
+      position: relative;
+      padding: var(--space-sm) 0 var(--space-sm) var(--space-xl);
+      color: var(--color-text-light);
+      line-height: 1.6;
+    }
+
+    .tip-list li::before {
+      content: '🐾';
+      position: absolute;
+      left: 0;
+      top: var(--space-sm);
+    }
+
+    /* Placeholder styles */
+    .tip-placeholder {
+      padding: var(--space-2xl);
+      text-align: center;
+      background: linear-gradient(135deg, var(--color-secondary-light) 0%, var(--color-secondary) 100%);
+      border-radius: var(--radius-md);
+      min-height: 200px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .placeholder-icon {
+      font-size: 4rem;
+      display: block;
+      margin-bottom: var(--space-md);
+      opacity: 0.5;
+    }
+
+    .tip-placeholder h3 {
+      color: var(--color-accent);
+      margin-bottom: var(--space-sm);
+    }
+
+    .tip-placeholder p {
+      color: var(--color-text-light);
+      font-style: italic;
+      margin: 0;
+    }
+
+    @media (max-width: 768px) {
+      .tips-container {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</Layout>

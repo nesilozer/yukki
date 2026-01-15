@@ -1,0 +1,199 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout
+  title="Советы по уходу - Уголок Юкки"
+  description="Полезные советы по выращиванию щенка сиба-ину"
+  lang="ru"
+>
+  <div class="section">
+    <div class="container">
+      <div class="page-header">
+        <h1>Советы по уходу за щенком</h1>
+        <p class="page-subtitle">Уроки, которые мы извлекли, воспитывая Юкки</p>
+      </div>
+
+      <div class="tips-container">
+        <!-- Example tip -->
+        <article class="tip-card card">
+          <div class="tip-icon">🐕</div>
+          <h2>Характер сиба-ину</h2>
+          <p>
+            Сиба-ину известны своим независимым и энергичным характером. Они невероятно
+            умные, но могут быть упрямыми. Ранняя социализация и последовательная
+            дрессировка — ключ к воспитанию послушного сиба.
+          </p>
+          <ul class="tip-list">
+            <li>Начинайте дрессировку рано (8-12 недель)</li>
+            <li>Используйте позитивное подкрепление</li>
+            <li>Будьте терпеливы и последовательны</li>
+            <li>Уважайте их независимый характер</li>
+          </ul>
+        </article>
+
+        <article class="tip-card card">
+          <div class="tip-icon">🍖</div>
+          <h2>Питание и кормление</h2>
+          <p>
+            Правильное питание имеет решающее значение для роста и развития вашего
+            щенка сиба-ину. Выбирайте качественный корм и установите регулярный
+            график кормления.
+          </p>
+          <ul class="tip-list">
+            <li>Кормите 3-4 раза в день щенков до 6 месяцев</li>
+            <li>Выбирайте качественный корм по возрасту</li>
+            <li>Избегайте перекармливания</li>
+            <li>Всегда обеспечивайте свежую воду</li>
+          </ul>
+        </article>
+
+        <article class="tip-card card">
+          <div class="tip-icon">🎾</div>
+          <h2>Упражнения и игры</h2>
+          <p>
+            Сиба-ину — энергичные собаки, которым нужны регулярные физические нагрузки
+            и умственная стимуляция. Уставший сиба — счастливый сиба!
+          </p>
+          <ul class="tip-list">
+            <li>Ежедневные прогулки (минимум 30-60 минут)</li>
+            <li>Интерактивные игрушки для умственной стимуляции</li>
+            <li>Игры с другими собаками под присмотром</li>
+            <li>Безопасные огороженные места для свободного бега</li>
+          </ul>
+        </article>
+
+        <article class="tip-card card">
+          <div class="tip-icon">✨</div>
+          <h2>Основы груминга</h2>
+          <p>
+            У сиба двойная шерсть, которая требует регулярного ухода, особенно
+            в период линьки (дважды в год).
+          </p>
+          <ul class="tip-list">
+            <li>Расчёсывайте 2-3 раза в неделю (ежедневно во время линьки)</li>
+            <li>Купайте каждые 3-4 месяца или по необходимости</li>
+            <li>Регулярно стригите когти</li>
+            <li>Еженедельно чистите уши</li>
+          </ul>
+        </article>
+
+        <!-- Placeholder tips -->
+        <article class="tip-card card placeholder-card">
+          <div class="tip-placeholder">
+            <span class="placeholder-icon">💡</span>
+            <h3>Добавьте свои советы</h3>
+            <p>Поделитесь полезными советами, которые вы узнали, воспитывая Юкки!</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .page-header {
+      text-align: center;
+      margin-bottom: var(--space-3xl);
+    }
+
+    .page-header h1 {
+      color: var(--color-primary);
+      font-size: var(--font-size-4xl);
+      margin-bottom: var(--space-md);
+    }
+
+    .page-subtitle {
+      font-size: var(--font-size-xl);
+      color: var(--color-text-light);
+    }
+
+    .tips-container {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+      gap: var(--space-xl);
+    }
+
+    .tip-card {
+      transition: transform var(--transition-base);
+    }
+
+    .tip-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .tip-icon {
+      font-size: 3rem;
+      margin-bottom: var(--space-md);
+    }
+
+    .tip-card h2 {
+      color: var(--color-primary);
+      font-size: var(--font-size-xl);
+      margin-bottom: var(--space-md);
+    }
+
+    .tip-card p {
+      color: var(--color-text);
+      line-height: 1.8;
+      margin-bottom: var(--space-lg);
+    }
+
+    .tip-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .tip-list li {
+      position: relative;
+      padding: var(--space-sm) 0 var(--space-sm) var(--space-xl);
+      color: var(--color-text-light);
+      line-height: 1.6;
+    }
+
+    .tip-list li::before {
+      content: '🐾';
+      position: absolute;
+      left: 0;
+      top: var(--space-sm);
+    }
+
+    /* Placeholder styles */
+    .tip-placeholder {
+      padding: var(--space-2xl);
+      text-align: center;
+      background: linear-gradient(135deg, var(--color-secondary-light) 0%, var(--color-secondary) 100%);
+      border-radius: var(--radius-md);
+      min-height: 200px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .placeholder-icon {
+      font-size: 4rem;
+      display: block;
+      margin-bottom: var(--space-md);
+      opacity: 0.5;
+    }
+
+    .tip-placeholder h3 {
+      color: var(--color-accent);
+      margin-bottom: var(--space-sm);
+    }
+
+    .tip-placeholder p {
+      color: var(--color-text-light);
+      font-style: italic;
+      margin: 0;
+    }
+
+    @media (max-width: 768px) {
+      .tips-container {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</Layout>

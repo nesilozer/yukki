@@ -1,0 +1,282 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout
+  title="Контакты - Уголок Юкки"
+  description="Свяжитесь с нами, чтобы узнать больше о Юкки и наших приключениях с сиба-ину"
+  lang="ru"
+>
+  <div class="section">
+    <div class="container">
+      <div class="page-header">
+        <h1>Связаться с нами</h1>
+        <p class="page-subtitle">Мы будем рады вашему сообщению!</p>
+      </div>
+
+      <div class="contact-content">
+        <div class="contact-info card">
+          <h2>Наши контакты</h2>
+          <p>
+            Есть вопросы о сиба-ину? Хотите поделиться историями о своём щенке?
+            Или просто хотите передать привет Юкки? Мы будем рады пообщаться!
+          </p>
+
+          <div class="contact-methods">
+            <div class="contact-method">
+              <div class="method-icon">📧</div>
+              <div class="method-details">
+                <h3>Email</h3>
+                <a href="mailto:hello@yukkiscorner.com">hello@yukkiscorner.com</a>
+              </div>
+            </div>
+
+            <div class="contact-method">
+              <div class="method-icon">📷</div>
+              <div class="method-details">
+                <h3>Instagram</h3>
+                <a href="#" target="_blank" rel="noopener">@yukkitheshiba</a>
+              </div>
+            </div>
+
+            <div class="contact-method">
+              <div class="method-icon">🐦</div>
+              <div class="method-details">
+                <h3>Twitter</h3>
+                <a href="#" target="_blank" rel="noopener">@yukkiscorner</a>
+              </div>
+            </div>
+
+            <div class="contact-method">
+              <div class="method-icon">📘</div>
+              <div class="method-details">
+                <h3>Facebook</h3>
+                <a href="#" target="_blank" rel="noopener">Уголок Юкки</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="fun-fact">
+            <h3>🐕 Интересный факт</h3>
+            <p>
+              Юкки обожает виртуальные поглаживания! Присылайте нам фотографии ваших
+              сиба-ину или щенков. Мы любим смотреть на других пушистых друзей!
+            </p>
+          </div>
+        </div>
+
+        <div class="contact-form-container card">
+          <h2>Отправить сообщение</h2>
+          <form class="contact-form">
+            <div class="form-group">
+              <label for="name">Ваше имя</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                placeholder="Иван Иванов"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="you@example.com"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="subject">Тема</label>
+              <input
+                type="text"
+                id="subject"
+                name="subject"
+                placeholder="Хочу познакомиться!"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="message">Сообщение</label>
+              <textarea
+                id="message"
+                name="message"
+                rows="5"
+                placeholder="Ваше сообщение здесь..."
+                required
+              ></textarea>
+            </div>
+
+            <button type="submit" class="btn">Отправить</button>
+          </form>
+
+          <p class="form-note">
+            Примечание: Это демо-форма. Чтобы она работала, подключите её к сервису
+            Formspree, Netlify Forms или вашему собственному бэкенду.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .page-header {
+      text-align: center;
+      margin-bottom: var(--space-3xl);
+    }
+
+    .page-header h1 {
+      color: var(--color-primary);
+      font-size: var(--font-size-4xl);
+      margin-bottom: var(--space-md);
+    }
+
+    .page-subtitle {
+      font-size: var(--font-size-xl);
+      color: var(--color-text-light);
+    }
+
+    .contact-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-2xl);
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .contact-info h2,
+    .contact-form-container h2 {
+      color: var(--color-primary);
+      margin-bottom: var(--space-lg);
+    }
+
+    .contact-info > p {
+      color: var(--color-text-light);
+      line-height: 1.8;
+      margin-bottom: var(--space-2xl);
+    }
+
+    .contact-methods {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-lg);
+      margin-bottom: var(--space-2xl);
+    }
+
+    .contact-method {
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+      padding: var(--space-md);
+      background-color: var(--color-secondary-light);
+      border-radius: var(--radius-md);
+      transition: all var(--transition-fast);
+    }
+
+    .contact-method:hover {
+      background-color: var(--color-secondary);
+      transform: translateX(4px);
+    }
+
+    .method-icon {
+      font-size: 2rem;
+    }
+
+    .method-details h3 {
+      color: var(--color-accent);
+      font-size: var(--font-size-base);
+      margin-bottom: var(--space-xs);
+    }
+
+    .method-details a {
+      color: var(--color-primary);
+      font-weight: 500;
+    }
+
+    .fun-fact {
+      padding: var(--space-lg);
+      background: linear-gradient(135deg, var(--color-primary-light) 0%, var(--color-primary) 100%);
+      color: var(--color-white);
+      border-radius: var(--radius-md);
+    }
+
+    .fun-fact h3 {
+      color: var(--color-white);
+      margin-bottom: var(--space-sm);
+    }
+
+    .fun-fact p {
+      margin: 0;
+      opacity: 0.95;
+    }
+
+    /* Form Styles */
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-lg);
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+
+    .form-group label {
+      color: var(--color-text);
+      font-weight: 500;
+      font-size: var(--font-size-base);
+    }
+
+    .form-group input,
+    .form-group textarea {
+      padding: var(--space-md);
+      border: 2px solid var(--color-secondary);
+      border-radius: var(--radius-md);
+      font-family: var(--font-family-sans);
+      font-size: var(--font-size-base);
+      transition: border-color var(--transition-fast);
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--color-primary);
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .form-note {
+      margin-top: var(--space-md);
+      padding: var(--space-md);
+      background-color: var(--color-secondary-light);
+      border-radius: var(--radius-md);
+      font-size: var(--font-size-sm);
+      color: var(--color-text-light);
+      font-style: italic;
+    }
+
+    @media (max-width: 968px) {
+      .contact-content {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+
+  <script>
+    const form = document.querySelector('.contact-form');
+    form?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert('Это демо-форма. Подключите её к сервису Formspree, чтобы она заработала!');
+    });
+  </script>
+</Layout>

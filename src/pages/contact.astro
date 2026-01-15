@@ -1,0 +1,281 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="Contact - Yukki's Corner"
+  description="Get in touch with us about Yukki and our Shiba Inu adventures"
+>
+  <div class="section">
+    <div class="container">
+      <div class="page-header">
+        <h1>Get in Touch</h1>
+        <p class="page-subtitle">We'd love to hear from you!</p>
+      </div>
+
+      <div class="contact-content">
+        <div class="contact-info card">
+          <h2>Connect With Us</h2>
+          <p>
+            Have questions about Shiba Inus? Want to share your own puppy stories?
+            Or just want to say hi to Yukki? We'd love to connect!
+          </p>
+
+          <div class="contact-methods">
+            <div class="contact-method">
+              <div class="method-icon">📧</div>
+              <div class="method-details">
+                <h3>Email</h3>
+                <a href="mailto:hello@yukkiscorner.com">hello@yukkiscorner.com</a>
+              </div>
+            </div>
+
+            <div class="contact-method">
+              <div class="method-icon">📷</div>
+              <div class="method-details">
+                <h3>Instagram</h3>
+                <a href="#" target="_blank" rel="noopener">@yukkitheshiba</a>
+              </div>
+            </div>
+
+            <div class="contact-method">
+              <div class="method-icon">🐦</div>
+              <div class="method-details">
+                <h3>Twitter</h3>
+                <a href="#" target="_blank" rel="noopener">@yukkiscorner</a>
+              </div>
+            </div>
+
+            <div class="contact-method">
+              <div class="method-icon">📘</div>
+              <div class="method-details">
+                <h3>Facebook</h3>
+                <a href="#" target="_blank" rel="noopener">Yukki's Corner</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="fun-fact">
+            <h3>🐕 Fun Fact</h3>
+            <p>
+              Yukki loves receiving virtual pats! Feel free to send us photos of your
+              own Shiba Inu or puppy. We love seeing other furry friends!
+            </p>
+          </div>
+        </div>
+
+        <div class="contact-form-container card">
+          <h2>Send Us a Message</h2>
+          <form class="contact-form">
+            <div class="form-group">
+              <label for="name">Your Name</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                placeholder="John Doe"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="you@example.com"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="subject">Subject</label>
+              <input
+                type="text"
+                id="subject"
+                name="subject"
+                placeholder="I'd love to connect!"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea
+                id="message"
+                name="message"
+                rows="5"
+                placeholder="Your message here..."
+                required
+              ></textarea>
+            </div>
+
+            <button type="submit" class="btn">Send Message</button>
+          </form>
+
+          <p class="form-note">
+            Note: This is a demo form. To make it functional, connect it to a service
+            like Formspree, Netlify Forms, or your own backend.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .page-header {
+      text-align: center;
+      margin-bottom: var(--space-3xl);
+    }
+
+    .page-header h1 {
+      color: var(--color-primary);
+      font-size: var(--font-size-4xl);
+      margin-bottom: var(--space-md);
+    }
+
+    .page-subtitle {
+      font-size: var(--font-size-xl);
+      color: var(--color-text-light);
+    }
+
+    .contact-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-2xl);
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .contact-info h2,
+    .contact-form-container h2 {
+      color: var(--color-primary);
+      margin-bottom: var(--space-lg);
+    }
+
+    .contact-info > p {
+      color: var(--color-text-light);
+      line-height: 1.8;
+      margin-bottom: var(--space-2xl);
+    }
+
+    .contact-methods {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-lg);
+      margin-bottom: var(--space-2xl);
+    }
+
+    .contact-method {
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+      padding: var(--space-md);
+      background-color: var(--color-secondary-light);
+      border-radius: var(--radius-md);
+      transition: all var(--transition-fast);
+    }
+
+    .contact-method:hover {
+      background-color: var(--color-secondary);
+      transform: translateX(4px);
+    }
+
+    .method-icon {
+      font-size: 2rem;
+    }
+
+    .method-details h3 {
+      color: var(--color-accent);
+      font-size: var(--font-size-base);
+      margin-bottom: var(--space-xs);
+    }
+
+    .method-details a {
+      color: var(--color-primary);
+      font-weight: 500;
+    }
+
+    .fun-fact {
+      padding: var(--space-lg);
+      background: linear-gradient(135deg, var(--color-primary-light) 0%, var(--color-primary) 100%);
+      color: var(--color-white);
+      border-radius: var(--radius-md);
+    }
+
+    .fun-fact h3 {
+      color: var(--color-white);
+      margin-bottom: var(--space-sm);
+    }
+
+    .fun-fact p {
+      margin: 0;
+      opacity: 0.95;
+    }
+
+    /* Form Styles */
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-lg);
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+
+    .form-group label {
+      color: var(--color-text);
+      font-weight: 500;
+      font-size: var(--font-size-base);
+    }
+
+    .form-group input,
+    .form-group textarea {
+      padding: var(--space-md);
+      border: 2px solid var(--color-secondary);
+      border-radius: var(--radius-md);
+      font-family: var(--font-family-sans);
+      font-size: var(--font-size-base);
+      transition: border-color var(--transition-fast);
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--color-primary);
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .form-note {
+      margin-top: var(--space-md);
+      padding: var(--space-md);
+      background-color: var(--color-secondary-light);
+      border-radius: var(--radius-md);
+      font-size: var(--font-size-sm);
+      color: var(--color-text-light);
+      font-style: italic;
+    }
+
+    @media (max-width: 968px) {
+      .contact-content {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+
+  <script>
+    const form = document.querySelector('.contact-form');
+    form?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert('This is a demo form. Connect it to a service like Formspree to make it functional!');
+    });
+  </script>
+</Layout>

@@ -1,0 +1,447 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="Yukki's Corner - Home of a Shiba Inu Puppy"
+  description="Welcome to Yukki's Corner! Follow the adventures, stories, and daily life of Yukki, an adorable Shiba Inu puppy."
+>
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1 class="hero-title hero-title-mobile">
+        🐾 Hi, I'm Yukki :)
+        <button class="bark-button" aria-label="Play Yukki's bark sound">
+          🔊
+        </button>
+      </h1>
+      <div class="hero-text">
+        <h1 class="hero-title hero-title-desktop">
+          🐾 Hi, I'm Yukki :)
+          <button class="bark-button" aria-label="Play Yukki's bark sound">
+            🔊
+          </button>
+        </h1>
+        <p class="hero-description">I'm a 5-month-old Shiba Inu with a BIG personality!</p>
+        <div class="hero-list">
+          <p class="hero-list-title">I love:</p>
+          <ul>
+            <li>Testing mom's patience (I'm adorably stubborn)</li>
+            <li>Chewing momy's fingers and slippers</li>
+            <li>Making new friends (especially if they have treats)</li>
+          </ul>
+        </div>
+        <div class="hero-buttons">
+          <a href="/about" class="btn">Meet Yukki</a>
+          <a href="/gallery" class="btn btn-secondary">View Gallery</a>
+        </div>
+      </div>
+      <div class="hero-image">
+        <div class="image-wrapper">
+          <img
+            src="/yukki-relaxing-in-bed.webp"
+            alt="Yukki, a cute Shiba Inu puppy"
+            width="600"
+            height="800"
+            loading="eager"
+            decoding="async"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="stats-section section">
+    <div class="container">
+      <h2 class="stats-heading">My Puppy Profile 🐾</h2>
+      <div class="stats-grid">
+        <div class="puppy-stat-card card">
+          <div class="stat-emoji">🎂</div>
+          <div class="stat-text">5 months old</div>
+        </div>
+        <div class="puppy-stat-card card">
+          <div class="stat-emoji">🐕</div>
+          <div class="stat-text">Shiba Inu</div>
+        </div>
+        <div class="puppy-stat-card card">
+          <div class="stat-emoji">🧸</div>
+          <div class="stat-text">Favorite: Chewing rope</div>
+        </div>
+        <div class="puppy-stat-card card">
+          <div class="stat-emoji">😴</div>
+          <div class="stat-text">Professional napper</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta section">
+    <div class="container">
+      <div class="cta-content card">
+        <h2>Stay Updated</h2>
+        <p>Want to keep up with Yukki's latest adventures? Get in touch!</p>
+        <a href="/contact" class="btn">Contact Us</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Audio element for bark sound -->
+  <audio id="barkAudio" preload="auto">
+    <source src="/yukki-bark.m4a" type="audio/mp4">
+  </audio>
+
+  <script>
+    // Bark button functionality - handle all bark buttons (mobile and desktop)
+    const barkButtons = document.querySelectorAll('.bark-button');
+    const barkAudio = document.getElementById('barkAudio') as HTMLAudioElement;
+
+    if (barkButtons.length > 0 && barkAudio) {
+      barkButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+          e.preventDefault();
+          // Reset audio to beginning if already playing
+          barkAudio.currentTime = 0;
+          // Play the bark sound
+          barkAudio.play().catch((error) => {
+            console.log('Audio playback failed:', error);
+          });
+        });
+      });
+    }
+  </script>
+
+  <style>
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(135deg, var(--color-secondary-light) 0%, var(--color-secondary) 100%);
+      padding: var(--space-4xl) 0;
+      overflow: hidden;
+    }
+
+    .hero-content {
+      max-width: var(--container-width);
+      margin: 0 auto;
+      padding: 0 var(--space-md);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-3xl);
+      align-items: center;
+    }
+
+    /* Desktop: hide mobile title, show desktop title */
+    .hero-title-mobile {
+      display: none;
+    }
+
+    .hero-title-desktop {
+      display: block;
+    }
+
+    @media (max-width: 1023px) {
+      .hero-content {
+        grid-template-columns: 1fr;
+        gap: var(--space-md);
+        display: flex;
+        flex-direction: column;
+      }
+
+      /* Mobile: show mobile title at top, hide desktop title */
+      .hero-title-mobile {
+        display: block;
+        order: -2; /* Show first */
+        text-align: center;
+        padding: 0 var(--space-md);
+        margin-bottom: 0;
+      }
+
+      .hero-title-desktop {
+        display: none; /* Hide the title inside hero-text */
+      }
+
+      .hero-image {
+        order: -1; /* Show second (after mobile title) */
+      }
+
+      .hero-text {
+        order: 0; /* Show third (after image) */
+      }
+    }
+
+    .hero-text {
+      padding: var(--space-lg);
+    }
+
+    .hero-title {
+      font-size: var(--font-size-5xl);
+      color: var(--color-primary);
+      margin-bottom: var(--space-md);
+      line-height: 1.1;
+    }
+
+    .hero-description {
+      font-size: var(--font-size-xl);
+      color: var(--color-text);
+      margin-bottom: var(--space-lg);
+      font-weight: 500;
+      line-height: 1.6;
+    }
+
+    .hero-list {
+      margin-bottom: var(--space-xl);
+    }
+
+    .hero-list-title {
+      font-size: var(--font-size-lg);
+      color: var(--color-text);
+      font-weight: 600;
+      margin-bottom: var(--space-sm);
+    }
+
+    .hero-list ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .hero-list li {
+      font-size: var(--font-size-base);
+      color: var(--color-text-light);
+      padding: var(--space-xs) 0;
+      line-height: 1.7;
+      position: relative;
+      padding-left: var(--space-lg);
+    }
+
+    .hero-list li::before {
+      content: '🐾';
+      position: absolute;
+      left: 0;
+    }
+
+    .bark-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.9);
+      border: 2px solid var(--color-primary);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      margin-left: var(--space-md);
+      vertical-align: middle;
+      border-radius: var(--radius-md);
+      padding: 0;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .bark-button:hover {
+      transform: scale(1.1);
+      animation: pulse 0.8s ease-in-out infinite;
+      background: rgba(255, 255, 255, 1);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .bark-button:active {
+      transform: scale(0.95);
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1.1);
+      }
+      50% {
+        transform: scale(1.2);
+      }
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: var(--space-md);
+      flex-wrap: wrap;
+    }
+
+    .hero-image {
+      position: relative;
+    }
+
+    .image-wrapper {
+      position: relative;
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      box-shadow: var(--shadow-xl);
+      transform: rotate(2deg);
+      transition: transform var(--transition-base);
+    }
+
+    .image-wrapper:hover {
+      transform: rotate(0deg) scale(1.02);
+    }
+
+    .image-wrapper img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* Stats Section */
+    .stats-section {
+      background: var(--color-background);
+      padding: var(--space-3xl) 0;
+    }
+
+    .stats-heading {
+      text-align: center;
+      font-size: 2.5rem;
+      color: var(--color-accent);
+      margin-bottom: 3rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-xl);
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .puppy-stat-card {
+      text-align: center;
+      transition: transform var(--transition-base);
+      padding: var(--space-2xl) var(--space-lg);
+    }
+
+    .puppy-stat-card:hover {
+      transform: translateY(-6px);
+    }
+
+    .stat-emoji {
+      font-size: 3rem;
+      line-height: 1;
+      margin-bottom: var(--space-lg);
+      display: block;
+    }
+
+    .stat-text {
+      font-size: var(--font-size-lg);
+      color: var(--color-text);
+      font-weight: 500;
+      line-height: 1.5;
+    }
+
+    /* CTA Section */
+    .cta-content {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto;
+      background: linear-gradient(135deg, var(--color-secondary-light) 0%, var(--color-secondary) 100%);
+    }
+
+    .cta-content h2 {
+      color: var(--color-primary);
+      margin-bottom: var(--space-md);
+    }
+
+    .cta-content p {
+      font-size: var(--font-size-lg);
+      color: var(--color-text-light);
+      margin-bottom: var(--space-xl);
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 1023px) {
+      .hero-content {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+
+      .hero-text {
+        text-align: center;
+        padding: var(--space-md);
+      }
+
+      .hero-buttons {
+        justify-content: center;
+      }
+
+      .image-wrapper {
+        max-width: 100%;
+        margin: 0 auto;
+        transform: rotate(0deg); /* Remove rotation on mobile for better presentation */
+      }
+
+      .image-wrapper:hover {
+        transform: scale(1.02);
+      }
+
+      .stats-heading {
+        font-size: 2rem;
+        margin-bottom: 2rem;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--space-lg);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        padding: var(--space-2xl) 0;
+      }
+
+      .hero-title {
+        font-size: var(--font-size-3xl);
+      }
+
+      .hero-description {
+        font-size: var(--font-size-lg);
+        margin-bottom: var(--space-md);
+      }
+
+      .hero-list {
+        margin-bottom: var(--space-lg);
+      }
+
+      .hero-list-title {
+        font-size: var(--font-size-base);
+      }
+
+      .hero-list li {
+        font-size: var(--font-size-sm);
+        padding-left: var(--space-md);
+      }
+
+      .stats-section {
+        padding: var(--space-2xl) 0;
+      }
+
+      .stats-heading {
+        font-size: 1.75rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--space-md);
+      }
+
+      .puppy-stat-card {
+        padding: var(--space-xl) var(--space-md);
+      }
+
+      .stat-emoji {
+        font-size: 2.5rem;
+        margin-bottom: var(--space-md);
+      }
+
+      .stat-text {
+        font-size: var(--font-size-base);
+      }
+    }
+  </style>
+</Layout>

@@ -1,0 +1,504 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  image?: string;
+  type?: string;
+  publishedDate?: string;
+  lang?: 'en' | 'ru';
+  alternateUrls?: { en: string; ru: string };
+}
+
+const {
+  title,
+  description = "Welcome to Yukki's Corner - A Shiba Inu's journey",
+  image = "/yukki-relaxing-in-bed.webp",
+  type = "website",
+  publishedDate,
+  lang = 'en',
+  alternateUrls
+} = Astro.props;
+
+const siteUrl = "https://yukkiscorner.com";
+const fullImageUrl = image.startsWith('http') ? image : `${siteUrl}${image}`;
+
+// Navigation translations
+const nav = {
+  en: {
+    home: 'Home',
+    about: 'About Us',
+    gallery: 'Gallery',
+    blog: 'Blog',
+    tips: 'Tips',
+    contact: 'Contact',
+    logoText: "Yukki's Corner",
+    footerTagline: "Following the adventures of a Shiba Inu puppy",
+    quickLinks: 'Quick Links',
+    connect: 'Connect',
+    footerCopyright: "Made with ❤️ for the best Shiba Inu."
+  },
+  ru: {
+    home: 'Главная',
+    about: 'О нас',
+    gallery: 'Галерея',
+    blog: 'Блог',
+    tips: 'Советы',
+    contact: 'Контакты',
+    logoText: 'Уголок Юкки',
+    footerTagline: 'Следим за приключениями щенка сиба-ину',
+    quickLinks: 'Быстрые ссылки',
+    connect: 'Соцсети',
+    footerCopyright: 'Сделано с ❤️ для лучшего сиба-ину.'
+  }
+};
+
+const t = nav[lang];
+const basePath = lang === 'ru' ? '/ru' : '';
+const altLang = lang === 'ru' ? 'en' : 'ru';
+const altPath = lang === 'ru' ? Astro.url.pathname.replace('/ru', '') || '/' : `/ru${Astro.url.pathname}`;
+---
+
+<!DOCTYPE html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={`${siteUrl}${Astro.url.pathname}`} />
+
+    <!-- hreflang tags for language versions -->
+    {alternateUrls ? (
+      <>
+        <link rel="alternate" hreflang="en" href={`${siteUrl}${alternateUrls.en}`} />
+        <link rel="alternate" hreflang="ru" href={`${siteUrl}${alternateUrls.ru}`} />
+        <link rel="alternate" hreflang="x-default" href={`${siteUrl}${alternateUrls.en}`} />
+      </>
+    ) : (
+      <>
+        <link rel="alternate" hreflang="en" href={`${siteUrl}${lang === 'en' ? Astro.url.pathname : Astro.url.pathname.replace('/ru', '') || '/'}`} />
+        <link rel="alternate" hreflang="ru" href={`${siteUrl}${lang === 'ru' ? Astro.url.pathname : '/ru' + Astro.url.pathname}`} />
+        <link rel="alternate" hreflang="x-default" href={`${siteUrl}${lang === 'en' ? Astro.url.pathname : Astro.url.pathname.replace('/ru', '') || '/'}`} />
+      </>
+    )}
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content={type} />
+    <meta property="og:url" content={`${siteUrl}${Astro.url.pathname}`} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={fullImageUrl} />
+    <meta property="og:site_name" content="Yukki's Corner" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={`${siteUrl}${Astro.url.pathname}`} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={fullImageUrl} />
+
+    <title>{title}</title>
+
+    <slot name="head" />
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="container navbar-container">
+        <a href={`${basePath}/`} class="logo">
+          <span class="logo-icon">🐕</span>
+          <span class="logo-text">{t.logoText}</span>
+        </a>
+
+        <ul class="nav-menu" id="navMenu">
+          <li><a href={`${basePath}/`} class="nav-link">{t.home}</a></li>
+          <li><a href={`${basePath}/about`} class="nav-link">{t.about}</a></li>
+          <li><a href={`${basePath}/gallery`} class="nav-link">{t.gallery}</a></li>
+          <li><a href={`${basePath}/blog`} class="nav-link">{t.blog}</a></li>
+          <li><a href={`${basePath}/tips`} class="nav-link">{t.tips}</a></li>
+          <li><a href={`${basePath}/contact`} class="nav-link">{t.contact}</a></li>
+        </ul>
+
+        <div class="nav-actions">
+          <a href={altPath} class="lang-link" title={altLang === 'ru' ? 'Русский' : 'English'}>
+            {altLang === 'ru' ? '🇷🇺' : '🇬🇧'}
+            <span class="lang-text">{altLang === 'ru' ? 'RU' : 'EN'}</span>
+          </a>
+          <button class="menu-toggle" aria-label="Toggle menu" id="menuToggle">
+            <span class="hamburger"></span>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-section">
+            <h3>{t.logoText}</h3>
+            <p>{t.footerTagline}</p>
+          </div>
+
+          <div class="footer-section">
+            <h4>{t.quickLinks}</h4>
+            <ul class="footer-links">
+              <li><a href={`${basePath}/`}>{t.home}</a></li>
+              <li><a href={`${basePath}/about`}>{t.about}</a></li>
+              <li><a href={`${basePath}/gallery`}>{t.gallery}</a></li>
+              <li><a href={`${basePath}/blog`}>{t.blog}</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-section">
+            <h4>{t.connect}</h4>
+            <div class="social-links">
+              <a href="https://instagram.com/lifewithyukki" aria-label="Instagram" class="social-link" target="_blank" rel="noopener">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+              </a>
+              <a href="https://tiktok.com/@shibayukki" aria-label="TikTok" class="social-link" target="_blank" rel="noopener">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg>
+              </a>
+              <a href="https://youtube.com/@ShibaYukki" aria-label="YouTube" class="social-link" target="_blank" rel="noopener">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p>&copy; {new Date().getFullYear()} {t.logoText}. {t.footerCopyright}</p>
+        </div>
+      </div>
+    </footer>
+
+    <style>
+      /* Navbar Styles */
+      .navbar {
+        background-color: var(--color-white);
+        box-shadow: var(--shadow-md);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        height: var(--navbar-height);
+      }
+
+      .navbar-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 100%;
+        position: relative;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: var(--space-sm);
+        font-size: var(--font-size-xl);
+        font-weight: 700;
+        color: var(--color-text);
+        text-decoration: none;
+        font-family: var(--font-family-display);
+        transition: transform var(--transition-fast);
+      }
+
+      .logo:hover {
+        transform: scale(1.05);
+        color: var(--color-primary);
+      }
+
+      .logo-icon {
+        font-size: var(--font-size-3xl);
+      }
+
+      .menu-toggle {
+        display: none;
+        flex-direction: column;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: var(--space-sm);
+      }
+
+      .hamburger,
+      .hamburger::before,
+      .hamburger::after {
+        width: 25px;
+        height: 3px;
+        background-color: var(--color-text);
+        border-radius: var(--radius-sm);
+        transition: all var(--transition-base);
+      }
+
+      .hamburger {
+        position: relative;
+        display: block;
+      }
+
+      .hamburger::before,
+      .hamburger::after {
+        content: '';
+        position: absolute;
+        left: 0;
+      }
+
+      .hamburger::before {
+        top: -8px;
+      }
+
+      .hamburger::after {
+        bottom: -8px;
+      }
+
+      .menu-toggle.active .hamburger {
+        background-color: transparent;
+      }
+
+      .menu-toggle.active .hamburger::before {
+        transform: rotate(45deg);
+        top: 0;
+      }
+
+      .menu-toggle.active .hamburger::after {
+        transform: rotate(-45deg);
+        bottom: 0;
+      }
+
+      .nav-menu {
+        display: flex;
+        gap: var(--space-lg);
+        list-style: none;
+        align-items: center;
+      }
+
+      .nav-link {
+        color: var(--color-text);
+        font-weight: 500;
+        padding: var(--space-sm) var(--space-md);
+        border-radius: var(--radius-md);
+        transition: all var(--transition-fast);
+        position: relative;
+      }
+
+      .nav-link::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        width: 0;
+        height: 2px;
+        background-color: var(--color-primary);
+        transition: all var(--transition-fast);
+        transform: translateX(-50%);
+      }
+
+      .nav-link:hover {
+        color: var(--color-primary);
+        background-color: var(--color-secondary-light);
+      }
+
+      .nav-link:hover::after {
+        width: 80%;
+      }
+
+      .nav-actions {
+        display: flex;
+        align-items: center;
+        gap: var(--space-md);
+      }
+
+      .lang-link {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--space-xs);
+        padding: var(--space-xs) var(--space-sm);
+        background-color: var(--color-secondary);
+        color: var(--color-text);
+        border-radius: var(--radius-md);
+        font-weight: 500;
+        font-size: var(--font-size-sm);
+        transition: all var(--transition-fast);
+      }
+
+      .lang-link:hover {
+        background-color: var(--color-primary);
+        color: var(--color-white);
+      }
+
+      .lang-text {
+        display: inline;
+      }
+
+      /* Footer Styles */
+      .footer {
+        background-color: var(--color-secondary);
+        padding: var(--space-3xl) 0 var(--space-xl);
+        margin-top: var(--space-4xl);
+      }
+
+      .footer-content {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: var(--space-2xl);
+        margin-bottom: var(--space-xl);
+      }
+
+      .footer-section h3 {
+        color: var(--color-primary);
+        margin-bottom: var(--space-md);
+      }
+
+      .footer-section h4 {
+        color: var(--color-text);
+        font-size: var(--font-size-lg);
+        margin-bottom: var(--space-md);
+      }
+
+      .footer-section p {
+        color: var(--color-text-light);
+      }
+
+      .footer-links {
+        list-style: none;
+      }
+
+      .footer-links li {
+        margin-bottom: var(--space-sm);
+      }
+
+      .footer-links a {
+        color: var(--color-text-light);
+        transition: color var(--transition-fast);
+      }
+
+      .footer-links a:hover {
+        color: var(--color-primary);
+      }
+
+      .social-links {
+        display: flex;
+        gap: var(--space-lg);
+      }
+
+      .social-link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: var(--color-primary);
+        color: var(--color-white);
+        transition: all var(--transition-fast);
+      }
+
+      .social-link:hover {
+        transform: translateY(-3px);
+        background-color: var(--color-primary-dark);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      }
+
+      .social-link svg {
+        width: 20px;
+        height: 20px;
+      }
+
+      .footer-bottom {
+        text-align: center;
+        padding-top: var(--space-xl);
+        border-top: 1px solid var(--color-secondary-dark);
+        color: var(--color-text-light);
+      }
+
+      /* Mobile Styles */
+      @media (max-width: 768px) {
+        .menu-toggle {
+          display: flex;
+        }
+
+        .nav-menu {
+          position: absolute;
+          top: var(--navbar-height);
+          left: 0;
+          right: 0;
+          flex-direction: column;
+          background-color: var(--color-white);
+          box-shadow: var(--shadow-lg);
+          padding: var(--space-lg);
+          gap: var(--space-sm);
+          transform: translateY(-100%);
+          opacity: 0;
+          visibility: hidden;
+          transition: all var(--transition-base);
+        }
+
+        .nav-menu.active {
+          transform: translateY(0);
+          opacity: 1;
+          visibility: visible;
+        }
+
+        .nav-link {
+          display: block;
+          width: 100%;
+          text-align: center;
+          padding: var(--space-md);
+        }
+
+        .lang-text {
+          display: none;
+        }
+
+        .lang-link {
+          padding: var(--space-xs) var(--space-sm);
+          font-size: var(--font-size-base);
+        }
+
+        .footer-content {
+          grid-template-columns: 1fr;
+          gap: var(--space-xl);
+        }
+      }
+
+      /* Main content spacing */
+      main {
+        min-height: calc(100vh - var(--navbar-height) - 400px);
+      }
+    </style>
+
+    <script>
+      // Mobile menu toggle
+      const menuToggle = document.getElementById('menuToggle');
+      const navMenu = document.getElementById('navMenu');
+
+      menuToggle?.addEventListener('click', () => {
+        menuToggle.classList.toggle('active');
+        navMenu?.classList.toggle('active');
+      });
+
+      // Close menu when clicking outside
+      document.addEventListener('click', (e) => {
+        const target = e.target as HTMLElement;
+        if (!target.closest('.navbar-container')) {
+          menuToggle?.classList.remove('active');
+          navMenu?.classList.remove('active');
+        }
+      });
+
+      // Close menu when clicking a link
+      const navLinks = document.querySelectorAll('.nav-link');
+      navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          menuToggle?.classList.remove('active');
+          navMenu?.classList.remove('active');
+        });
+      });
+    </script>
+  </body>
+</html>

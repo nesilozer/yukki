@@ -1,0 +1,31 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(open http://localhost:4321/)",
+      "Bash(npm run preview:*)",
+      "Bash(node convert-images.mjs:*)",
+      "Bash(avconvert:*)",
+      "Bash(ls:*)",
+      "Bash(npm run build:*)",
+      "Bash(open http://localhost:4321/stories/welcome-home-yukki/)",
+      "Bash(sips:*)",
+      "Bash(node -e:*)",
+      "Bash(open http://localhost:4321/blog/)",
+      "Bash(git init:*)",
+      "Bash(gh:*)",
+      "Bash(brew install:*)",
+      "Bash(git push:*)",
+      "Bash(npm run dev:*)",
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nAdd Russian language support with hreflang tags\n\n- Create Russian versions of all pages under /ru/\n- Add hreflang tags for SEO\n- Add language switcher \\(always visible on mobile\\)\n- Translate navigation, footer, and blog post\n- Fix paragraph spacing to match industry standards\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(GIT_CURL_VERBOSE=1 git push:*)",
+      "Bash(git config:*)",
+      "Bash(git fetch:*)",
+      "Bash(git remote remove:*)",
+      "Bash(git remote add:*)",
+      "Bash(git count-objects:*)",
+      "Bash(git gc:*)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nYukki''s Corner - Shiba Inu blog with Russian translation\n\n- Complete Astro-based blog for Yukki the Shiba Inu\n- Russian language support with hreflang tags\n- Language switcher always visible on mobile\n- Blog post: Welcome Home Yukki \\(EN + RU\\)\n- Gallery, Tips, Contact, About pages\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")"
+    ]
+  }
+}

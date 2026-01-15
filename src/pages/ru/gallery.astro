@@ -1,0 +1,205 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout
+  title="Галерея - Уголок Юкки"
+  description="Смотрите очаровательные фотографии Юкки, щенка сиба-ину"
+  lang="ru"
+>
+  <div class="section">
+    <div class="container">
+      <div class="page-header">
+        <h1>Фотогалерея</h1>
+        <p class="page-subtitle">Самые милые моменты Юкки</p>
+      </div>
+
+      <div class="gallery-grid">
+        <!-- Example gallery item - you can duplicate this for more photos -->
+        <div class="gallery-item">
+          <div class="gallery-image">
+            <img
+              src="/yukki-relaxing-in-bed.webp"
+              alt="Юкки отдыхает в кровати с игрушками"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+          <div class="gallery-caption">
+            <h3>Уютный сон</h3>
+            <p>Юкки наслаждается спокойным отдыхом в окружении любимых игрушек</p>
+          </div>
+        </div>
+
+        <!-- Placeholder items -->
+        <div class="gallery-item placeholder">
+          <div class="gallery-image">
+            <div class="placeholder-content">
+              <span class="placeholder-icon">📸</span>
+              <p>Добавьте фото сюда</p>
+            </div>
+          </div>
+          <div class="gallery-caption">
+            <h3>Название фото</h3>
+            <p>Добавьте описание для этого фото</p>
+          </div>
+        </div>
+
+        <div class="gallery-item placeholder">
+          <div class="gallery-image">
+            <div class="placeholder-content">
+              <span class="placeholder-icon">📸</span>
+              <p>Добавьте фото сюда</p>
+            </div>
+          </div>
+          <div class="gallery-caption">
+            <h3>Название фото</h3>
+            <p>Добавьте описание для этого фото</p>
+          </div>
+        </div>
+
+        <div class="gallery-item placeholder">
+          <div class="gallery-image">
+            <div class="placeholder-content">
+              <span class="placeholder-icon">📸</span>
+              <p>Добавьте фото сюда</p>
+            </div>
+          </div>
+          <div class="gallery-caption">
+            <h3>Название фото</h3>
+            <p>Добавьте описание для этого фото</p>
+          </div>
+        </div>
+
+        <div class="gallery-item placeholder">
+          <div class="gallery-image">
+            <div class="placeholder-content">
+              <span class="placeholder-icon">📸</span>
+              <p>Добавьте фото сюда</p>
+            </div>
+          </div>
+          <div class="gallery-caption">
+            <h3>Название фото</h3>
+            <p>Добавьте описание для этого фото</p>
+          </div>
+        </div>
+
+        <div class="gallery-item placeholder">
+          <div class="gallery-image">
+            <div class="placeholder-content">
+              <span class="placeholder-icon">📸</span>
+              <p>Добавьте фото сюда</p>
+            </div>
+          </div>
+          <div class="gallery-caption">
+            <h3>Название фото</h3>
+            <p>Добавьте описание для этого фото</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .page-header {
+      text-align: center;
+      margin-bottom: var(--space-3xl);
+    }
+
+    .page-header h1 {
+      color: var(--color-primary);
+      font-size: var(--font-size-4xl);
+      margin-bottom: var(--space-md);
+    }
+
+    .page-subtitle {
+      font-size: var(--font-size-xl);
+      color: var(--color-text-light);
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: var(--space-xl);
+    }
+
+    .gallery-item {
+      background: var(--color-white);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      transition: all var(--transition-base);
+    }
+
+    .gallery-item:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-xl);
+    }
+
+    .gallery-image {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      overflow: hidden;
+      background-color: var(--color-secondary-light);
+    }
+
+    .gallery-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform var(--transition-base);
+    }
+
+    .gallery-item:hover .gallery-image img {
+      transform: scale(1.05);
+    }
+
+    .gallery-caption {
+      padding: var(--space-lg);
+    }
+
+    .gallery-caption h3 {
+      color: var(--color-accent);
+      font-size: var(--font-size-lg);
+      margin-bottom: var(--space-sm);
+    }
+
+    .gallery-caption p {
+      color: var(--color-text-light);
+      font-size: var(--font-size-sm);
+      margin: 0;
+    }
+
+    /* Placeholder styles */
+    .placeholder .gallery-image {
+      background: linear-gradient(135deg, var(--color-secondary-light) 0%, var(--color-secondary) 100%);
+    }
+
+    .placeholder-content {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-sm);
+    }
+
+    .placeholder-icon {
+      font-size: 4rem;
+      opacity: 0.5;
+    }
+
+    .placeholder-content p {
+      color: var(--color-text-light);
+      opacity: 0.7;
+      font-style: italic;
+    }
+
+    @media (max-width: 768px) {
+      .gallery-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</Layout>
