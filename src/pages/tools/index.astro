@@ -1,0 +1,149 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout
+  title="Shiba Inu Tools & Calculators | Yukki's Corner"
+  description="Free tools for Shiba Inu owners: puppy growth chart, weight tracker, cost calculator, and more. Track your Shiba's development."
+>
+  <div class="section">
+    <div class="container">
+      <div class="page-header">
+        <h1>Shiba Inu Tools</h1>
+        <p class="page-subtitle">Helpful calculators and trackers for Shiba Inu owners</p>
+      </div>
+
+      <div class="tools-grid">
+        <a href="/tools/growth-chart" class="tool-card card">
+          <div class="tool-icon">📊</div>
+          <h2>Puppy Growth Chart</h2>
+          <p>Track your Shiba Inu puppy's weight and compare it to breed averages. See if your pup is growing on track.</p>
+          <div class="tool-features">
+            <span class="feature">Weight tracking</span>
+            <span class="feature">Age comparison</span>
+            <span class="feature">Growth milestones</span>
+          </div>
+          <span class="btn">Open Tool</span>
+        </a>
+
+        <div class="tool-card card coming-soon">
+          <div class="tool-icon">💰</div>
+          <h2>Ownership Cost Calculator</h2>
+          <p>Estimate the monthly and yearly costs of owning a Shiba Inu, including food, vet care, grooming, and supplies.</p>
+          <div class="tool-features">
+            <span class="feature">Monthly costs</span>
+            <span class="feature">Yearly breakdown</span>
+            <span class="feature">Lifetime estimate</span>
+          </div>
+          <span class="btn btn-disabled">Coming Soon</span>
+        </div>
+
+        <div class="tool-card card coming-soon">
+          <div class="tool-icon">🍖</div>
+          <h2>Feeding Calculator</h2>
+          <p>Calculate how much food your Shiba Inu needs based on age, weight, and activity level.</p>
+          <div class="tool-features">
+            <span class="feature">Portion sizes</span>
+            <span class="feature">Calorie needs</span>
+            <span class="feature">Feeding schedule</span>
+          </div>
+          <span class="btn btn-disabled">Coming Soon</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .page-header {
+      text-align: center;
+      margin-bottom: var(--space-3xl);
+    }
+
+    .page-header h1 {
+      color: var(--color-primary);
+      font-size: var(--font-size-4xl);
+      margin-bottom: var(--space-md);
+    }
+
+    .page-subtitle {
+      font-size: var(--font-size-xl);
+      color: var(--color-text-light);
+    }
+
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: var(--space-xl);
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .tool-card {
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      transition: transform var(--transition-base), box-shadow var(--transition-base);
+      text-decoration: none;
+      color: inherit;
+    }
+
+    a.tool-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-xl);
+    }
+
+    .tool-card.coming-soon {
+      opacity: 0.7;
+    }
+
+    .tool-icon {
+      font-size: 4rem;
+      margin-bottom: var(--space-lg);
+    }
+
+    .tool-card h2 {
+      color: var(--color-primary);
+      font-size: var(--font-size-xl);
+      margin-bottom: var(--space-md);
+    }
+
+    .tool-card p {
+      color: var(--color-text-light);
+      line-height: 1.7;
+      margin-bottom: var(--space-lg);
+      flex-grow: 1;
+    }
+
+    .tool-features {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: var(--space-sm);
+      margin-bottom: var(--space-lg);
+    }
+
+    .feature {
+      background-color: var(--color-secondary);
+      color: var(--color-text);
+      padding: var(--space-xs) var(--space-sm);
+      border-radius: var(--radius-full);
+      font-size: var(--font-size-xs);
+    }
+
+    .btn-disabled {
+      background-color: var(--color-text-light);
+      cursor: not-allowed;
+    }
+
+    .btn-disabled:hover {
+      background-color: var(--color-text-light);
+      transform: none;
+    }
+
+    @media (max-width: 768px) {
+      .tools-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</Layout>

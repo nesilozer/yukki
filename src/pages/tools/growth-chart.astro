@@ -1,0 +1,696 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const chartSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Shiba Inu Puppy Growth Chart",
+  "description": "Interactive growth chart to track your Shiba Inu puppy's weight and compare it to breed averages.",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+};
+---
+
+<Layout
+  title="Shiba Inu Puppy Growth Chart & Weight Tracker | Yukki's Corner"
+  description="Free Shiba Inu puppy growth chart. Track your puppy's weight by age and compare to breed averages. See expected weight at 8 weeks, 3 months, 6 months, and adult."
+>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(chartSchema)} />
+
+  <div class="section">
+    <div class="container">
+      <div class="tool-container">
+        <!-- Header -->
+        <div class="tool-header">
+          <nav class="breadcrumb">
+            <a href="/">Home</a>
+            <span class="separator">&rarr;</span>
+            <a href="/tools">Tools</a>
+            <span class="separator">&rarr;</span>
+            <span>Growth Chart</span>
+          </nav>
+          <h1>Shiba Inu Puppy Growth Chart</h1>
+          <p class="tool-intro">Track your Shiba Inu's weight and see how they compare to breed averages. Shiba Inus typically reach adult weight between 12-18 months.</p>
+        </div>
+
+        <!-- Weight Checker -->
+        <div class="weight-checker card">
+          <h2>Check Your Puppy's Weight</h2>
+          <div class="checker-form">
+            <div class="form-group">
+              <label for="puppyAge">Puppy's Age</label>
+              <select id="puppyAge">
+                <option value="">Select age...</option>
+                <option value="8">8 weeks (2 months)</option>
+                <option value="12">12 weeks (3 months)</option>
+                <option value="16">16 weeks (4 months)</option>
+                <option value="20">20 weeks (5 months)</option>
+                <option value="24">24 weeks (6 months)</option>
+                <option value="32">32 weeks (8 months)</option>
+                <option value="40">40 weeks (10 months)</option>
+                <option value="52">52 weeks (12 months)</option>
+                <option value="78">18 months (Adult)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="puppyWeight">Current Weight</label>
+              <div class="weight-input-group">
+                <input type="number" id="puppyWeight" placeholder="Enter weight" step="0.1" min="0" max="30">
+                <select id="weightUnit">
+                  <option value="kg">kg</option>
+                  <option value="lbs">lbs</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="puppyGender">Gender</label>
+              <select id="puppyGender">
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+              </select>
+            </div>
+            <button class="btn" id="checkWeightBtn">Check Weight</button>
+          </div>
+          <div class="result-container" id="resultContainer" style="display: none;">
+            <!-- Result will be rendered here -->
+          </div>
+        </div>
+
+        <!-- Growth Chart Table -->
+        <div class="chart-section card">
+          <h2>Shiba Inu Weight by Age</h2>
+          <p class="chart-note">Average weight ranges for healthy Shiba Inus. Individual dogs may vary based on genetics, diet, and activity level.</p>
+
+          <div class="table-wrapper">
+            <table class="growth-table">
+              <thead>
+                <tr>
+                  <th>Age</th>
+                  <th>Male Weight</th>
+                  <th>Female Weight</th>
+                  <th>Milestones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>8 weeks</strong></td>
+                  <td>2.0 - 3.0 kg<br><span class="lbs">(4.4 - 6.6 lbs)</span></td>
+                  <td>1.8 - 2.7 kg<br><span class="lbs">(4.0 - 6.0 lbs)</span></td>
+                  <td>Ready for new home, start socialization</td>
+                </tr>
+                <tr>
+                  <td><strong>12 weeks</strong></td>
+                  <td>3.0 - 4.5 kg<br><span class="lbs">(6.6 - 10 lbs)</span></td>
+                  <td>2.7 - 4.0 kg<br><span class="lbs">(6.0 - 8.8 lbs)</span></td>
+                  <td>Vaccinations continue, rapid growth phase</td>
+                </tr>
+                <tr>
+                  <td><strong>16 weeks</strong></td>
+                  <td>4.5 - 6.0 kg<br><span class="lbs">(10 - 13 lbs)</span></td>
+                  <td>4.0 - 5.5 kg<br><span class="lbs">(8.8 - 12 lbs)</span></td>
+                  <td>Can start basic training, teething begins</td>
+                </tr>
+                <tr>
+                  <td><strong>20 weeks</strong></td>
+                  <td>5.5 - 7.0 kg<br><span class="lbs">(12 - 15 lbs)</span></td>
+                  <td>5.0 - 6.5 kg<br><span class="lbs">(11 - 14 lbs)</span></td>
+                  <td>Adolescent phase, testing boundaries</td>
+                </tr>
+                <tr>
+                  <td><strong>6 months</strong></td>
+                  <td>6.5 - 8.0 kg<br><span class="lbs">(14 - 18 lbs)</span></td>
+                  <td>5.5 - 7.0 kg<br><span class="lbs">(12 - 15 lbs)</span></td>
+                  <td>~70% of adult weight, growth slowing</td>
+                </tr>
+                <tr>
+                  <td><strong>8 months</strong></td>
+                  <td>7.5 - 9.5 kg<br><span class="lbs">(16 - 21 lbs)</span></td>
+                  <td>6.5 - 8.0 kg<br><span class="lbs">(14 - 18 lbs)</span></td>
+                  <td>~85% of adult weight</td>
+                </tr>
+                <tr>
+                  <td><strong>10 months</strong></td>
+                  <td>8.5 - 10.5 kg<br><span class="lbs">(19 - 23 lbs)</span></td>
+                  <td>7.0 - 9.0 kg<br><span class="lbs">(15 - 20 lbs)</span></td>
+                  <td>~95% of adult weight</td>
+                </tr>
+                <tr>
+                  <td><strong>12 months</strong></td>
+                  <td>9.0 - 11.0 kg<br><span class="lbs">(20 - 24 lbs)</span></td>
+                  <td>7.5 - 9.5 kg<br><span class="lbs">(16 - 21 lbs)</span></td>
+                  <td>Near adult weight, still maturing</td>
+                </tr>
+                <tr class="adult-row">
+                  <td><strong>Adult (18+ mo)</strong></td>
+                  <td>10 - 12 kg<br><span class="lbs">(22 - 26 lbs)</span></td>
+                  <td>8 - 10 kg<br><span class="lbs">(17 - 22 lbs)</span></td>
+                  <td>Fully grown, maintain healthy weight</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Growth Tips -->
+        <div class="tips-section card">
+          <h2>Healthy Growth Tips</h2>
+          <div class="tips-grid">
+            <div class="tip">
+              <div class="tip-icon">🍖</div>
+              <h3>Proper Nutrition</h3>
+              <p>Feed high-quality puppy food appropriate for their age. Avoid overfeeding - Shibas gain weight easily.</p>
+            </div>
+            <div class="tip">
+              <div class="tip-icon">🏃</div>
+              <h3>Regular Exercise</h3>
+              <p>Puppies need moderate exercise. Avoid over-exercising young puppies as it can damage developing joints.</p>
+            </div>
+            <div class="tip">
+              <div class="tip-icon">⚕️</div>
+              <h3>Vet Checkups</h3>
+              <p>Regular vet visits ensure healthy development. Your vet can monitor weight and catch issues early.</p>
+            </div>
+            <div class="tip">
+              <div class="tip-icon">📏</div>
+              <h3>Track Progress</h3>
+              <p>Weigh your puppy weekly during the first 6 months, then monthly. Sudden changes may indicate health issues.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ Section -->
+        <div class="faq-section card">
+          <h2>Common Questions</h2>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>When do Shiba Inus stop growing?</summary>
+              <p>Shiba Inus typically reach their full height by 12 months, but continue filling out until 18 months. Males may take slightly longer to fully mature than females.</p>
+            </details>
+            <details class="faq-item">
+              <summary>My puppy is underweight. Should I be worried?</summary>
+              <p>Slight variations are normal. If your puppy is more than 15% below the average, consult your vet. Factors like genetics, activity level, and diet all play a role.</p>
+            </details>
+            <details class="faq-item">
+              <summary>My puppy seems overweight. What should I do?</summary>
+              <p>Shiba Inus are prone to weight gain. Reduce treats, measure food portions, and increase exercise. Consult your vet for a proper diet plan if needed.</p>
+            </details>
+            <details class="faq-item">
+              <summary>How often should I weigh my Shiba Inu puppy?</summary>
+              <p>Weigh weekly for the first 6 months, then monthly until they're fully grown. After that, monthly or bi-monthly checks help maintain a healthy weight.</p>
+            </details>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Growth data (in kg)
+    const growthData = {
+      male: {
+        8: { min: 2.0, max: 3.0 },
+        12: { min: 3.0, max: 4.5 },
+        16: { min: 4.5, max: 6.0 },
+        20: { min: 5.5, max: 7.0 },
+        24: { min: 6.5, max: 8.0 },
+        32: { min: 7.5, max: 9.5 },
+        40: { min: 8.5, max: 10.5 },
+        52: { min: 9.0, max: 11.0 },
+        78: { min: 10.0, max: 12.0 }
+      },
+      female: {
+        8: { min: 1.8, max: 2.7 },
+        12: { min: 2.7, max: 4.0 },
+        16: { min: 4.0, max: 5.5 },
+        20: { min: 5.0, max: 6.5 },
+        24: { min: 5.5, max: 7.0 },
+        32: { min: 6.5, max: 8.0 },
+        40: { min: 7.0, max: 9.0 },
+        52: { min: 7.5, max: 9.5 },
+        78: { min: 8.0, max: 10.0 }
+      }
+    };
+
+    function checkWeight() {
+      const ageSelect = document.getElementById('puppyAge') as HTMLSelectElement;
+      const weightInput = document.getElementById('puppyWeight') as HTMLInputElement;
+      const unitSelect = document.getElementById('weightUnit') as HTMLSelectElement;
+      const genderSelect = document.getElementById('puppyGender') as HTMLSelectElement;
+      const resultContainer = document.getElementById('resultContainer');
+
+      const age = parseInt(ageSelect.value);
+      let weight = parseFloat(weightInput.value);
+      const unit = unitSelect.value;
+      const gender = genderSelect.value as 'male' | 'female';
+
+      if (!age || !weight) {
+        if (resultContainer) {
+          resultContainer.style.display = 'block';
+          resultContainer.innerHTML = `
+            <div class="result result-error">
+              <p>Please enter both age and weight to check.</p>
+            </div>
+          `;
+        }
+        return;
+      }
+
+      // Convert to kg if needed
+      if (unit === 'lbs') {
+        weight = weight * 0.453592;
+      }
+
+      const range = growthData[gender][age];
+      const midpoint = (range.min + range.max) / 2;
+      const percentOfMid = (weight / midpoint) * 100;
+
+      let status, statusClass, message, emoji;
+
+      if (weight < range.min * 0.85) {
+        status = 'Underweight';
+        statusClass = 'result-warning';
+        emoji = '⚠️';
+        message = `Your puppy is below the expected weight range. Consider consulting your vet to rule out any health issues and discuss nutrition.`;
+      } else if (weight < range.min) {
+        status = 'Slightly Below Average';
+        statusClass = 'result-info';
+        emoji = '📊';
+        message = `Your puppy is slightly below the typical range but may be normal. Monitor growth and ensure proper nutrition.`;
+      } else if (weight <= range.max) {
+        status = 'Healthy Weight';
+        statusClass = 'result-success';
+        emoji = '✅';
+        message = `Great news! Your puppy's weight is within the healthy range for their age and gender.`;
+      } else if (weight <= range.max * 1.15) {
+        status = 'Slightly Above Average';
+        statusClass = 'result-info';
+        emoji = '📊';
+        message = `Your puppy is slightly above the typical range. This can be normal, but watch for excessive weight gain.`;
+      } else {
+        status = 'Overweight';
+        statusClass = 'result-warning';
+        emoji = '⚠️';
+        message = `Your puppy is above the expected weight range. Consider reducing treats and portions, and consult your vet.`;
+      }
+
+      const displayMin = unit === 'lbs' ? (range.min * 2.20462).toFixed(1) : range.min.toFixed(1);
+      const displayMax = unit === 'lbs' ? (range.max * 2.20462).toFixed(1) : range.max.toFixed(1);
+      const displayWeight = unit === 'lbs' ? (weight * 2.20462).toFixed(1) : weight.toFixed(1);
+
+      if (resultContainer) {
+        resultContainer.style.display = 'block';
+        resultContainer.innerHTML = `
+          <div class="result ${statusClass}">
+            <div class="result-header">
+              <span class="result-emoji">${emoji}</span>
+              <span class="result-status">${status}</span>
+            </div>
+            <p class="result-message">${message}</p>
+            <div class="result-details">
+              <div class="detail">
+                <span class="detail-label">Your puppy</span>
+                <span class="detail-value">${displayWeight} ${unit}</span>
+              </div>
+              <div class="detail">
+                <span class="detail-label">Expected range</span>
+                <span class="detail-value">${displayMin} - ${displayMax} ${unit}</span>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+    }
+
+    document.getElementById('checkWeightBtn')?.addEventListener('click', checkWeight);
+
+    // Allow Enter key to submit
+    document.getElementById('puppyWeight')?.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        checkWeight();
+      }
+    });
+  </script>
+
+  <style>
+    .tool-container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      margin-bottom: var(--space-lg);
+      font-size: var(--font-size-sm);
+      color: var(--color-text-light);
+    }
+
+    .breadcrumb a {
+      color: var(--color-primary);
+      transition: color var(--transition-fast);
+    }
+
+    .breadcrumb a:hover {
+      color: var(--color-primary-dark);
+    }
+
+    .tool-header {
+      text-align: center;
+      margin-bottom: var(--space-2xl);
+    }
+
+    .tool-header h1 {
+      color: var(--color-primary);
+      font-size: var(--font-size-3xl);
+      margin-bottom: var(--space-md);
+    }
+
+    .tool-intro {
+      color: var(--color-text-light);
+      font-size: var(--font-size-lg);
+      line-height: 1.6;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Weight Checker */
+    .weight-checker {
+      margin-bottom: var(--space-2xl);
+    }
+
+    .weight-checker h2 {
+      color: var(--color-accent);
+      margin-bottom: var(--space-xl);
+      text-align: center;
+    }
+
+    .checker-form {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: var(--space-lg);
+      align-items: end;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+
+    .form-group label {
+      font-weight: 600;
+      color: var(--color-text);
+      font-size: var(--font-size-sm);
+    }
+
+    .form-group select,
+    .form-group input {
+      padding: var(--space-md);
+      border: 2px solid var(--color-secondary);
+      border-radius: var(--radius-md);
+      font-size: var(--font-size-base);
+      background-color: var(--color-white);
+      transition: border-color var(--transition-fast);
+    }
+
+    .form-group select:focus,
+    .form-group input:focus {
+      outline: none;
+      border-color: var(--color-primary);
+    }
+
+    .weight-input-group {
+      display: flex;
+      gap: var(--space-sm);
+    }
+
+    .weight-input-group input {
+      flex: 1;
+    }
+
+    .weight-input-group select {
+      width: 80px;
+    }
+
+    .result-container {
+      margin-top: var(--space-xl);
+    }
+
+    .result {
+      padding: var(--space-xl);
+      border-radius: var(--radius-md);
+      text-align: center;
+    }
+
+    .result-success {
+      background-color: #dcfce7;
+      border: 2px solid #22c55e;
+    }
+
+    .result-warning {
+      background-color: #fef3c7;
+      border: 2px solid #f59e0b;
+    }
+
+    .result-info {
+      background-color: #e0f2fe;
+      border: 2px solid #0ea5e9;
+    }
+
+    .result-error {
+      background-color: #fee2e2;
+      border: 2px solid #ef4444;
+    }
+
+    .result-header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-sm);
+      margin-bottom: var(--space-md);
+    }
+
+    .result-emoji {
+      font-size: 2rem;
+    }
+
+    .result-status {
+      font-size: var(--font-size-xl);
+      font-weight: 700;
+      color: var(--color-text);
+    }
+
+    .result-message {
+      color: var(--color-text);
+      margin-bottom: var(--space-lg);
+      line-height: 1.6;
+    }
+
+    .result-details {
+      display: flex;
+      justify-content: center;
+      gap: var(--space-2xl);
+      flex-wrap: wrap;
+    }
+
+    .detail {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+
+    .detail-label {
+      font-size: var(--font-size-sm);
+      color: var(--color-text-light);
+    }
+
+    .detail-value {
+      font-size: var(--font-size-lg);
+      font-weight: 600;
+      color: var(--color-text);
+    }
+
+    /* Chart Section */
+    .chart-section {
+      margin-bottom: var(--space-2xl);
+    }
+
+    .chart-section h2 {
+      color: var(--color-accent);
+      margin-bottom: var(--space-md);
+    }
+
+    .chart-note {
+      color: var(--color-text-light);
+      font-size: var(--font-size-sm);
+      margin-bottom: var(--space-xl);
+    }
+
+    .table-wrapper {
+      overflow-x: auto;
+    }
+
+    .growth-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: var(--font-size-sm);
+    }
+
+    .growth-table th,
+    .growth-table td {
+      padding: var(--space-md);
+      text-align: left;
+      border-bottom: 1px solid var(--color-secondary);
+    }
+
+    .growth-table th {
+      background-color: var(--color-primary);
+      color: var(--color-white);
+      font-weight: 600;
+    }
+
+    .growth-table th:first-child {
+      border-radius: var(--radius-md) 0 0 0;
+    }
+
+    .growth-table th:last-child {
+      border-radius: 0 var(--radius-md) 0 0;
+    }
+
+    .growth-table tr:hover {
+      background-color: var(--color-secondary-light);
+    }
+
+    .growth-table .adult-row {
+      background-color: var(--color-secondary);
+      font-weight: 500;
+    }
+
+    .growth-table .lbs {
+      color: var(--color-text-light);
+      font-size: var(--font-size-xs);
+    }
+
+    /* Tips Section */
+    .tips-section {
+      margin-bottom: var(--space-2xl);
+    }
+
+    .tips-section h2 {
+      color: var(--color-accent);
+      margin-bottom: var(--space-xl);
+    }
+
+    .tips-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: var(--space-lg);
+    }
+
+    .tip {
+      text-align: center;
+      padding: var(--space-lg);
+      background-color: var(--color-secondary-light);
+      border-radius: var(--radius-md);
+    }
+
+    .tip-icon {
+      font-size: 2.5rem;
+      margin-bottom: var(--space-md);
+    }
+
+    .tip h3 {
+      color: var(--color-primary);
+      font-size: var(--font-size-base);
+      margin-bottom: var(--space-sm);
+    }
+
+    .tip p {
+      color: var(--color-text-light);
+      font-size: var(--font-size-sm);
+      line-height: 1.6;
+    }
+
+    /* FAQ Section */
+    .faq-section h2 {
+      color: var(--color-accent);
+      margin-bottom: var(--space-xl);
+    }
+
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+
+    .faq-item {
+      border: 1px solid var(--color-secondary);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+    }
+
+    .faq-item summary {
+      padding: var(--space-lg);
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--color-text);
+      background-color: var(--color-secondary-light);
+      transition: background-color var(--transition-fast);
+      list-style: none;
+    }
+
+    .faq-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-item summary::before {
+      content: '+ ';
+      color: var(--color-primary);
+    }
+
+    .faq-item[open] summary::before {
+      content: '- ';
+    }
+
+    .faq-item summary:hover {
+      background-color: var(--color-secondary);
+    }
+
+    .faq-item p {
+      padding: var(--space-lg);
+      color: var(--color-text-light);
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    @media (max-width: 768px) {
+      .tool-header h1 {
+        font-size: var(--font-size-2xl);
+      }
+
+      .checker-form {
+        grid-template-columns: 1fr;
+      }
+
+      .growth-table {
+        font-size: var(--font-size-xs);
+      }
+
+      .growth-table th,
+      .growth-table td {
+        padding: var(--space-sm);
+      }
+
+      .result-details {
+        flex-direction: column;
+        gap: var(--space-md);
+      }
+    }
+  </style>
+</Layout>

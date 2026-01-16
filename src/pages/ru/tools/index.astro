@@ -1,0 +1,150 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+---
+
+<Layout
+  title="Инструменты для владельцев сиба-ину | Уголок Юкки"
+  description="Бесплатные инструменты для владельцев сиба-ину: таблица роста щенка, калькулятор веса, калькулятор расходов и многое другое."
+  lang="ru"
+>
+  <div class="section">
+    <div class="container">
+      <div class="page-header">
+        <h1>Инструменты для сиба-ину</h1>
+        <p class="page-subtitle">Полезные калькуляторы и трекеры для владельцев сиба-ину</p>
+      </div>
+
+      <div class="tools-grid">
+        <a href="/ru/tools/growth-chart" class="tool-card card">
+          <div class="tool-icon">📊</div>
+          <h2>Таблица роста щенка</h2>
+          <p>Отслеживайте вес вашего щенка сиба-ину и сравнивайте его со средними показателями породы. Проверьте, правильно ли растёт ваш малыш.</p>
+          <div class="tool-features">
+            <span class="feature">Отслеживание веса</span>
+            <span class="feature">Сравнение по возрасту</span>
+            <span class="feature">Этапы роста</span>
+          </div>
+          <span class="btn">Открыть</span>
+        </a>
+
+        <div class="tool-card card coming-soon">
+          <div class="tool-icon">💰</div>
+          <h2>Калькулятор расходов</h2>
+          <p>Рассчитайте месячные и годовые расходы на содержание сиба-ину, включая корм, ветеринара, груминг и аксессуары.</p>
+          <div class="tool-features">
+            <span class="feature">Месячные расходы</span>
+            <span class="feature">Годовой бюджет</span>
+            <span class="feature">Расчёт на всю жизнь</span>
+          </div>
+          <span class="btn btn-disabled">Скоро</span>
+        </div>
+
+        <div class="tool-card card coming-soon">
+          <div class="tool-icon">🍖</div>
+          <h2>Калькулятор кормления</h2>
+          <p>Рассчитайте, сколько корма нужно вашему сиба-ину в зависимости от возраста, веса и уровня активности.</p>
+          <div class="tool-features">
+            <span class="feature">Размер порции</span>
+            <span class="feature">Потребность в калориях</span>
+            <span class="feature">График кормления</span>
+          </div>
+          <span class="btn btn-disabled">Скоро</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .page-header {
+      text-align: center;
+      margin-bottom: var(--space-3xl);
+    }
+
+    .page-header h1 {
+      color: var(--color-primary);
+      font-size: var(--font-size-4xl);
+      margin-bottom: var(--space-md);
+    }
+
+    .page-subtitle {
+      font-size: var(--font-size-xl);
+      color: var(--color-text-light);
+    }
+
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: var(--space-xl);
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .tool-card {
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      transition: transform var(--transition-base), box-shadow var(--transition-base);
+      text-decoration: none;
+      color: inherit;
+    }
+
+    a.tool-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-xl);
+    }
+
+    .tool-card.coming-soon {
+      opacity: 0.7;
+    }
+
+    .tool-icon {
+      font-size: 4rem;
+      margin-bottom: var(--space-lg);
+    }
+
+    .tool-card h2 {
+      color: var(--color-primary);
+      font-size: var(--font-size-xl);
+      margin-bottom: var(--space-md);
+    }
+
+    .tool-card p {
+      color: var(--color-text-light);
+      line-height: 1.7;
+      margin-bottom: var(--space-lg);
+      flex-grow: 1;
+    }
+
+    .tool-features {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: var(--space-sm);
+      margin-bottom: var(--space-lg);
+    }
+
+    .feature {
+      background-color: var(--color-secondary);
+      color: var(--color-text);
+      padding: var(--space-xs) var(--space-sm);
+      border-radius: var(--radius-full);
+      font-size: var(--font-size-xs);
+    }
+
+    .btn-disabled {
+      background-color: var(--color-text-light);
+      cursor: not-allowed;
+    }
+
+    .btn-disabled:hover {
+      background-color: var(--color-text-light);
+      transform: none;
+    }
+
+    @media (max-width: 768px) {
+      .tools-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</Layout>

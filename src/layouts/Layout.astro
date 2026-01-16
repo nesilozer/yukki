@@ -28,10 +28,10 @@ const fullImageUrl = image.startsWith('http') ? image : `${siteUrl}${image}`;
 const nav = {
   en: {
     home: 'Home',
-    about: 'About Us',
-    gallery: 'Gallery',
     blog: 'Blog',
     tips: 'Tips',
+    quizzes: 'Quizzes',
+    tools: 'Tools',
     contact: 'Contact',
     logoText: "Yukki's Corner",
     footerTagline: "Following the adventures of a Shiba Inu puppy",
@@ -41,10 +41,10 @@ const nav = {
   },
   ru: {
     home: 'Главная',
-    about: 'О нас',
-    gallery: 'Галерея',
     blog: 'Блог',
     tips: 'Советы',
+    quizzes: 'Тесты',
+    tools: 'Инструменты',
     contact: 'Контакты',
     logoText: 'Уголок Юкки',
     footerTagline: 'Следим за приключениями щенка сиба-ину',
@@ -67,6 +67,7 @@ const altPath = lang === 'ru' ? Astro.url.pathname.replace('/ru', '') || '/' : `
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <meta name="robots" content="noindex, nofollow" />
+    <meta name="googlebot" content="noindex, nofollow" />
     <meta name="generator" content={Astro.generator} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="canonical" href={`${siteUrl}${Astro.url.pathname}`} />
@@ -106,6 +107,26 @@ const altPath = lang === 'ru' ? Astro.url.pathname.replace('/ru', '') || '/' : `
     <slot name="head" />
   </head>
   <body>
+    <!-- Password Protection Gate -->
+    <div id="passwordGate" class="password-gate">
+      <div class="password-container">
+        <div class="password-logo">🐕</div>
+        <h1>Yukki's Corner</h1>
+        <p>This site is currently private</p>
+        <form id="passwordForm" class="password-form">
+          <input
+            type="password"
+            id="passwordInput"
+            placeholder="Enter password"
+            autocomplete="off"
+            required
+          />
+          <button type="submit">Enter</button>
+        </form>
+        <p id="passwordError" class="password-error"></p>
+      </div>
+    </div>
+
     <nav class="navbar">
       <div class="container navbar-container">
         <a href={`${basePath}/`} class="logo">
@@ -115,10 +136,10 @@ const altPath = lang === 'ru' ? Astro.url.pathname.replace('/ru', '') || '/' : `
 
         <ul class="nav-menu" id="navMenu">
           <li><a href={`${basePath}/`} class="nav-link">{t.home}</a></li>
-          <li><a href={`${basePath}/about`} class="nav-link">{t.about}</a></li>
-          <li><a href={`${basePath}/gallery`} class="nav-link">{t.gallery}</a></li>
           <li><a href={`${basePath}/blog`} class="nav-link">{t.blog}</a></li>
           <li><a href={`${basePath}/tips`} class="nav-link">{t.tips}</a></li>
+          <li><a href={`${basePath}/quizzes`} class="nav-link">{t.quizzes}</a></li>
+          <li><a href={`${basePath}/tools`} class="nav-link">{t.tools}</a></li>
           <li><a href={`${basePath}/contact`} class="nav-link">{t.contact}</a></li>
         </ul>
 
@@ -150,9 +171,9 @@ const altPath = lang === 'ru' ? Astro.url.pathname.replace('/ru', '') || '/' : `
             <h4>{t.quickLinks}</h4>
             <ul class="footer-links">
               <li><a href={`${basePath}/`}>{t.home}</a></li>
-              <li><a href={`${basePath}/about`}>{t.about}</a></li>
-              <li><a href={`${basePath}/gallery`}>{t.gallery}</a></li>
               <li><a href={`${basePath}/blog`}>{t.blog}</a></li>
+              <li><a href={`${basePath}/quizzes`}>{t.quizzes}</a></li>
+              <li><a href={`${basePath}/tools`}>{t.tools}</a></li>
             </ul>
           </div>
 
@@ -179,6 +200,98 @@ const altPath = lang === 'ru' ? Astro.url.pathname.replace('/ru', '') || '/' : `
     </footer>
 
     <style>
+      /* Password Gate Styles */
+      .password-gate {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, var(--color-secondary-light) 0%, var(--color-secondary) 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10000;
+        opacity: 1;
+        transition: opacity 0.3s ease;
+      }
+
+      .password-gate.hidden {
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .password-container {
+        background: var(--color-white);
+        padding: var(--space-3xl);
+        border-radius: var(--radius-xl);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+        text-align: center;
+        max-width: 360px;
+        width: 90%;
+      }
+
+      .password-logo {
+        font-size: 4rem;
+        margin-bottom: var(--space-md);
+      }
+
+      .password-container h1 {
+        color: var(--color-primary);
+        font-size: var(--font-size-2xl);
+        margin-bottom: var(--space-sm);
+      }
+
+      .password-container > p {
+        color: var(--color-text-light);
+        margin-bottom: var(--space-xl);
+        font-size: var(--font-size-sm);
+      }
+
+      .password-form {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-md);
+      }
+
+      .password-form input {
+        padding: var(--space-md) var(--space-lg);
+        border: 2px solid var(--color-secondary);
+        border-radius: var(--radius-md);
+        font-size: var(--font-size-base);
+        text-align: center;
+        transition: border-color 0.2s ease;
+      }
+
+      .password-form input:focus {
+        outline: none;
+        border-color: var(--color-primary);
+      }
+
+      .password-form button {
+        padding: var(--space-md) var(--space-lg);
+        background-color: var(--color-primary);
+        color: var(--color-white);
+        border: none;
+        border-radius: var(--radius-md);
+        font-size: var(--font-size-base);
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .password-form button:hover {
+        background-color: var(--color-primary-dark);
+        transform: translateY(-2px);
+      }
+
+      .password-error {
+        color: #ef4444;
+        font-size: var(--font-size-sm);
+        margin-top: var(--space-sm);
+        min-height: 20px;
+      }
+
       /* Navbar Styles */
       .navbar {
         background-color: var(--color-white);
@@ -474,6 +587,41 @@ const altPath = lang === 'ru' ? Astro.url.pathname.replace('/ru', '') || '/' : `
     </style>
 
     <script>
+      // Password Gate Logic
+      (function() {
+        const SITE_PASSWORD = 'NesitoKarina';
+        const STORAGE_KEY = 'yukki_auth';
+
+        const gate = document.getElementById('passwordGate');
+        const form = document.getElementById('passwordForm');
+        const input = document.getElementById('passwordInput');
+        const error = document.getElementById('passwordError');
+
+        // Check if already authenticated
+        if (localStorage.getItem(STORAGE_KEY) === 'true') {
+          gate?.classList.add('hidden');
+          setTimeout(() => { if (gate) gate.style.display = 'none'; }, 300);
+        }
+
+        // Handle form submission
+        form?.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const password = input?.value || '';
+
+          if (password === SITE_PASSWORD) {
+            localStorage.setItem(STORAGE_KEY, 'true');
+            gate?.classList.add('hidden');
+            setTimeout(() => { if (gate) gate.style.display = 'none'; }, 300);
+          } else {
+            if (error) error.textContent = 'Incorrect password';
+            if (input) {
+              input.value = '';
+              input.focus();
+            }
+          }
+        });
+      })();
+
       // Mobile menu toggle
       const menuToggle = document.getElementById('menuToggle');
       const navMenu = document.getElementById('navMenu');

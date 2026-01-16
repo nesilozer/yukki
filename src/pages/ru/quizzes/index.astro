@@ -1,0 +1,148 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+---
+
+<Layout
+  title="Тесты о сиба-ину - Проверь свои знания | Уголок Юкки"
+  description="Интересные и познавательные тесты о сиба-ину. Узнайте, подходит ли вам сиба-ину, проверьте свои знания о породе и многое другое."
+  lang="ru"
+>
+  <div class="section">
+    <div class="container">
+      <div class="page-header">
+        <h1>Тесты о сиба-ину</h1>
+        <p class="page-subtitle">Интерактивные тесты, чтобы узнать больше об этой удивительной породе</p>
+      </div>
+
+      <div class="quizzes-grid">
+        <a href="/ru/quizzes/is-shiba-right-for-you" class="quiz-card card">
+          <div class="quiz-icon">🐕</div>
+          <h2>Подходит ли вам сиба-ину?</h2>
+          <p>Ответьте на 10 вопросов, чтобы узнать, подходит ли сиба-ину вашему образу жизни, жилищным условиям и характеру.</p>
+          <span class="quiz-meta">
+            <span class="quiz-time">5 мин</span>
+            <span class="quiz-questions">10 вопросов</span>
+          </span>
+          <span class="btn">Пройти тест</span>
+        </a>
+
+        <div class="quiz-card card coming-soon">
+          <div class="quiz-icon">🎨</div>
+          <h2>Какой окрас сиба-ину вам подходит?</h2>
+          <p>Узнайте, какой окрас сиба-ину отражает вашу личность - рыжий, сезам, чёрно-подпалый или кремовый.</p>
+          <span class="quiz-meta">
+            <span class="quiz-time">3 мин</span>
+            <span class="quiz-questions">8 вопросов</span>
+          </span>
+          <span class="btn btn-disabled">Скоро</span>
+        </div>
+
+        <div class="quiz-card card coming-soon">
+          <div class="quiz-icon">🧠</div>
+          <h2>Тест на знание породы сиба-ину</h2>
+          <p>Думаете, что знаете всё о сиба-ину? Проверьте свои знания об истории, особенностях и уходе за породой.</p>
+          <span class="quiz-meta">
+            <span class="quiz-time">5 мин</span>
+            <span class="quiz-questions">15 вопросов</span>
+          </span>
+          <span class="btn btn-disabled">Скоро</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .page-header {
+      text-align: center;
+      margin-bottom: var(--space-3xl);
+    }
+
+    .page-header h1 {
+      color: var(--color-primary);
+      font-size: var(--font-size-4xl);
+      margin-bottom: var(--space-md);
+    }
+
+    .page-subtitle {
+      font-size: var(--font-size-xl);
+      color: var(--color-text-light);
+    }
+
+    .quizzes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: var(--space-xl);
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .quiz-card {
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      transition: transform var(--transition-base), box-shadow var(--transition-base);
+      text-decoration: none;
+      color: inherit;
+    }
+
+    a.quiz-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-xl);
+    }
+
+    .quiz-card.coming-soon {
+      opacity: 0.7;
+    }
+
+    .quiz-icon {
+      font-size: 4rem;
+      margin-bottom: var(--space-lg);
+    }
+
+    .quiz-card h2 {
+      color: var(--color-primary);
+      font-size: var(--font-size-xl);
+      margin-bottom: var(--space-md);
+    }
+
+    .quiz-card p {
+      color: var(--color-text-light);
+      line-height: 1.7;
+      margin-bottom: var(--space-lg);
+      flex-grow: 1;
+    }
+
+    .quiz-meta {
+      display: flex;
+      justify-content: center;
+      gap: var(--space-lg);
+      margin-bottom: var(--space-lg);
+      font-size: var(--font-size-sm);
+      color: var(--color-text-light);
+    }
+
+    .quiz-time::before {
+      content: '⏱️ ';
+    }
+
+    .quiz-questions::before {
+      content: '📝 ';
+    }
+
+    .btn-disabled {
+      background-color: var(--color-text-light);
+      cursor: not-allowed;
+    }
+
+    .btn-disabled:hover {
+      background-color: var(--color-text-light);
+      transform: none;
+    }
+
+    @media (max-width: 768px) {
+      .quizzes-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</Layout>

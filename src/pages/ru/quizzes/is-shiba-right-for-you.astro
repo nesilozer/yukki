@@ -1,0 +1,668 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+
+const quizSchema = {
+  "@context": "https://schema.org",
+  "@type": "Quiz",
+  "name": "Подходит ли вам сиба-ину?",
+  "description": "Комплексный тест, который поможет определить, подходит ли порода сиба-ину вашему образу жизни, жилищным условиям и характеру.",
+  "educationalLevel": "beginner",
+  "about": {
+    "@type": "Thing",
+    "name": "Сиба-ину",
+    "description": "Японская порода собак"
+  }
+};
+---
+
+<Layout
+  title="Подходит ли вам сиба-ину? | Бесплатный тест | Уголок Юкки"
+  description="Пройдите наш бесплатный тест, чтобы узнать, подходит ли вам порода сиба-ину. Ответьте на 10 вопросов о вашем образе жизни, опыте и жилищных условиях."
+  lang="ru"
+>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(quizSchema)} />
+
+  <div class="section">
+    <div class="container">
+      <div class="quiz-container">
+        <!-- Quiz Header -->
+        <div class="quiz-header">
+          <nav class="breadcrumb">
+            <a href="/ru">Главная</a>
+            <span class="separator">&rarr;</span>
+            <a href="/ru/quizzes">Тесты</a>
+            <span class="separator">&rarr;</span>
+            <span>Подходит ли вам сиба-ину?</span>
+          </nav>
+          <h1>Подходит ли вам сиба-ину?</h1>
+          <p class="quiz-intro">Честно ответьте на эти 10 вопросов, чтобы узнать, подходит ли сиба-ину вашему образу жизни. Тест займёт около 5 минут.</p>
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="progress-container">
+          <div class="progress-bar" id="progressBar"></div>
+          <span class="progress-text" id="progressText">Вопрос 1 из 10</span>
+        </div>
+
+        <!-- Quiz Questions -->
+        <div class="quiz-content" id="quizContent">
+          <!-- Questions will be rendered by JavaScript -->
+        </div>
+
+        <!-- Quiz Results (hidden initially) -->
+        <div class="quiz-results" id="quizResults" style="display: none;">
+          <!-- Results will be rendered by JavaScript -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const questions = [
+      {
+        id: 1,
+        question: "Как бы вы описали ваши жилищные условия?",
+        options: [
+          { text: "Дом с надёжно огороженным двором", score: 3 },
+          { text: "Квартира с парками поблизости", score: 2 },
+          { text: "Маленькая квартира, ограниченный доступ на улицу", score: 1 },
+          { text: "Часто переезжаю / нестабильное жильё", score: 0 }
+        ]
+      },
+      {
+        id: 2,
+        question: "Сколько времени вы можете уделять ежедневным упражнениям и прогулкам?",
+        options: [
+          { text: "1-2 часа в день, я очень активный человек", score: 3 },
+          { text: "30-60 минут в день", score: 2 },
+          { text: "15-30 минут, у меня плотный график", score: 1 },
+          { text: "Очень мало, предпочитаю спокойного питомца", score: 0 }
+        ]
+      },
+      {
+        id: 3,
+        question: "Какой у вас опыт содержания собак?",
+        options: [
+          { text: "Опыт с независимыми/упрямыми породами", score: 3 },
+          { text: "Были собаки, но послушные породы", score: 2 },
+          { text: "Первая собака, но много изучал информации", score: 1 },
+          { text: "Нет опыта, хочу простую первую собаку", score: 0 }
+        ]
+      },
+      {
+        id: 4,
+        question: "Как вы относитесь к собаке, которая не всегда выполняет команды?",
+        options: [
+          { text: "Мне нравится независимость, готов работать над этим", score: 3 },
+          { text: "Буду терпеливым, но хотелось бы послушания", score: 2 },
+          { text: "Это расстроит меня, но справлюсь", score: 1 },
+          { text: "Мне нужна собака, которая слушается", score: 0 }
+        ]
+      },
+      {
+        id: 5,
+        question: "Как вы относитесь к шерсти и уходу за собакой?",
+        options: [
+          { text: "Не против сильной линьки, готов регулярно вычёсывать", score: 3 },
+          { text: "Умеренная линька — это нормально", score: 2 },
+          { text: "Предпочитаю минимальную линьку", score: 1 },
+          { text: "Совсем не переношу шерсть", score: 0 }
+        ]
+      },
+      {
+        id: 6,
+        question: "Есть ли у вас другие питомцы дома?",
+        options: [
+          { text: "Нет других питомцев", score: 3 },
+          { text: "Спокойный питомец, дружелюбный к собакам", score: 2 },
+          { text: "Мелкие животные (кошки, кролики и т.д.)", score: 1 },
+          { text: "Несколько питомцев, включая мелких животных", score: 0 }
+        ]
+      },
+      {
+        id: 7,
+        question: "Какая у вас домашняя обстановка?",
+        options: [
+          { text: "Только взрослые, спокойная атмосфера", score: 3 },
+          { text: "Взрослые с детьми старше 10 лет", score: 2 },
+          { text: "Маленькие дети в доме", score: 1 },
+          { text: "Очень шумно, много гостей", score: 0 }
+        ]
+      },
+      {
+        id: 8,
+        question: "Насколько важна для вас возможность отпускать собаку без поводка?",
+        options: [
+          { text: "Не важно, всегда буду использовать поводок", score: 3 },
+          { text: "Было бы неплохо, но не обязательно", score: 2 },
+          { text: "Достаточно важно для меня", score: 1 },
+          { text: "Очень важно, хочу свободу без поводка", score: 0 }
+        ]
+      },
+      {
+        id: 9,
+        question: "Как вы относитесь к питомцу, который иногда отстранён, как кошка?",
+        options: [
+          { text: "Мне это нравится! Независимость привлекает", score: 3 },
+          { text: "Приму это, если будут моменты нежности", score: 2 },
+          { text: "Предпочёл бы больше ласки", score: 1 },
+          { text: "Хочу собаку, которая всегда рада угодить", score: 0 }
+        ]
+      },
+      {
+        id: 10,
+        question: "Готовы ли вы к возможным расходам на здоровье и к 12-16 годам ответственности?",
+        options: [
+          { text: "Да, есть сбережения и полная готовность", score: 3 },
+          { text: "Планирую страховку для питомца, готов к обязательствам", score: 2 },
+          { text: "Готов, но финансы ограничены", score: 1 },
+          { text: "Не особо думал о долгосрочных расходах", score: 0 }
+        ]
+      }
+    ];
+
+    const results = {
+      excellent: {
+        title: "Идеальное совпадение! 🎉",
+        emoji: "🐕",
+        description: "Поздравляем! Судя по вашим ответам, сиба-ину может стать для вас отличным компаньоном. У вас подходящие жилищные условия, реалистичные ожидания и терпение, необходимое для этой независимой породы.",
+        tips: [
+          "Найдите надёжного заводчика или рассмотрите приюты для сиба-ину",
+          "Начните изучать методы дрессировки упрямых пород",
+          "Подготовьте дом: надёжный забор и безопасность для щенка",
+          "Запланируйте бюджет на качественный корм, уход и ветеринара"
+        ],
+        color: "#22c55e"
+      },
+      good: {
+        title: "Хороший потенциал! 👍",
+        emoji: "🤔",
+        description: "У вас много качеств, которые сделают вас хорошим владельцем сиба-ину, но есть несколько моментов для размышления. С некоторой подготовкой вы можете отлично подойти друг другу.",
+        tips: [
+          "Изучите темперамент сиба-ину более подробно",
+          "Познакомьтесь с сиба-ину лично перед принятием решения",
+          "Подготовьтесь к трудностям, выявленным в ваших ответах",
+          "Пообщайтесь с владельцами сиба-ину, чтобы узнать их опыт"
+        ],
+        color: "#eab308"
+      },
+      maybe: {
+        title: "Стоит подумать 🤷",
+        emoji: "⚠️",
+        description: "Хотя вам может понравиться сиба-ину, ваш текущий образ жизни или ожидания могут создать некоторые трудности. Важно честно оценить, подходит ли вам эта порода сейчас.",
+        tips: [
+          "Проведите время с сиба-ину перед принятием решения",
+          "Подумайте, может ли ваш образ жизни измениться",
+          "Изучите другие породы, которые могут лучше подойти",
+          "Поговорите с опытными владельцами о реальностях содержания"
+        ],
+        color: "#f97316"
+      },
+      notRecommended: {
+        title: "Возможно, не сейчас 💭",
+        emoji: "🚫",
+        description: "Судя по вашим ответам, сиба-ину может не подойти для вашей текущей ситуации. Это не осуждение — речь о том, чтобы найти правильный выбор и для вас, и для собаки.",
+        tips: [
+          "Рассмотрите породы, которые лучше соответствуют вашему образу жизни",
+          "Ваша ситуация может измениться в будущем",
+          "Изучите породы, подходящие для начинающих владельцев",
+          "Попробуйте передержку собак для получения опыта"
+        ],
+        color: "#ef4444"
+      }
+    };
+
+    let currentQuestion = 0;
+    let answers: number[] = [];
+
+    function renderQuestion() {
+      const question = questions[currentQuestion];
+      const quizContent = document.getElementById('quizContent');
+      const progressBar = document.getElementById('progressBar');
+      const progressText = document.getElementById('progressText');
+
+      if (progressBar) {
+        progressBar.style.width = `${((currentQuestion) / questions.length) * 100}%`;
+      }
+      if (progressText) {
+        progressText.textContent = `Вопрос ${currentQuestion + 1} из ${questions.length}`;
+      }
+
+      if (quizContent) {
+        quizContent.innerHTML = `
+          <div class="question-card">
+            <h2 class="question-number">Вопрос ${question.id}</h2>
+            <p class="question-text">${question.question}</p>
+            <div class="options-container">
+              ${question.options.map((option, index) => `
+                <button class="option-btn" data-score="${option.score}" data-index="${index}">
+                  ${option.text}
+                </button>
+              `).join('')}
+            </div>
+          </div>
+        `;
+
+        document.querySelectorAll('.option-btn').forEach(btn => {
+          btn.addEventListener('click', handleAnswer);
+        });
+      }
+    }
+
+    function handleAnswer(e: Event) {
+      const target = e.target as HTMLElement;
+      const score = parseInt(target.dataset.score || '0');
+      answers.push(score);
+
+      document.querySelectorAll('.option-btn').forEach(btn => {
+        btn.classList.remove('selected');
+      });
+      target.classList.add('selected');
+
+      setTimeout(() => {
+        if (currentQuestion < questions.length - 1) {
+          currentQuestion++;
+          renderQuestion();
+        } else {
+          showResults();
+        }
+      }, 300);
+    }
+
+    function showResults() {
+      const totalScore = answers.reduce((sum, score) => sum + score, 0);
+      const maxScore = questions.length * 3;
+      const percentage = (totalScore / maxScore) * 100;
+
+      let result;
+      if (percentage >= 80) {
+        result = results.excellent;
+      } else if (percentage >= 60) {
+        result = results.good;
+      } else if (percentage >= 40) {
+        result = results.maybe;
+      } else {
+        result = results.notRecommended;
+      }
+
+      const quizContent = document.getElementById('quizContent');
+      const quizResults = document.getElementById('quizResults');
+      const progressBar = document.getElementById('progressBar');
+
+      if (quizContent) quizContent.style.display = 'none';
+      if (progressBar) progressBar.style.width = '100%';
+
+      if (quizResults) {
+        quizResults.style.display = 'block';
+        quizResults.innerHTML = `
+          <div class="results-card">
+            <div class="results-emoji">${result.emoji}</div>
+            <h2 class="results-title" style="color: ${result.color}">${result.title}</h2>
+            <div class="score-display">
+              <div class="score-circle" style="border-color: ${result.color}">
+                <span class="score-number">${totalScore}</span>
+                <span class="score-max">/ ${maxScore}</span>
+              </div>
+            </div>
+            <p class="results-description">${result.description}</p>
+            <div class="results-tips">
+              <h3>Следующие шаги:</h3>
+              <ul>
+                ${result.tips.map(tip => `<li>${tip}</li>`).join('')}
+              </ul>
+            </div>
+            <div class="results-actions">
+              <button class="btn" id="retakeBtn">Пройти заново</button>
+              <a href="/ru/tips" class="btn btn-secondary">Советы по уходу</a>
+            </div>
+            <div class="share-section">
+              <p>Поделиться результатом:</p>
+              <div class="share-buttons">
+                <button class="share-btn" id="copyResultBtn" title="Копировать ссылку">📋 Копировать</button>
+              </div>
+            </div>
+          </div>
+        `;
+
+        document.getElementById('retakeBtn')?.addEventListener('click', () => {
+          currentQuestion = 0;
+          answers = [];
+          if (quizResults) quizResults.style.display = 'none';
+          if (quizContent) quizContent.style.display = 'block';
+          renderQuestion();
+        });
+
+        document.getElementById('copyResultBtn')?.addEventListener('click', () => {
+          navigator.clipboard.writeText(window.location.href);
+          const btn = document.getElementById('copyResultBtn');
+          if (btn) {
+            btn.textContent = '✓ Скопировано!';
+            setTimeout(() => {
+              btn.textContent = '📋 Копировать';
+            }, 2000);
+          }
+        });
+      }
+    }
+
+    renderQuestion();
+  </script>
+
+  <style is:global>
+    .quiz-container {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      margin-bottom: var(--space-lg);
+      font-size: var(--font-size-sm);
+      color: var(--color-text-light);
+    }
+
+    .breadcrumb a {
+      color: var(--color-primary);
+      transition: color var(--transition-fast);
+    }
+
+    .breadcrumb a:hover {
+      color: var(--color-primary-dark);
+    }
+
+    .quiz-header {
+      text-align: center;
+      margin-bottom: var(--space-2xl);
+    }
+
+    .quiz-header h1 {
+      color: var(--color-primary);
+      font-size: var(--font-size-3xl);
+      margin-bottom: var(--space-md);
+    }
+
+    .quiz-intro {
+      color: var(--color-text-light);
+      font-size: var(--font-size-lg);
+      line-height: 1.6;
+    }
+
+    .progress-container {
+      background-color: var(--color-secondary);
+      border-radius: var(--radius-full);
+      height: 12px;
+      margin-bottom: var(--space-sm);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .progress-bar {
+      background: linear-gradient(90deg, var(--color-primary), var(--color-primary-dark));
+      height: 100%;
+      width: 0%;
+      transition: width var(--transition-base);
+      border-radius: var(--radius-full);
+    }
+
+    .progress-text {
+      display: block;
+      text-align: center;
+      font-size: var(--font-size-sm);
+      color: var(--color-text-light);
+      margin-bottom: var(--space-xl);
+    }
+
+    .question-card {
+      background: var(--color-white);
+      border-radius: var(--radius-xl);
+      padding: var(--space-3xl);
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+    }
+
+    .question-number {
+      color: var(--color-primary);
+      font-size: var(--font-size-xs);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: var(--space-sm);
+      font-weight: 600;
+    }
+
+    .question-text {
+      font-size: var(--font-size-2xl);
+      color: var(--color-text);
+      margin-bottom: var(--space-2xl);
+      line-height: 1.4;
+      font-weight: 600;
+    }
+
+    .options-container {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+
+    .option-btn {
+      width: 100%;
+      padding: var(--space-lg) var(--space-xl);
+      background-color: var(--color-white);
+      border: 2px solid #e5e7eb;
+      border-radius: var(--radius-lg);
+      font-size: var(--font-size-base);
+      color: var(--color-text);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-align: left;
+      line-height: 1.5;
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+    }
+
+    .option-btn::before {
+      content: '';
+      width: 22px;
+      height: 22px;
+      min-width: 22px;
+      border: 2px solid #d1d5db;
+      border-radius: 50%;
+      transition: all 0.2s ease;
+      background-color: var(--color-white);
+    }
+
+    .option-btn:hover {
+      border-color: var(--color-primary);
+      background-color: #fff8f5;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    .option-btn:hover::before {
+      border-color: var(--color-primary);
+    }
+
+    .option-btn.selected {
+      border-color: var(--color-primary);
+      background-color: var(--color-primary);
+      color: var(--color-white);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(232, 119, 68, 0.3);
+    }
+
+    .option-btn.selected::before {
+      border-color: var(--color-white);
+      background-color: var(--color-white);
+      box-shadow: inset 0 0 0 5px var(--color-primary);
+    }
+
+    .results-card {
+      background: var(--color-white);
+      border-radius: var(--radius-lg);
+      padding: var(--space-3xl);
+      box-shadow: var(--shadow-lg);
+      text-align: center;
+    }
+
+    .results-emoji {
+      font-size: 5rem;
+      margin-bottom: var(--space-lg);
+    }
+
+    .results-title {
+      font-size: var(--font-size-3xl);
+      margin-bottom: var(--space-xl);
+    }
+
+    .score-display {
+      margin-bottom: var(--space-xl);
+    }
+
+    .score-circle {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 4px solid;
+      background-color: var(--color-secondary-light);
+    }
+
+    .score-number {
+      font-size: var(--font-size-3xl);
+      font-weight: 700;
+      color: var(--color-text);
+    }
+
+    .score-max {
+      font-size: var(--font-size-sm);
+      color: var(--color-text-light);
+    }
+
+    .results-description {
+      font-size: var(--font-size-lg);
+      color: var(--color-text);
+      line-height: 1.7;
+      margin-bottom: var(--space-2xl);
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .results-tips {
+      background-color: var(--color-secondary-light);
+      border-radius: var(--radius-md);
+      padding: var(--space-xl);
+      margin-bottom: var(--space-2xl);
+      text-align: left;
+    }
+
+    .results-tips h3 {
+      color: var(--color-accent);
+      margin-bottom: var(--space-md);
+    }
+
+    .results-tips ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .results-tips li {
+      padding: var(--space-sm) 0;
+      padding-left: var(--space-lg);
+      position: relative;
+      color: var(--color-text);
+      line-height: 1.6;
+    }
+
+    .results-tips li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--color-primary);
+      font-weight: bold;
+    }
+
+    .results-actions {
+      display: flex;
+      gap: var(--space-md);
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: var(--space-xl);
+    }
+
+    .share-section {
+      padding-top: var(--space-xl);
+      border-top: 1px solid var(--color-secondary);
+    }
+
+    .share-section p {
+      color: var(--color-text-light);
+      margin-bottom: var(--space-md);
+      font-size: var(--font-size-sm);
+    }
+
+    .share-buttons {
+      display: flex;
+      justify-content: center;
+      gap: var(--space-md);
+    }
+
+    .share-btn {
+      padding: var(--space-sm) var(--space-lg);
+      background-color: var(--color-secondary);
+      border: none;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      font-size: var(--font-size-sm);
+      transition: all var(--transition-fast);
+    }
+
+    .share-btn:hover {
+      background-color: var(--color-secondary-dark);
+    }
+
+    @media (max-width: 768px) {
+      .quiz-header h1 {
+        font-size: var(--font-size-2xl);
+      }
+
+      .question-card {
+        padding: var(--space-xl);
+        border-radius: var(--radius-lg);
+      }
+
+      .question-text {
+        font-size: var(--font-size-xl);
+        margin-bottom: var(--space-xl);
+      }
+
+      .option-btn {
+        padding: var(--space-md) var(--space-lg);
+        font-size: var(--font-size-sm);
+      }
+
+      .option-btn::before {
+        width: 18px;
+        height: 18px;
+        min-width: 18px;
+      }
+
+      .results-card {
+        padding: var(--space-xl);
+      }
+
+      .results-emoji {
+        font-size: 4rem;
+      }
+
+      .results-title {
+        font-size: var(--font-size-2xl);
+      }
+    }
+  </style>
+</Layout>

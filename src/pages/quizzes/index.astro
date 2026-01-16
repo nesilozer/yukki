@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout
+  title="Shiba Inu Quizzes - Test Your Knowledge | Yukki's Corner"
+  description="Fun and informative quizzes about Shiba Inu dogs. Find out if a Shiba Inu is right for you, test your breed knowledge, and more."
+>
+  <div class="section">
+    <div class="container">
+      <div class="page-header">
+        <h1>Shiba Inu Quizzes</h1>
+        <p class="page-subtitle">Interactive quizzes to help you learn about this amazing breed</p>
+      </div>
+
+      <div class="quizzes-grid">
+        <a href="/quizzes/is-shiba-right-for-you" class="quiz-card card">
+          <div class="quiz-icon">🐕</div>
+          <h2>Is a Shiba Inu Right for You?</h2>
+          <p>Answer 10 questions to find out if a Shiba Inu matches your lifestyle, living situation, and personality.</p>
+          <span class="quiz-meta">
+            <span class="quiz-time">5 min</span>
+            <span class="quiz-questions">10 questions</span>
+          </span>
+          <span class="btn">Take Quiz</span>
+        </a>
+
+        <div class="quiz-card card coming-soon">
+          <div class="quiz-icon">🎨</div>
+          <h2>What Shiba Color Matches You?</h2>
+          <p>Discover which Shiba Inu coat color reflects your personality - Red, Sesame, Black & Tan, or Cream.</p>
+          <span class="quiz-meta">
+            <span class="quiz-time">3 min</span>
+            <span class="quiz-questions">8 questions</span>
+          </span>
+          <span class="btn btn-disabled">Coming Soon</span>
+        </div>
+
+        <div class="quiz-card card coming-soon">
+          <div class="quiz-icon">🧠</div>
+          <h2>Shiba Inu Breed Knowledge Test</h2>
+          <p>Think you know everything about Shiba Inus? Test your knowledge about their history, traits, and care.</p>
+          <span class="quiz-meta">
+            <span class="quiz-time">5 min</span>
+            <span class="quiz-questions">15 questions</span>
+          </span>
+          <span class="btn btn-disabled">Coming Soon</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .page-header {
+      text-align: center;
+      margin-bottom: var(--space-3xl);
+    }
+
+    .page-header h1 {
+      color: var(--color-primary);
+      font-size: var(--font-size-4xl);
+      margin-bottom: var(--space-md);
+    }
+
+    .page-subtitle {
+      font-size: var(--font-size-xl);
+      color: var(--color-text-light);
+    }
+
+    .quizzes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: var(--space-xl);
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .quiz-card {
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      transition: transform var(--transition-base), box-shadow var(--transition-base);
+      text-decoration: none;
+      color: inherit;
+    }
+
+    a.quiz-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-xl);
+    }
+
+    .quiz-card.coming-soon {
+      opacity: 0.7;
+    }
+
+    .quiz-icon {
+      font-size: 4rem;
+      margin-bottom: var(--space-lg);
+    }
+
+    .quiz-card h2 {
+      color: var(--color-primary);
+      font-size: var(--font-size-xl);
+      margin-bottom: var(--space-md);
+    }
+
+    .quiz-card p {
+      color: var(--color-text-light);
+      line-height: 1.7;
+      margin-bottom: var(--space-lg);
+      flex-grow: 1;
+    }
+
+    .quiz-meta {
+      display: flex;
+      justify-content: center;
+      gap: var(--space-lg);
+      margin-bottom: var(--space-lg);
+      font-size: var(--font-size-sm);
+      color: var(--color-text-light);
+    }
+
+    .quiz-time::before {
+      content: '⏱️ ';
+    }
+
+    .quiz-questions::before {
+      content: '📝 ';
+    }
+
+    .btn-disabled {
+      background-color: var(--color-text-light);
+      cursor: not-allowed;
+    }
+
+    .btn-disabled:hover {
+      background-color: var(--color-text-light);
+      transform: none;
+    }
+
+    @media (max-width: 768px) {
+      .quizzes-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</Layout>
