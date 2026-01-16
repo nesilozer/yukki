@@ -3,22 +3,16 @@ import Layout from '../../layouts/Layout.astro';
 ---
 
 <Layout
-  title="Уголок Юкки - Дом щенка сиба-ину"
-  description="Добро пожаловать в Уголок Юкки! Следите за приключениями, историями и повседневной жизнью Юкки, очаровательного щенка сиба-ину."
+  title="Жизнь с Юкки - Дом щенка сиба-ину"
+  description="Добро пожаловать в Жизнь с Юкки! Следите за приключениями, историями и повседневной жизнью Юкки, очаровательного щенка сиба-ину."
   lang="ru"
 >
   <!-- Hero Section -->
   <section class="hero">
     <div class="hero-content">
-      <h1 class="hero-title hero-title-mobile">
-        Привет, я Юкки :)
-        <button class="bark-button" aria-label="Воспроизвести лай Юкки">
-          🔊
-        </button>
-      </h1>
       <div class="hero-text">
-        <h1 class="hero-title hero-title-desktop">
-          Привет, я Юкки :)
+        <h1 class="hero-title">
+          🐾 Привет, я Юкки :)
           <button class="bark-button" aria-label="Воспроизвести лай Юкки">
             🔊
           </button>
@@ -128,16 +122,7 @@ import Layout from '../../layouts/Layout.astro';
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: var(--space-3xl);
-      align-items: center;
-    }
-
-    /* Desktop: hide mobile title, show desktop title */
-    .hero-title-mobile {
-      display: none;
-    }
-
-    .hero-title-desktop {
-      display: block;
+      align-items: start;
     }
 
     @media (max-width: 1023px) {
@@ -148,25 +133,26 @@ import Layout from '../../layouts/Layout.astro';
         flex-direction: column;
       }
 
-      /* Mobile: show mobile title at top, hide desktop title */
-      .hero-title-mobile {
-        display: block;
-        order: -2; /* Show first */
+      .hero-text {
+        display: contents;
+      }
+
+      .hero-title {
+        order: -2;
         text-align: center;
         padding: 0 var(--space-md);
         margin-bottom: 0;
       }
 
-      .hero-title-desktop {
-        display: none; /* Hide the title inside hero-text */
-      }
-
       .hero-image {
-        order: -1; /* Show second (after mobile title) */
+        order: -1;
       }
 
-      .hero-text {
-        order: 0; /* Show third (after image) */
+      .hero-description,
+      .hero-list,
+      .hero-buttons {
+        order: 0;
+        text-align: center;
       }
     }
 

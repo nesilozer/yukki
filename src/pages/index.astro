@@ -3,20 +3,14 @@ import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout
-  title="Yukki's Corner - Home of a Shiba Inu Puppy"
-  description="Welcome to Yukki's Corner! Follow the adventures, stories, and daily life of Yukki, an adorable Shiba Inu puppy."
+  title="Life with Yukki - A Shiba Inu Puppy's Journey"
+  description="Welcome to Life with Yukki! Follow the adventures, stories, and daily life of Yukki, an adorable Shiba Inu puppy."
 >
   <!-- Hero Section -->
   <section class="hero">
     <div class="hero-content">
-      <h1 class="hero-title hero-title-mobile">
-        🐾 Hi, I'm Yukki :)
-        <button class="bark-button" aria-label="Play Yukki's bark sound">
-          🔊
-        </button>
-      </h1>
       <div class="hero-text">
-        <h1 class="hero-title hero-title-desktop">
+        <h1 class="hero-title">
           🐾 Hi, I'm Yukki :)
           <button class="bark-button" aria-label="Play Yukki's bark sound">
             🔊
@@ -127,16 +121,7 @@ import Layout from '../layouts/Layout.astro';
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: var(--space-3xl);
-      align-items: center;
-    }
-
-    /* Desktop: hide mobile title, show desktop title */
-    .hero-title-mobile {
-      display: none;
-    }
-
-    .hero-title-desktop {
-      display: block;
+      align-items: start;
     }
 
     @media (max-width: 1023px) {
@@ -147,25 +132,26 @@ import Layout from '../layouts/Layout.astro';
         flex-direction: column;
       }
 
-      /* Mobile: show mobile title at top, hide desktop title */
-      .hero-title-mobile {
-        display: block;
-        order: -2; /* Show first */
+      .hero-text {
+        display: contents;
+      }
+
+      .hero-title {
+        order: -2;
         text-align: center;
         padding: 0 var(--space-md);
         margin-bottom: 0;
       }
 
-      .hero-title-desktop {
-        display: none; /* Hide the title inside hero-text */
-      }
-
       .hero-image {
-        order: -1; /* Show second (after mobile title) */
+        order: -1;
       }
 
-      .hero-text {
-        order: 0; /* Show third (after image) */
+      .hero-description,
+      .hero-list,
+      .hero-buttons {
+        order: 0;
+        text-align: center;
       }
     }
 
