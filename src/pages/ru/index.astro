@@ -77,30 +77,41 @@ import Layout from '../../layouts/Layout.astro';
   <section class="newsletter section">
     <div class="container">
       <div class="newsletter-content card">
-        <h2>Нюх-репорт Юкки</h2>
-        <p class="newsletter-subtitle">Следите за моим упрямым маленьким путешествием по жизни</p>
-        <form
-          class="newsletter-form"
-          action="https://buttondown.email/api/emails/embed-subscribe/lifewithyukki"
-          method="post"
-          target="popupwindow"
-        >
-          <input type="hidden" name="tag" value="russian" />
-          <div class="form-row">
-            <input
-              type="email"
-              name="email"
-              placeholder="ваш@email.com"
-              required
-              class="newsletter-input"
-            />
-            <button type="submit" class="btn">Подписаться</button>
-          </div>
-          <label class="consent-label">
-            <input type="checkbox" required />
-            <span>Я согласен получать письма. <a href="/ru/privacy">Политика конфиденциальности</a></span>
-          </label>
-        </form>
+        <div class="newsletter-text">
+          <h2>Нюх-репорт Юкки</h2>
+          <p class="newsletter-subtitle">Следите за моим упрямым маленьким путешествием по жизни</p>
+          <form
+            class="newsletter-form"
+            action="https://buttondown.email/api/emails/embed-subscribe/lifewithyukki"
+            method="post"
+            target="popupwindow"
+          >
+            <input type="hidden" name="tag" value="russian" />
+            <div class="form-row">
+              <input
+                type="email"
+                name="email"
+                placeholder="ваш@email.com"
+                required
+                class="newsletter-input"
+              />
+              <button type="submit" class="btn">Подписаться</button>
+            </div>
+            <label class="consent-label">
+              <input type="checkbox" required />
+              <span>Я согласен получать письма. <a href="/ru/privacy">Политика конфиденциальности</a></span>
+            </label>
+          </form>
+        </div>
+        <div class="newsletter-image">
+          <img
+            src="/yukki-sniff-roses.webp"
+            alt="Юкки сиба-ину нюхает красивые красные розы"
+            width="300"
+            height="356"
+            loading="lazy"
+          />
+        </div>
       </div>
     </div>
   </section>
@@ -399,10 +410,51 @@ import Layout from '../../layouts/Layout.astro';
 
     /* Newsletter Section */
     .newsletter-content {
-      text-align: center;
-      max-width: 600px;
+      max-width: 900px;
       margin: 0 auto;
       background: linear-gradient(135deg, var(--color-secondary-light) 0%, var(--color-secondary) 100%);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-2xl);
+      align-items: center;
+    }
+
+    .newsletter-text {
+      text-align: center;
+    }
+
+    .newsletter-image {
+      display: flex;
+      justify-content: center;
+    }
+
+    .newsletter-image img {
+      width: 100%;
+      max-width: 350px;
+      max-height: 450px;
+      object-fit: cover;
+      object-position: top;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
+    }
+
+    @media (max-width: 768px) {
+      .newsletter-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .newsletter-text {
+        order: 2;
+      }
+
+      .newsletter-image {
+        order: 1;
+      }
+
+      .newsletter-image img {
+        max-width: 280px;
+      }
     }
 
     .newsletter-content h2 {
