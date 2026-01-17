@@ -54,8 +54,28 @@ const nav = {
   }
 };
 
+// URL paths for each language (transliterated for Russian SEO)
+const paths = {
+  en: {
+    home: '/',
+    blog: '/blog',
+    tips: '/tips',
+    quizzes: '/quizzes',
+    tools: '/tools',
+    contact: '/contact'
+  },
+  ru: {
+    home: '/ru/',
+    blog: '/ru/blog',
+    tips: '/ru/sovety',
+    quizzes: '/ru/testy',
+    tools: '/ru/instrumenty',
+    contact: '/ru/kontakty'
+  }
+};
+
 const t = nav[lang];
-const basePath = lang === 'ru' ? '/ru' : '';
+const p = paths[lang];
 const altLang = lang === 'ru' ? 'en' : 'ru';
 const altPath = lang === 'ru' ? Astro.url.pathname.replace('/ru', '') || '/' : `/ru${Astro.url.pathname}`;
 ---
@@ -129,18 +149,18 @@ const altPath = lang === 'ru' ? Astro.url.pathname.replace('/ru', '') || '/' : `
 
     <nav class="navbar">
       <div class="container navbar-container">
-        <a href={`${basePath}/`} class="logo">
+        <a href={p.home} class="logo">
           <span class="logo-icon">🐕</span>
           <span class="logo-text">{t.logoText}</span>
         </a>
 
         <ul class="nav-menu" id="navMenu">
-          <li><a href={`${basePath}/`} class="nav-link">{t.home}</a></li>
-          <li><a href={`${basePath}/blog`} class="nav-link">{t.blog}</a></li>
-          <li><a href={`${basePath}/tips`} class="nav-link">{t.tips}</a></li>
-          <li><a href={`${basePath}/quizzes`} class="nav-link">{t.quizzes}</a></li>
-          <li><a href={`${basePath}/tools`} class="nav-link">{t.tools}</a></li>
-          <li><a href={`${basePath}/contact`} class="nav-link">{t.contact}</a></li>
+          <li><a href={p.home} class="nav-link">{t.home}</a></li>
+          <li><a href={p.blog} class="nav-link">{t.blog}</a></li>
+          <li><a href={p.tips} class="nav-link">{t.tips}</a></li>
+          <li><a href={p.quizzes} class="nav-link">{t.quizzes}</a></li>
+          <li><a href={p.tools} class="nav-link">{t.tools}</a></li>
+          <li><a href={p.contact} class="nav-link">{t.contact}</a></li>
         </ul>
 
         <div class="nav-actions">
@@ -170,10 +190,10 @@ const altPath = lang === 'ru' ? Astro.url.pathname.replace('/ru', '') || '/' : `
           <div class="footer-section">
             <h4>{t.quickLinks}</h4>
             <ul class="footer-links">
-              <li><a href={`${basePath}/`}>{t.home}</a></li>
-              <li><a href={`${basePath}/blog`}>{t.blog}</a></li>
-              <li><a href={`${basePath}/quizzes`}>{t.quizzes}</a></li>
-              <li><a href={`${basePath}/tools`}>{t.tools}</a></li>
+              <li><a href={p.home}>{t.home}</a></li>
+              <li><a href={p.blog}>{t.blog}</a></li>
+              <li><a href={p.quizzes}>{t.quizzes}</a></li>
+              <li><a href={p.tools}>{t.tools}</a></li>
             </ul>
           </div>
 

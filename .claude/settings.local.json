@@ -35,7 +35,8 @@
       "Bash(npx vercel:*)",
       "Bash(find:*)",
       "WebSearch",
-      "Bash(open https://vercel.com/dashboard)"
+      "Bash(open https://vercel.com/dashboard)",
+      "WebFetch(domain:lenta.ru)"
     ]
   }
 }
