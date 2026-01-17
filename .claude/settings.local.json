@@ -39,7 +39,11 @@
       "WebFetch(domain:lenta.ru)",
       "Bash(python3:*)",
       "WebFetch(domain:developers.google.com)",
-      "Bash(npx --yes sharp-cli:*)"
+      "Bash(npx --yes sharp-cli:*)",
+      "Bash(ffmpeg:*)",
+      "Bash(npx sharp-cli:*)",
+      "Bash(brew list:*)",
+      "Bash(git rm:*)"
     ]
   }
 }
