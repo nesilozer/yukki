@@ -67,7 +67,7 @@ import Layout from '../../layouts/Layout.astro';
 
         <div class="contact-form-container card">
           <h2>Отправить сообщение</h2>
-          <form class="contact-form">
+          <form class="contact-form" action="https://formspree.io/yukkitoslife@outlook.com" method="POST">
             <div class="form-group">
               <label for="name">Ваше имя</label>
               <input
@@ -115,10 +115,6 @@ import Layout from '../../layouts/Layout.astro';
             <button type="submit" class="btn">Отправить</button>
           </form>
 
-          <p class="form-note">
-            Примечание: Это демо-форма. Чтобы она работала, подключите её к сервису
-            Formspree, Netlify Forms или вашему собственному бэкенду.
-          </p>
         </div>
       </div>
     </div>
@@ -272,11 +268,4 @@ import Layout from '../../layouts/Layout.astro';
     }
   </style>
 
-  <script>
-    const form = document.querySelector('.contact-form');
-    form?.addEventListener('submit', (e) => {
-      e.preventDefault();
-      alert('Это демо-форма. Подключите её к сервису Formspree, чтобы она заработала!');
-    });
-  </script>
 </Layout>
