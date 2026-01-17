@@ -51,6 +51,18 @@ const articleSchema = {
           </div>
         </header>
 
+        <!-- Hero Image -->
+        <figure class="post-image hero-image">
+          <img
+            src="/yukki-blog-hero.webp"
+            alt="Щенок сиба-ину Юкки - начало нашего путешествия"
+            width="800"
+            height="600"
+            loading="eager"
+            decoding="async"
+          />
+        </figure>
+
         <!-- Post Body -->
         <div class="post-body">
           <p>
@@ -147,16 +159,18 @@ const articleSchema = {
             Я не был готов к тому, что увидел. Четыре крошечных щенка сиба-ину. Все пушистые. Все очаровательные. Все идеальные.
           </p>
 
-          <!-- Image 1: After "All perfect." -->
-          <figure class="post-image">
-            <img
-              src="/shiba-inu-puppies-playing.webp"
-              alt="Четыре очаровательных щенка сиба-ину играют вместе в питомнике Kolgerhouse"
+          <!-- Video: After "All perfect." -->
+          <figure class="post-video">
+            <video
+              controls
+              playsinline
+              preload="metadata"
               width="800"
-              height="600"
-              loading="lazy"
-              decoding="async"
-            />
+              poster="/shiba-inu-puppies-playing.webp"
+            >
+              <source src="/yukki-brothers.mp4" type="video/mp4">
+              Ваш браузер не поддерживает видео.
+            </video>
             <figcaption>Четыре пушистых щенка сиба-ину — как выбрать?</figcaption>
           </figure>
 
@@ -171,9 +185,9 @@ const articleSchema = {
               playsinline
               preload="metadata"
               width="800"
-              poster="/shiba-inu-puppies-playing.webp"
+              poster="/yukki-puppies-cuddle.webp"
             >
-              <source src="/yukki-with-puppies-video.m4v" type="video/mp4">
+              <source src="/yukki-with-puppies-video.mp4" type="video/mp4">
               Ваш браузер не поддерживает видео.
             </video>
             <figcaption>Первая встреча со щенками — чистая радость!</figcaption>
@@ -438,6 +452,12 @@ const articleSchema = {
       border-radius: var(--radius-lg);
       overflow: hidden;
       box-shadow: var(--shadow-lg);
+    }
+
+    .hero-image img {
+      max-height: 620px;
+      object-fit: cover;
+      object-position: center;
     }
 
     .post-image img,

@@ -50,6 +50,18 @@ const articleSchema = {
           </div>
         </header>
 
+        <!-- Hero Image -->
+        <figure class="post-image hero-image">
+          <img
+            src="/yukki-blog-hero.webp"
+            alt="Yukki the Shiba Inu puppy - our journey begins"
+            width="800"
+            height="600"
+            loading="eager"
+            decoding="async"
+          />
+        </figure>
+
         <!-- Post Body -->
         <div class="post-body">
           <p>
@@ -146,16 +158,18 @@ const articleSchema = {
             I wasn't prepared for what I saw. Four tiny Shiba Inu puppies. All fluffy. All adorable. All perfect.
           </p>
 
-          <!-- Image 1: After "All perfect." -->
-          <figure class="post-image">
-            <img
-              src="/shiba-inu-puppies-playing.webp"
-              alt="Four adorable Shiba Inu puppies playing together at Kolgerhouse Kennel"
+          <!-- Video: After "All perfect." -->
+          <figure class="post-video">
+            <video
+              controls
+              playsinline
+              preload="metadata"
               width="800"
-              height="600"
-              loading="lazy"
-              decoding="async"
-            />
+              poster="/shiba-inu-puppies-playing.webp"
+            >
+              <source src="/yukki-brothers.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
             <figcaption>Four fluffy Shiba Inu puppies - how do you choose?</figcaption>
           </figure>
 
@@ -170,9 +184,9 @@ const articleSchema = {
               playsinline
               preload="metadata"
               width="800"
-              poster="/shiba-inu-puppies-playing.webp"
+              poster="/yukki-puppies-cuddle.webp"
             >
-              <source src="/yukki-with-puppies-video.m4v" type="video/mp4">
+              <source src="/yukki-with-puppies-video.mp4" type="video/mp4">
               Your browser does not support the video tag.
             </video>
             <figcaption>Meeting the puppies for the first time - pure joy!</figcaption>
@@ -433,6 +447,12 @@ const articleSchema = {
       border-radius: var(--radius-lg);
       overflow: hidden;
       box-shadow: var(--shadow-lg);
+    }
+
+    .hero-image img {
+      max-height: 620px;
+      object-fit: cover;
+      object-position: center;
     }
 
     .post-image img,
