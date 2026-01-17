@@ -79,12 +79,7 @@ import Layout from '../layouts/Layout.astro';
         <div class="newsletter-text">
           <h2>Yukki's Sniff Report</h2>
           <p class="newsletter-subtitle">Follow my stubborn little journey through life</p>
-          <form
-            class="newsletter-form"
-            action="https://buttondown.email/api/emails/embed-subscribe/lifewithyukki"
-            method="post"
-            target="popupwindow"
-          >
+          <form class="newsletter-form" id="newsletterForm">
             <input type="hidden" name="tag" value="english" />
             <div class="form-row">
               <input
@@ -93,13 +88,15 @@ import Layout from '../layouts/Layout.astro';
                 placeholder="your@email.com"
                 required
                 class="newsletter-input"
+                id="newsletterEmail"
               />
-              <button type="submit" class="btn">Sniff-scribe</button>
+              <button type="submit" class="btn" id="newsletterBtn">Sniff-scribe</button>
             </div>
             <label class="consent-label">
               <input type="checkbox" required />
               <span>I agree to receive emails. <a href="/privacy">Privacy Policy</a></span>
             </label>
+            <p class="newsletter-success" id="newsletterSuccess" style="display: none;">Thanks for subscribing! Check your email to confirm.</p>
           </form>
         </div>
         <div class="newsletter-image">
@@ -139,6 +136,52 @@ import Layout from '../layouts/Layout.astro';
       });
     }
 
+    // Newsletter form AJAX submission
+    const newsletterForm = document.getElementById('newsletterForm');
+    const newsletterEmail = document.getElementById('newsletterEmail') as HTMLInputElement;
+    const newsletterBtn = document.getElementById('newsletterBtn');
+    const newsletterSuccess = document.getElementById('newsletterSuccess');
+
+    newsletterForm?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const email = newsletterEmail?.value;
+      if (!email) return;
+
+      // Disable button while submitting
+      if (newsletterBtn) {
+        newsletterBtn.textContent = 'Subscribing...';
+        newsletterBtn.setAttribute('disabled', 'true');
+      }
+
+      try {
+        const formData = new FormData();
+        formData.append('email', email);
+        formData.append('tag', 'english');
+
+        await fetch('https://buttondown.email/api/emails/embed-subscribe/lifewithyukki', {
+          method: 'POST',
+          body: formData,
+          mode: 'no-cors'
+        });
+
+        // Show success message
+        if (newsletterSuccess) {
+          newsletterSuccess.style.display = 'block';
+        }
+        if (newsletterEmail) {
+          newsletterEmail.value = '';
+        }
+        if (newsletterBtn) {
+          newsletterBtn.textContent = 'Subscribed!';
+        }
+      } catch (error) {
+        if (newsletterBtn) {
+          newsletterBtn.textContent = 'Sniff-scribe';
+          newsletterBtn.removeAttribute('disabled');
+        }
+      }
+    });
   </script>
 
   <style>
@@ -524,6 +567,16 @@ import Layout from '../layouts/Layout.astro';
       color: var(--color-text-light);
       font-style: italic;
       margin: 0;
+    }
+
+    .newsletter-success {
+      margin-top: var(--space-md);
+      padding: var(--space-md);
+      background-color: #10b981;
+      color: white;
+      border-radius: var(--radius-md);
+      font-weight: 500;
+      text-align: center;
     }
 
     @media (max-width: 480px) {
