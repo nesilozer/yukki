@@ -1,0 +1,124 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="Privacy Policy - Life with Yukki"
+  description="Privacy policy for Life with Yukki website and newsletter"
+>
+  <div class="section">
+    <div class="container">
+      <div class="page-header">
+        <h1>Privacy Policy</h1>
+        <p class="page-subtitle">How we handle your data</p>
+      </div>
+
+      <div class="content-wrapper">
+        <div class="policy-content card">
+          <p class="last-updated">Last updated: January 17, 2026</p>
+
+          <h2>What We Collect</h2>
+          <p>
+            When you subscribe to Yukki's Sniff Report, we collect only your email address.
+            That's it. No tracking cookies, no analytics, no third-party data sharing.
+          </p>
+
+          <h2>How We Use Your Email</h2>
+          <p>
+            Your email is used solely to send you updates about Yukki - new blog posts,
+            photos, and occasional Shiba Inu tips. We won't spam you or share your
+            email with anyone else.
+          </p>
+
+          <h2>Your Rights</h2>
+          <p>You can:</p>
+          <ul>
+            <li><strong>Unsubscribe anytime</strong> - Every email has an unsubscribe link</li>
+            <li><strong>Request deletion</strong> - Email us and we'll remove your data</li>
+            <li><strong>Ask questions</strong> - Contact us about how your data is used</li>
+          </ul>
+
+          <h2>Data Storage</h2>
+          <p>
+            Your email is stored securely with our email service provider. We don't
+            store your data on our own servers.
+          </p>
+
+          <h2>Contact</h2>
+          <p>
+            Questions about privacy? Email us at
+            <a href="mailto:hello@shibayukki.com">hello@shibayukki.com</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .page-header {
+      text-align: center;
+      margin-bottom: var(--space-3xl);
+    }
+
+    .page-header h1 {
+      color: var(--color-primary);
+      font-size: var(--font-size-4xl);
+      margin-bottom: var(--space-md);
+    }
+
+    .page-subtitle {
+      font-size: var(--font-size-xl);
+      color: var(--color-text-light);
+    }
+
+    .content-wrapper {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .policy-content {
+      line-height: 1.8;
+    }
+
+    .last-updated {
+      font-size: var(--font-size-sm);
+      color: var(--color-text-light);
+      font-style: italic;
+      margin-bottom: var(--space-2xl);
+    }
+
+    .policy-content h2 {
+      color: var(--color-primary);
+      font-size: var(--font-size-xl);
+      margin-top: var(--space-2xl);
+      margin-bottom: var(--space-md);
+    }
+
+    .policy-content h2:first-of-type {
+      margin-top: 0;
+    }
+
+    .policy-content p {
+      color: var(--color-text);
+      margin-bottom: var(--space-md);
+    }
+
+    .policy-content ul {
+      margin-bottom: var(--space-md);
+      padding-left: var(--space-xl);
+    }
+
+    .policy-content li {
+      margin-bottom: var(--space-sm);
+      color: var(--color-text);
+    }
+
+    .policy-content a {
+      color: var(--color-primary);
+    }
+
+    .policy-content a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</Layout>

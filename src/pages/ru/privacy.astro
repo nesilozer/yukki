@@ -1,0 +1,126 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout
+  title="Политика конфиденциальности - Жизнь с Юкки"
+  description="Политика конфиденциальности сайта Жизнь с Юкки и рассылки"
+  lang="ru"
+>
+  <div class="section">
+    <div class="container">
+      <div class="page-header">
+        <h1>Политика конфиденциальности</h1>
+        <p class="page-subtitle">Как мы обрабатываем ваши данные</p>
+      </div>
+
+      <div class="content-wrapper">
+        <div class="policy-content card">
+          <p class="last-updated">Последнее обновление: 17 января 2026</p>
+
+          <h2>Что мы собираем</h2>
+          <p>
+            Когда вы подписываетесь на Нюх-репорт Юкки, мы собираем только ваш email.
+            Это всё. Никаких cookies для отслеживания, никакой аналитики, никакого
+            обмена данными с третьими лицами.
+          </p>
+
+          <h2>Как мы используем ваш email</h2>
+          <p>
+            Ваш email используется исключительно для отправки новостей о Юкки -
+            новые записи в блоге, фотографии и советы по уходу за сиба-ину.
+            Мы не будем спамить и не передадим ваш email кому-либо ещё.
+          </p>
+
+          <h2>Ваши права</h2>
+          <p>Вы можете:</p>
+          <ul>
+            <li><strong>Отписаться в любое время</strong> - в каждом письме есть ссылка для отписки</li>
+            <li><strong>Запросить удаление данных</strong> - напишите нам, и мы удалим ваши данные</li>
+            <li><strong>Задать вопросы</strong> - свяжитесь с нами по поводу использования ваших данных</li>
+          </ul>
+
+          <h2>Хранение данных</h2>
+          <p>
+            Ваш email надёжно хранится у нашего провайдера email-рассылок.
+            Мы не храним ваши данные на собственных серверах.
+          </p>
+
+          <h2>Контакты</h2>
+          <p>
+            Вопросы о конфиденциальности? Напишите нам на
+            <a href="mailto:hello@shibayukki.com">hello@shibayukki.com</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .page-header {
+      text-align: center;
+      margin-bottom: var(--space-3xl);
+    }
+
+    .page-header h1 {
+      color: var(--color-primary);
+      font-size: var(--font-size-4xl);
+      margin-bottom: var(--space-md);
+    }
+
+    .page-subtitle {
+      font-size: var(--font-size-xl);
+      color: var(--color-text-light);
+    }
+
+    .content-wrapper {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .policy-content {
+      line-height: 1.8;
+    }
+
+    .last-updated {
+      font-size: var(--font-size-sm);
+      color: var(--color-text-light);
+      font-style: italic;
+      margin-bottom: var(--space-2xl);
+    }
+
+    .policy-content h2 {
+      color: var(--color-primary);
+      font-size: var(--font-size-xl);
+      margin-top: var(--space-2xl);
+      margin-bottom: var(--space-md);
+    }
+
+    .policy-content h2:first-of-type {
+      margin-top: 0;
+    }
+
+    .policy-content p {
+      color: var(--color-text);
+      margin-bottom: var(--space-md);
+    }
+
+    .policy-content ul {
+      margin-bottom: var(--space-md);
+      padding-left: var(--space-xl);
+    }
+
+    .policy-content li {
+      margin-bottom: var(--space-sm);
+      color: var(--color-text);
+    }
+
+    .policy-content a {
+      color: var(--color-primary);
+    }
+
+    .policy-content a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</Layout>

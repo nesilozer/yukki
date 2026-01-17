@@ -24,47 +24,45 @@ const {
 const siteUrl = "https://shibayukki.com";
 const fullImageUrl = image.startsWith('http') ? image : `${siteUrl}${image}`;
 
-// Structured Data (JSON-LD) - inspired by best SEO practices
-const websiteSchema = {
+// Structured Data (JSON-LD) - using @graph for proper entity relationships
+const schemaGraph = {
   "@context": "https://schema.org",
-  "@type": "WebSite",
-  "@id": `${siteUrl}/#website`,
-  "name": lang === 'ru' ? "Жизнь с Юкки" : "Life with Yukki",
-  "url": siteUrl,
-  "description": lang === 'ru'
-    ? "Следите за приключениями Юкки, очаровательного щенка сиба-ину. Советы по уходу, фото и истории."
-    : "Follow the adventures of Yukki, an adorable Shiba Inu puppy. Care tips, photos, and stories.",
-  "inLanguage": [lang === 'ru' ? "ru-RU" : "en-US"],
-  "publisher": {
-    "@id": `${siteUrl}/#organization`
-  }
-};
-
-const organizationSchema = {
-  "@context": "https://schema.org",
-  "@type": ["Organization", "Blog"],
-  "@id": `${siteUrl}/#organization`,
-  "name": "Life with Yukki",
-  "alternateName": "Shiba Yukki",
-  "url": siteUrl,
-  "logo": {
-    "@type": "ImageObject",
-    "url": `${siteUrl}/yukki-family-portrait.webp`,
-    "width": 960,
-    "height": 1280
-  },
-  "image": `${siteUrl}/yukki-family-portrait.webp`,
-  "description": "A Shiba Inu puppy blog documenting Yukki's growth, adventures, and providing helpful resources for Shiba Inu owners.",
-  "foundingDate": "2024",
-  "sameAs": [
-    "https://instagram.com/lifewithyukki",
-    "https://tiktok.com/@shibayukki",
-    "https://youtube.com/@ShibaYukki"
-  ],
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": siteUrl
-  }
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": `${siteUrl}/#website`,
+      "name": lang === 'ru' ? "Жизнь с Юкки" : "Life with Yukki",
+      "url": siteUrl,
+      "description": lang === 'ru'
+        ? "Следите за приключениями Юкки, очаровательного щенка сиба-ину. Советы по уходу, фото и истории."
+        : "Follow the adventures of Yukki, an adorable Shiba Inu puppy. Care tips, photos, and stories.",
+      "inLanguage": lang === 'ru' ? "ru-RU" : "en-US",
+      "publisher": {
+        "@id": `${siteUrl}/#organization`
+      }
+    },
+    {
+      "@type": "Organization",
+      "@id": `${siteUrl}/#organization`,
+      "name": "Life with Yukki",
+      "alternateName": "Shiba Yukki",
+      "url": siteUrl,
+      "logo": {
+        "@type": "ImageObject",
+        "url": `${siteUrl}/yukki-family-portrait.webp`,
+        "width": 960,
+        "height": 1280
+      },
+      "image": `${siteUrl}/yukki-family-portrait.webp`,
+      "description": "A Shiba Inu puppy blog documenting Yukki's growth, adventures, and providing helpful resources for Shiba Inu owners.",
+      "foundingDate": "2024",
+      "sameAs": [
+        "https://instagram.com/lifewithyukki",
+        "https://tiktok.com/@shibayukki",
+        "https://youtube.com/@ShibaYukki"
+      ]
+    }
+  ]
 };
 
 // Navigation translations
@@ -120,7 +118,54 @@ const paths = {
 const t = nav[lang];
 const p = paths[lang];
 const altLang = lang === 'ru' ? 'en' : 'ru';
-const altPath = lang === 'ru' ? Astro.url.pathname.replace('/ru', '') || '/' : `/ru${Astro.url.pathname}`;
+
+// Path mapping for language switching (EN ↔ RU)
+const pathMap: Record<string, string> = {
+  // EN → RU
+  '/': '/ru/',
+  '/blog': '/ru/blog',
+  '/blog/': '/ru/blog/',
+  '/blog/welcome-home-yukki': '/ru/blog/dobro-pozhalovat-domoy-yukki',
+  '/tips': '/ru/sovety',
+  '/tips/': '/ru/sovety/',
+  '/quizzes': '/ru/testy',
+  '/quizzes/': '/ru/testy/',
+  '/quizzes/is-shiba-right-for-you': '/ru/testy/podhodit-li-vam-shiba-inu',
+  '/tools': '/ru/instrumenty',
+  '/tools/': '/ru/instrumenty/',
+  '/tools/shiba-inu-puppy-growth-chart': '/ru/instrumenty/grafik-rosta-shiba-inu',
+  '/contact': '/ru/kontakty',
+  '/contact/': '/ru/kontakty/',
+  '/privacy': '/ru/privacy',
+  '/privacy/': '/ru/privacy/',
+  // RU → EN
+  '/ru': '/',
+  '/ru/': '/',
+  '/ru/blog': '/blog',
+  '/ru/blog/': '/blog/',
+  '/ru/blog/dobro-pozhalovat-domoy-yukki': '/blog/welcome-home-yukki',
+  '/ru/sovety': '/tips',
+  '/ru/sovety/': '/tips/',
+  '/ru/testy': '/quizzes',
+  '/ru/testy/': '/quizzes/',
+  '/ru/testy/podhodit-li-vam-shiba-inu': '/quizzes/is-shiba-right-for-you',
+  '/ru/instrumenty': '/tools',
+  '/ru/instrumenty/': '/tools/',
+  '/ru/instrumenty/grafik-rosta-shiba-inu': '/tools/shiba-inu-puppy-growth-chart',
+  '/ru/kontakty': '/contact',
+  '/ru/kontakty/': '/contact/',
+  '/ru/privacy': '/privacy',
+  '/ru/privacy/': '/privacy/',
+  '/ru/o-nas': '/about',
+  '/ru/o-nas/': '/about/',
+  '/about': '/ru/o-nas',
+  '/about/': '/ru/o-nas/',
+};
+
+// Get alternate path, fallback to simple prefix/remove if not in map
+const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
+const altPath = pathMap[currentPath] || pathMap[currentPath + '/'] ||
+  (lang === 'ru' ? currentPath.replace('/ru', '') || '/' : `/ru${currentPath}`);
 ---
 
 <!DOCTYPE html>
@@ -168,8 +213,7 @@ const altPath = lang === 'ru' ? Astro.url.pathname.replace('/ru', '') || '/' : `
     <title>{title}</title>
 
     <!-- Structured Data (JSON-LD) -->
-    <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
-    <script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(schemaGraph)} />
 
     <slot name="head" />
   </head>

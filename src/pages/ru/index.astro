@@ -73,13 +73,34 @@ import Layout from '../../layouts/Layout.astro';
     </div>
   </section>
 
-  <!-- CTA Section -->
-  <section class="cta section">
+  <!-- Newsletter Section -->
+  <section class="newsletter section">
     <div class="container">
-      <div class="cta-content card">
-        <h2>Оставайтесь на связи</h2>
-        <p>Хотите следить за последними приключениями Юкки? Свяжитесь с нами!</p>
-        <a href="/ru/kontakty" class="btn">Контакты</a>
+      <div class="newsletter-content card">
+        <h2>Нюх-репорт Юкки</h2>
+        <p class="newsletter-subtitle">Следите за моим упрямым маленьким путешествием по жизни</p>
+        <form
+          class="newsletter-form"
+          action="https://buttondown.email/api/emails/embed-subscribe/lifewithyukki"
+          method="post"
+          target="popupwindow"
+        >
+          <input type="hidden" name="tag" value="russian" />
+          <div class="form-row">
+            <input
+              type="email"
+              name="email"
+              placeholder="ваш@email.com"
+              required
+              class="newsletter-input"
+            />
+            <button type="submit" class="btn">Подписаться</button>
+          </div>
+          <label class="consent-label">
+            <input type="checkbox" required />
+            <span>Я согласен получать письма. <a href="/ru/privacy">Политика конфиденциальности</a></span>
+          </label>
+        </form>
       </div>
     </div>
   </section>
@@ -107,6 +128,7 @@ import Layout from '../../layouts/Layout.astro';
         });
       });
     }
+
   </script>
 
   <style>
@@ -375,23 +397,90 @@ import Layout from '../../layouts/Layout.astro';
       line-height: 1.5;
     }
 
-    /* CTA Section */
-    .cta-content {
+    /* Newsletter Section */
+    .newsletter-content {
       text-align: center;
       max-width: 600px;
       margin: 0 auto;
       background: linear-gradient(135deg, var(--color-secondary-light) 0%, var(--color-secondary) 100%);
     }
 
-    .cta-content h2 {
+    .newsletter-content h2 {
       color: var(--color-primary);
-      margin-bottom: var(--space-md);
+      margin-bottom: var(--space-sm);
     }
 
-    .cta-content p {
+    .newsletter-subtitle {
       font-size: var(--font-size-lg);
       color: var(--color-text-light);
       margin-bottom: var(--space-xl);
+    }
+
+    .newsletter-form {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+      margin-bottom: var(--space-lg);
+    }
+
+    .form-row {
+      display: flex;
+      gap: var(--space-sm);
+      justify-content: center;
+    }
+
+    .newsletter-input {
+      padding: var(--space-md) var(--space-lg);
+      border: 2px solid var(--color-primary-light);
+      border-radius: var(--radius-md);
+      font-size: var(--font-size-base);
+      width: 100%;
+      max-width: 300px;
+      transition: border-color var(--transition-fast);
+    }
+
+    .newsletter-input:focus {
+      outline: none;
+      border-color: var(--color-primary);
+    }
+
+    .consent-label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-sm);
+      font-size: var(--font-size-sm);
+      color: var(--color-text-light);
+      cursor: pointer;
+    }
+
+    .consent-label input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      cursor: pointer;
+    }
+
+    .consent-label a {
+      color: var(--color-primary);
+      text-decoration: underline;
+    }
+
+    .newsletter-tagline {
+      font-size: var(--font-size-base);
+      color: var(--color-text-light);
+      font-style: italic;
+      margin: 0;
+    }
+
+    @media (max-width: 480px) {
+      .form-row {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .newsletter-input {
+        max-width: 100%;
+      }
     }
 
     @media (max-width: 768px) {

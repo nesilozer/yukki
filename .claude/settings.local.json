@@ -36,7 +36,9 @@
       "Bash(find:*)",
       "WebSearch",
       "Bash(open https://vercel.com/dashboard)",
-      "WebFetch(domain:lenta.ru)"
+      "WebFetch(domain:lenta.ru)",
+      "Bash(python3:*)",
+      "WebFetch(domain:developers.google.com)"
     ]
   }
 }

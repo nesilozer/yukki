@@ -2,32 +2,19 @@
 import Layout from '../../../layouts/Layout.astro';
 import Comments from '../../../components/Comments.astro';
 
+// BlogPosting schema following Google's Article structured data guidelines
 const articleSchema = {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
   "headline": "Добро пожаловать домой, Юкки - Наш путь к щенку сиба-ину",
-  "description": "Трогательная история о том, как мы нашли и привезли домой Юкки, нашего очаровательного щенка сиба-ину из питомника Kolgerhouse в Беларуси.",
   "image": "https://shibayukki.com/yukki-shiba-inu-puppy-portrait.webp",
-  "datePublished": "2026-01-14",
-  "dateModified": "2026-01-14",
+  "datePublished": "2026-01-14T00:00:00+00:00",
+  "dateModified": "2026-01-14T00:00:00+00:00",
   "author": {
-    "@type": "Organization",
+    "@type": "Person",
     "name": "Жизнь с Юкки",
     "url": "https://shibayukki.com"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "Жизнь с Юкки",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://shibayukki.com/favicon.svg"
-    }
-  },
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://shibayukki.com/ru/blog/dobro-pozhalovat-domoy-yukki/"
-  },
-  "keywords": ["Сиба-ину", "щенок", "щенок сиба-ину", "питомник Kolgerhouse", "новый щенок"]
+  }
 };
 ---
 
