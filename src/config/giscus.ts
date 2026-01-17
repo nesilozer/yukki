@@ -3,9 +3,9 @@
 
 export const giscusConfig = {
   repo: "nesilozer/yukki",
-  repoId: "R_kgDOP_Hk2w",
+  repoId: "R_kgDOQ6Khcw",
   category: "Comments",
-  categoryId: "DIC_kwDOP_Hk284CwbcP",
+  categoryId: "DIC_kwDOQ6Khc84C1C40",
   mapping: "pathname",
   strict: "0",
   reactionsEnabled: "1",

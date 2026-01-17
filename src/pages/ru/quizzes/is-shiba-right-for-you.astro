@@ -215,6 +215,79 @@ const quizSchema = {
     let currentQuestion = 0;
     let answers: number[] = [];
 
+    // Counter API configuration for anonymous result tracking
+    const COUNTER_NAMESPACE = 'shibayukki-quiz';
+    const RESULT_KEYS = ['excellent', 'good', 'maybe', 'notRecommended'];
+
+    async function incrementResultCount(resultKey: string) {
+      try {
+        await fetch(`https://api.counterapi.dev/v1/${COUNTER_NAMESPACE}/${resultKey}/up`);
+      } catch (e) {
+        // Silently fail - stats are non-critical
+      }
+    }
+
+    async function fetchAllCounts(): Promise<Record<string, number>> {
+      const counts: Record<string, number> = {};
+      try {
+        const responses = await Promise.all(
+          RESULT_KEYS.map(key =>
+            fetch(`https://api.counterapi.dev/v1/${COUNTER_NAMESPACE}/${key}`)
+              .then(r => r.json())
+              .catch(() => ({ count: 0 }))
+          )
+        );
+        RESULT_KEYS.forEach((key, i) => {
+          counts[key] = responses[i]?.count || 0;
+        });
+      } catch (e) {
+        RESULT_KEYS.forEach(key => counts[key] = 0);
+      }
+      return counts;
+    }
+
+    async function loadCommunityStats(userResult: string) {
+      const counts = await fetchAllCounts();
+      const total = Object.values(counts).reduce((sum, n) => sum + n, 0);
+
+      const labels: Record<string, string> = {
+        excellent: 'Идеальное совпадение',
+        good: 'Хороший потенциал',
+        maybe: 'Стоит подумать',
+        notRecommended: 'Не сейчас'
+      };
+
+      const colors: Record<string, string> = {
+        excellent: '#22c55e',
+        good: '#eab308',
+        maybe: '#f97316',
+        notRecommended: '#ef4444'
+      };
+
+      const subtitle = document.querySelector('.stats-subtitle');
+      const chart = document.getElementById('statsChart');
+
+      if (total > 0 && chart && subtitle) {
+        subtitle.textContent = `Пройдено тестов: ${total.toLocaleString()}`;
+        chart.innerHTML = RESULT_KEYS.map(key => {
+          const count = counts[key] || 0;
+          const percentage = Math.round((count / total) * 100);
+          const isUser = key === userResult;
+          return `
+            <div class="stat-row ${isUser ? 'user-result' : ''}">
+              <div class="stat-label">${labels[key]} ${isUser ? '(Вы)' : ''}</div>
+              <div class="stat-bar-container">
+                <div class="stat-bar" style="width: ${percentage}%; background-color: ${colors[key]}"></div>
+              </div>
+              <div class="stat-percent">${percentage}%</div>
+            </div>
+          `;
+        }).join('');
+      } else if (subtitle) {
+        subtitle.textContent = 'Будьте первым, кто пройдёт этот тест!';
+      }
+    }
+
     function renderQuestion() {
       const question = questions[currentQuestion];
       const quizContent = document.getElementById('quizContent');
@@ -275,15 +348,23 @@ const quizSchema = {
       const percentage = (totalScore / maxScore) * 100;
 
       let result;
+      let resultKey: string;
       if (percentage >= 80) {
         result = results.excellent;
+        resultKey = 'excellent';
       } else if (percentage >= 60) {
         result = results.good;
+        resultKey = 'good';
       } else if (percentage >= 40) {
         result = results.maybe;
+        resultKey = 'maybe';
       } else {
         result = results.notRecommended;
+        resultKey = 'notRecommended';
       }
+
+      // Track result anonymously
+      incrementResultCount(resultKey);
 
       const quizContent = document.getElementById('quizContent');
       const quizResults = document.getElementById('quizResults');
@@ -321,8 +402,16 @@ const quizSchema = {
                 <button class="share-btn" id="copyResultBtn" title="Копировать ссылку">📋 Копировать</button>
               </div>
             </div>
+            <div class="community-stats">
+              <h3>Результаты других</h3>
+              <p class="stats-subtitle">Загрузка результатов...</p>
+              <div class="stats-chart" id="statsChart"></div>
+            </div>
           </div>
         `;
+
+        // Load stats after rendering
+        loadCommunityStats(resultKey);
 
         document.getElementById('retakeBtn')?.addEventListener('click', () => {
           currentQuestion = 0;
@@ -626,6 +715,70 @@ const quizSchema = {
       background-color: var(--color-secondary-dark);
     }
 
+    /* Community Stats */
+    .community-stats {
+      margin-top: var(--space-2xl);
+      padding-top: var(--space-xl);
+      border-top: 1px solid var(--color-secondary);
+      text-align: left;
+    }
+
+    .community-stats h3 {
+      text-align: center;
+      color: var(--color-accent);
+      margin-bottom: var(--space-xs);
+    }
+
+    .stats-subtitle {
+      text-align: center;
+      font-size: var(--font-size-sm);
+      color: var(--color-text-light);
+      margin-bottom: var(--space-lg);
+    }
+
+    .stats-chart {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+
+    .stat-row {
+      display: grid;
+      grid-template-columns: 140px 1fr 45px;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    .stat-row.user-result .stat-label {
+      font-weight: 600;
+      color: var(--color-primary);
+    }
+
+    .stat-label {
+      font-size: var(--font-size-sm);
+      color: var(--color-text);
+    }
+
+    .stat-bar-container {
+      height: 20px;
+      background-color: var(--color-secondary);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+    }
+
+    .stat-bar {
+      height: 100%;
+      border-radius: var(--radius-sm);
+      transition: width 0.5s ease-out;
+    }
+
+    .stat-percent {
+      font-size: var(--font-size-sm);
+      font-weight: 600;
+      color: var(--color-text);
+      text-align: right;
+    }
+
     @media (max-width: 768px) {
       .quiz-header h1 {
         font-size: var(--font-size-2xl);
@@ -662,6 +815,18 @@ const quizSchema = {
 
       .results-title {
         font-size: var(--font-size-2xl);
+      }
+
+      .stat-row {
+        grid-template-columns: 120px 1fr 40px;
+      }
+
+      .stat-label {
+        font-size: var(--font-size-xs);
+      }
+
+      .stat-bar-container {
+        height: 16px;
       }
     }
   </style>

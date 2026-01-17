@@ -9,25 +9,27 @@ import Layout from '../layouts/Layout.astro';
   <!-- Hero Section -->
   <section class="hero">
     <div class="hero-content">
-      <div class="hero-text">
+      <div class="hero-left">
         <h1 class="hero-title">
           🐾 Hi, I'm Yukki :)
           <button class="bark-button" aria-label="Play Yukki's bark sound">
             🔊
           </button>
         </h1>
-        <p class="hero-description">I'm a 5-month-old Shiba Inu with a BIG personality!</p>
-        <div class="hero-list">
-          <p class="hero-list-title">I love:</p>
-          <ul>
-            <li>Testing mom's patience (I'm adorably stubborn)</li>
-            <li>Chewing momy's fingers and slippers</li>
-            <li>Making new friends (especially if they have treats)</li>
-          </ul>
-        </div>
-        <div class="hero-buttons">
-          <a href="/quizzes/is-shiba-right-for-you" class="btn">Is Shiba Right for You?</a>
-          <a href="/blog" class="btn btn-secondary">Read Our Story</a>
+        <div class="hero-text">
+          <p class="hero-description">I'm a 5-month-old Shiba Inu with a BIG personality!</p>
+          <div class="hero-list">
+            <p class="hero-list-title">I love:</p>
+            <ul>
+              <li>Testing mom's patience (I'm adorably stubborn)</li>
+              <li>Chewing momy's fingers and slippers</li>
+              <li>Making new friends (especially if they have treats)</li>
+            </ul>
+          </div>
+          <div class="hero-buttons">
+            <a href="/quizzes/is-shiba-right-for-you" class="btn">Is Shiba Right for You?</a>
+            <a href="/blog" class="btn btn-secondary">Read Our Story</a>
+          </div>
         </div>
       </div>
       <div class="hero-image">
@@ -121,48 +123,101 @@ import Layout from '../layouts/Layout.astro';
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: var(--space-3xl);
-      align-items: start;
+      align-items: center;
+    }
+
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-lg);
+    }
+
+    .hero-text {
+      padding: 0;
+    }
+
+    .hero-image {
     }
 
     @media (max-width: 1023px) {
-      .hero-content {
-        grid-template-columns: 1fr;
-        gap: var(--space-md);
-        display: flex;
-        flex-direction: column;
+      .hero {
+        padding: var(--space-2xl) 0;
       }
 
-      .hero-text {
+      .hero-content {
+        grid-template-columns: 1fr;
+        gap: var(--space-lg);
+      }
+
+      .hero-left {
         display: contents;
       }
 
       .hero-title {
-        order: -2;
+        order: 1;
         text-align: center;
-        padding: 0 var(--space-md);
+        font-size: 1.5rem;
         margin-bottom: 0;
       }
 
       .hero-image {
-        order: -1;
+        order: 2;
+        max-width: 400px;
+        margin: 0 auto;
       }
 
-      .hero-description,
-      .hero-list,
+      .hero-text {
+        order: 3;
+        text-align: center;
+        padding: 0 var(--space-sm);
+      }
+
+      .hero-description {
+        font-size: var(--font-size-lg);
+        margin-bottom: var(--space-lg);
+      }
+
+      .hero-list {
+        display: inline-block;
+        text-align: left;
+        margin-bottom: var(--space-xl);
+      }
+
+      .hero-list-title {
+        text-align: center;
+        font-size: var(--font-size-base);
+      }
+
+      .hero-list li {
+        font-size: var(--font-size-sm);
+      }
+
       .hero-buttons {
-        order: 0;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .hero-buttons .btn {
+        width: 100%;
+        max-width: 280px;
         text-align: center;
       }
-    }
 
-    .hero-text {
-      padding: var(--space-lg);
+      .image-wrapper {
+        transform: none;
+        border-radius: var(--radius-lg);
+      }
+
+      .image-wrapper:hover {
+        transform: scale(1.01);
+      }
     }
 
     .hero-title {
       font-size: var(--font-size-5xl);
       color: var(--color-primary);
-      margin-bottom: var(--space-md);
+      margin-bottom: 0;
       line-height: 1.1;
     }
 
@@ -338,70 +393,8 @@ import Layout from '../layouts/Layout.astro';
       margin-bottom: var(--space-xl);
     }
 
-    /* Mobile Responsive */
-    @media (max-width: 1023px) {
-      .hero-content {
-        grid-template-columns: 1fr;
-        gap: 0;
-      }
-
-      .hero-text {
-        text-align: center;
-        padding: var(--space-md);
-      }
-
-      .hero-buttons {
-        justify-content: center;
-      }
-
-      .image-wrapper {
-        max-width: 100%;
-        margin: 0 auto;
-        transform: rotate(0deg); /* Remove rotation on mobile for better presentation */
-      }
-
-      .image-wrapper:hover {
-        transform: scale(1.02);
-      }
-
-      .stats-heading {
-        font-size: 2rem;
-        margin-bottom: 2rem;
-      }
-
-      .stats-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: var(--space-lg);
-      }
-    }
-
+    /* Tablet/Mobile Stats */
     @media (max-width: 768px) {
-      .hero {
-        padding: var(--space-2xl) 0;
-      }
-
-      .hero-title {
-        font-size: var(--font-size-3xl);
-      }
-
-      .hero-description {
-        font-size: var(--font-size-lg);
-        margin-bottom: var(--space-md);
-      }
-
-      .hero-list {
-        margin-bottom: var(--space-lg);
-      }
-
-      .hero-list-title {
-        font-size: var(--font-size-base);
-      }
-
-      .hero-list li {
-        font-size: var(--font-size-sm);
-        padding-left: var(--space-md);
-      }
-
       .stats-section {
         padding: var(--space-2xl) 0;
       }

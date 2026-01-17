@@ -111,7 +111,7 @@ const altPath = lang === 'ru' ? Astro.url.pathname.replace('/ru', '') || '/' : `
     <div id="passwordGate" class="password-gate">
       <div class="password-container">
         <div class="password-logo">🐕</div>
-        <h1>Life with Yukki</h1>
+        <p class="password-title">Life with Yukki</p>
         <p>This site is currently private</p>
         <form id="passwordForm" class="password-form">
           <input
@@ -236,9 +236,10 @@ const altPath = lang === 'ru' ? Astro.url.pathname.replace('/ru', '') || '/' : `
         margin-bottom: var(--space-md);
       }
 
-      .password-container h1 {
+      .password-title {
         color: var(--color-primary);
         font-size: var(--font-size-2xl);
+        font-weight: 700;
         margin-bottom: var(--space-sm);
       }
 

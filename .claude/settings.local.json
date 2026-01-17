@@ -33,7 +33,9 @@
       "Bash(open http://localhost:4322/)",
       "Bash(git commit:*)",
       "Bash(npx vercel:*)",
-      "Bash(find:*)"
+      "Bash(find:*)",
+      "WebSearch",
+      "Bash(open https://vercel.com/dashboard)"
     ]
   }
 }
