@@ -1,0 +1,6 @@
+# robots.txt for shibayukki.com
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://shibayukki.com/sitemap-index.xml
