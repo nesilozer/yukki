@@ -186,7 +186,9 @@ const altPath = pathMap[currentPath] || pathMap[currentPath + '/'] ||
     <meta name="robots" content="index, follow" />
     <meta name="googlebot" content="index, follow" />
     <meta name="generator" content={Astro.generator} />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="canonical" href={`${siteUrl}${Astro.url.pathname}`} />
 
     <!-- hreflang tags for language versions -->
@@ -230,7 +232,7 @@ const altPath = pathMap[currentPath] || pathMap[currentPath + '/'] ||
     <nav class="navbar">
       <div class="container navbar-container">
         <a href={p.home} class="logo">
-          <span class="logo-icon">🐕</span>
+          <img src="/yukki-logo.png" alt="Yukki" class="logo-img" />
           <span class="logo-text">{t.logoText}</span>
         </a>
 
@@ -318,25 +320,35 @@ const altPath = pathMap[currentPath] || pathMap[currentPath + '/'] ||
         position: relative;
       }
 
-      .logo {
+      a.logo {
         display: flex;
         align-items: center;
-        gap: var(--space-sm);
+        gap: 0;
         font-size: var(--font-size-xl);
         font-weight: 700;
-        color: var(--color-text);
+        color: #2c3e50;
         text-decoration: none;
         font-family: var(--font-family-display);
-        transition: transform var(--transition-fast);
+        transition: all var(--transition-fast);
       }
 
-      .logo:hover {
+      .logo-text {
+        margin-left: -8px;
+        color: #2c3e50;
+      }
+
+      a.logo:hover {
         transform: scale(1.05);
+      }
+
+      a.logo:hover .logo-text {
         color: var(--color-primary);
       }
 
-      .logo-icon {
-        font-size: var(--font-size-3xl);
+      .logo-img {
+        width: 80px;
+        height: 80px;
+        object-fit: contain;
       }
 
       .menu-toggle {
