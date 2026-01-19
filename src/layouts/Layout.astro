@@ -556,6 +556,13 @@ const altPath = pathMap[currentPath] || pathMap[currentPath + '/'] ||
         color: var(--color-text-light);
       }
 
+      /* Desktop Styles */
+      @media (min-width: 769px) {
+        a.logo {
+          margin-left: -40px;
+        }
+      }
+
       /* Mobile Styles */
       @media (max-width: 768px) {
         .menu-toggle {
