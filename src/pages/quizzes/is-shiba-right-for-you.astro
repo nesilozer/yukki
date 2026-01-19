@@ -18,6 +18,7 @@ const quizSchema = {
 <Layout
   title="Is a Shiba Inu Right for You? | Free Quiz | Life with Yukki"
   description="Take our free quiz to find out if a Shiba Inu is the right dog breed for you. Answer 10 questions about your lifestyle, experience, and living situation."
+  alternateUrls={{ en: '/quizzes/is-shiba-right-for-you/', ru: '/ru/testy/podhodit-li-vam-shiba-inu/' }}
 >
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(quizSchema)} />
 
@@ -29,7 +30,7 @@ const quizSchema = {
           <nav class="breadcrumb">
             <a href="/">Home</a>
             <span class="separator">&rarr;</span>
-            <a href="/quizzes">Quizzes</a>
+            <a href="/quizzes/">Quizzes</a>
             <span class="separator">&rarr;</span>
             <span>Is a Shiba Inu Right for You?</span>
           </nav>
@@ -396,7 +397,7 @@ const quizSchema = {
             </div>
             <div class="results-actions">
               <button class="btn" id="retakeBtn">Retake Quiz</button>
-              <a href="/tips" class="btn btn-secondary">Explore Shiba Tips</a>
+              <a href="/tips/" class="btn btn-secondary">Explore Shiba Tips</a>
             </div>
             <div class="share-section">
               <p>Share your result:</p>

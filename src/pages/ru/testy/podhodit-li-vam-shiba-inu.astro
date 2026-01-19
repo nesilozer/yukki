@@ -19,6 +19,7 @@ const quizSchema = {
   title="Подходит ли вам сиба-ину? | Бесплатный тест | Жизнь с Юкки"
   description="Пройдите наш бесплатный тест, чтобы узнать, подходит ли вам порода сиба-ину. Ответьте на 10 вопросов о вашем образе жизни, опыте и жилищных условиях."
   lang="ru"
+  alternateUrls={{ en: '/quizzes/is-shiba-right-for-you/', ru: '/ru/testy/podhodit-li-vam-shiba-inu/' }}
 >
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(quizSchema)} />
 
@@ -30,7 +31,7 @@ const quizSchema = {
           <nav class="breadcrumb">
             <a href="/ru/">Главная</a>
             <span class="separator">&rarr;</span>
-            <a href="/ru/testy">Тесты</a>
+            <a href="/ru/testy/">Тесты</a>
             <span class="separator">&rarr;</span>
             <span>Подходит ли вам сиба-ину?</span>
           </nav>
@@ -394,7 +395,7 @@ const quizSchema = {
             </div>
             <div class="results-actions">
               <button class="btn" id="retakeBtn">Пройти заново</button>
-              <a href="/ru/sovety" class="btn btn-secondary">Советы по уходу</a>
+              <a href="/ru/sovety/" class="btn btn-secondary">Советы по уходу</a>
             </div>
             <div class="share-section">
               <p>Поделиться результатом:</p>

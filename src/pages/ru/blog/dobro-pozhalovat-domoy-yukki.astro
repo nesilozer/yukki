@@ -25,6 +25,7 @@ const articleSchema = {
   type="article"
   publishedDate="2026-01-14"
   lang="ru"
+  alternateUrls={{ en: '/blog/welcome-home-yukki/', ru: '/ru/blog/dobro-pozhalovat-domoy-yukki/' }}
 >
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
   <article class="blog-post">
@@ -35,7 +36,7 @@ const articleSchema = {
           <nav class="breadcrumb">
             <a href="/ru/">Главная</a>
             <span class="separator">→</span>
-            <a href="/ru/blog">Блог</a>
+            <a href="/ru/blog/">Блог</a>
             <span class="separator">→</span>
             <span>Добро пожаловать домой, Юкки</span>
           </nav>
@@ -348,7 +349,7 @@ const articleSchema = {
 
         <!-- Navigation -->
         <nav class="post-navigation">
-          <a href="/ru/blog" class="nav-button">← Назад к блогу</a>
+          <a href="/ru/blog/" class="nav-button">← Назад к блогу</a>
         </nav>
       </div>
 

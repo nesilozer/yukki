@@ -6,6 +6,7 @@ import Layout from '../../layouts/Layout.astro';
   title="Страница не найдена - Жизнь с Юкки"
   description="Упс! Юкки не смог найти эту страницу."
   lang="ru"
+  noHreflang={true}
 >
   <section class="error-page">
     <div class="container">
@@ -27,7 +28,7 @@ import Layout from '../../layouts/Layout.astro';
           </p>
           <div class="error-buttons">
             <a href="/ru" class="btn">На главную</a>
-            <a href="/ru/blog" class="btn btn-secondary">Читать блог</a>
+            <a href="/ru/blog/" class="btn btn-secondary">Читать блог</a>
           </div>
         </div>
       </div>

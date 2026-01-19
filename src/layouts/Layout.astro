@@ -9,6 +9,7 @@ interface Props {
   publishedDate?: string;
   lang?: 'en' | 'ru';
   alternateUrls?: { en: string; ru: string };
+  noHreflang?: boolean;
 }
 
 const {
@@ -18,7 +19,8 @@ const {
   type = "website",
   publishedDate,
   lang = 'en',
-  alternateUrls
+  alternateUrls,
+  noHreflang = false
 } = Astro.props;
 
 const siteUrl = "https://shibayukki.com";
@@ -99,19 +101,19 @@ const nav = {
 const paths = {
   en: {
     home: '/',
-    blog: '/blog',
-    tips: '/tips',
-    quizzes: '/quizzes',
-    tools: '/tools',
-    contact: '/contact'
+    blog: '/blog/',
+    tips: '/tips/',
+    quizzes: '/quizzes/',
+    tools: '/tools/',
+    contact: '/contact/'
   },
   ru: {
     home: '/ru/',
-    blog: '/ru/blog',
-    tips: '/ru/sovety',
-    quizzes: '/ru/testy',
-    tools: '/ru/instrumenty',
-    contact: '/ru/kontakty'
+    blog: '/ru/blog/',
+    tips: '/ru/sovety/',
+    quizzes: '/ru/testy/',
+    tools: '/ru/instrumenty/',
+    contact: '/ru/kontakty/'
   }
 };
 
@@ -156,10 +158,6 @@ const pathMap: Record<string, string> = {
   '/ru/kontakty/': '/contact/',
   '/ru/privacy': '/privacy',
   '/ru/privacy/': '/privacy/',
-  '/ru/o-nas': '/about',
-  '/ru/o-nas/': '/about/',
-  '/about': '/ru/o-nas',
-  '/about/': '/ru/o-nas/',
 };
 
 // Get alternate path, fallback to simple prefix/remove if not in map
@@ -192,7 +190,7 @@ const altPath = pathMap[currentPath] || pathMap[currentPath + '/'] ||
     <link rel="canonical" href={`${siteUrl}${Astro.url.pathname}`} />
 
     <!-- hreflang tags for language versions -->
-    {alternateUrls ? (
+    {!noHreflang && (alternateUrls ? (
       <>
         <link rel="alternate" hreflang="en" href={`${siteUrl}${alternateUrls.en}`} />
         <link rel="alternate" hreflang="ru" href={`${siteUrl}${alternateUrls.ru}`} />
@@ -204,7 +202,7 @@ const altPath = pathMap[currentPath] || pathMap[currentPath + '/'] ||
         <link rel="alternate" hreflang="ru" href={`${siteUrl}${lang === 'ru' ? Astro.url.pathname : '/ru' + Astro.url.pathname}`} />
         <link rel="alternate" hreflang="x-default" href={`${siteUrl}${lang === 'en' ? Astro.url.pathname : Astro.url.pathname.replace('/ru', '') || '/'}`} />
       </>
-    )}
+    ))}
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content={type} />
