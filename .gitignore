@@ -26,3 +26,4 @@ pnpm-debug.log*
 # chrome extension build artifacts
 *.zip
 .vercel
+# Trigger rebuild
