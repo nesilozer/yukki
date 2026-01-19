@@ -44,7 +44,13 @@
       "Bash(npx sharp-cli:*)",
       "Bash(brew list:*)",
       "Bash(git rm:*)",
-      "Bash(npm install:*)"
+      "Bash(npm install:*)",
+      "Bash(convert:*)",
+      "Bash(pip3 install:*)",
+      "WebFetch(domain:www.orientashibainu.com)",
+      "Bash(xlsx2csv:*)",
+      "Bash(unzip:*)",
+      "Bash(cwebp:*)"
     ]
   }
 }
