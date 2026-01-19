@@ -237,7 +237,7 @@ const altPath = pathMap[currentPath] || pathMap[currentPath + '/'] ||
     <nav class="navbar">
       <div class="container navbar-container">
         <a href={p.home} class="logo">
-          <img src="/yukki-logo.png" alt="Yukki" class="logo-img" />
+          <img src="/yukki-jumping.webp" alt="Yukki" class="logo-img" />
           <span class="logo-text">{t.logoText}</span>
         </a>
 
@@ -351,9 +351,10 @@ const altPath = pathMap[currentPath] || pathMap[currentPath + '/'] ||
       }
 
       .logo-img {
-        width: 80px;
-        height: 80px;
+        width: 160px;
+        height: 120px;
         object-fit: contain;
+        margin-top: 20px;
       }
 
       .menu-toggle {
@@ -597,6 +598,21 @@ const altPath = pathMap[currentPath] || pathMap[currentPath + '/'] ||
         .lang-link {
           padding: var(--space-xs) var(--space-sm);
           font-size: var(--font-size-base);
+        }
+
+        .logo {
+          flex-wrap: nowrap;
+        }
+
+        .logo-img {
+          width: 115px;
+          height: 85px;
+          margin-top: 12px;
+          margin-left: -22px;
+        }
+
+        .logo-text {
+          white-space: nowrap;
         }
 
         .footer-content {
