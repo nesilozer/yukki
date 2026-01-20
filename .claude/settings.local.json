@@ -50,7 +50,8 @@
       "WebFetch(domain:www.orientashibainu.com)",
       "Bash(xlsx2csv:*)",
       "Bash(unzip:*)",
-      "Bash(cwebp:*)"
+      "Bash(cwebp:*)",
+      "WebFetch(domain:shibayukki.com)"
     ]
   }
 }
