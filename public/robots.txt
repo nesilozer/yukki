@@ -4,4 +4,3 @@ Allow: /
 
 # Sitemap
 Sitemap: https://shibayukki.com/sitemap-index.xml
-# Force rebuild Tue Jan 20 06:10:06 CET 2026
