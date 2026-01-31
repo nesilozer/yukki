@@ -1,0 +1,225 @@
+---
+interface Props {
+  lang?: 'en' | 'ru';
+}
+
+const { lang = 'en' } = Astro.props;
+
+const text = {
+  en: {
+    message: 'We use cookies to analyze site traffic and improve your experience.',
+    accept: 'Accept',
+    decline: 'Decline',
+    privacy: 'Privacy Policy'
+  },
+  ru: {
+    message: 'Мы используем файлы cookie для анализа трафика и улучшения вашего опыта.',
+    accept: 'Принять',
+    decline: 'Отклонить',
+    privacy: 'Политика конфиденциальности'
+  }
+};
+
+const t = text[lang];
+const privacyPath = lang === 'ru' ? '/ru/privacy/' : '/privacy/';
+---
+
+<div id="cookie-consent" class="cookie-banner" style="display: none;">
+  <div class="cookie-content">
+    <p class="cookie-message">
+      {t.message}
+      <a href={privacyPath} class="cookie-link">{t.privacy}</a>
+    </p>
+    <div class="cookie-buttons">
+      <button id="cookie-decline" class="cookie-btn cookie-btn-decline">{t.decline}</button>
+      <button id="cookie-accept" class="cookie-btn cookie-btn-accept">{t.accept}</button>
+    </div>
+  </div>
+</div>
+
+<style>
+  .cookie-banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #2c3e50;
+    color: #fff;
+    padding: 1rem;
+    z-index: 9999;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+  }
+
+  .cookie-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .cookie-message {
+    flex: 1;
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  .cookie-link {
+    color: #f8b500;
+    text-decoration: underline;
+  }
+
+  .cookie-link:hover {
+    color: #ffc933;
+  }
+
+  .cookie-buttons {
+    display: flex;
+    gap: 0.75rem;
+    flex-shrink: 0;
+  }
+
+  .cookie-btn {
+    padding: 0.6rem 1.25rem;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .cookie-btn-accept {
+    background-color: #f8b500;
+    color: #2c3e50;
+  }
+
+  .cookie-btn-accept:hover {
+    background-color: #ffc933;
+    transform: translateY(-1px);
+  }
+
+  .cookie-btn-decline {
+    background-color: transparent;
+    color: #fff;
+    border: 1px solid #fff;
+  }
+
+  .cookie-btn-decline:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  @media (max-width: 600px) {
+    .cookie-content {
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .cookie-buttons {
+      width: 100%;
+      justify-content: center;
+    }
+
+    .cookie-btn {
+      flex: 1;
+      max-width: 150px;
+    }
+  }
+</style>
+
+<script>
+  // Cookie consent logic
+  const CONSENT_KEY = 'yukki_cookie_consent';
+  const GA_ID = 'G-S7J15W6CK9';
+
+  function getConsent(): string | null {
+    return localStorage.getItem(CONSENT_KEY);
+  }
+
+  function setConsent(value: 'accepted' | 'declined'): void {
+    localStorage.setItem(CONSENT_KEY, value);
+  }
+
+  function loadGoogleAnalytics(): void {
+    // Check if already loaded
+    if (document.querySelector(`script[src*="googletagmanager"]`)) return;
+
+    // Load gtag.js
+    const script = document.createElement('script');
+    script.async = true;
+    script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_ID}`;
+    document.head.appendChild(script);
+
+    // Initialize gtag
+    script.onload = () => {
+      window.dataLayer = window.dataLayer || [];
+      function gtag(...args: any[]) {
+        window.dataLayer.push(args);
+      }
+      gtag('js', new Date());
+      gtag('config', GA_ID);
+
+      // Make gtag globally available
+      (window as any).gtag = gtag;
+    };
+  }
+
+  function showBanner(): void {
+    const banner = document.getElementById('cookie-consent');
+    if (banner) {
+      banner.style.display = 'block';
+    }
+  }
+
+  function hideBanner(): void {
+    const banner = document.getElementById('cookie-consent');
+    if (banner) {
+      banner.style.display = 'none';
+    }
+  }
+
+  // Initialize on page load
+  document.addEventListener('DOMContentLoaded', () => {
+    const consent = getConsent();
+
+    if (consent === 'accepted') {
+      // User already accepted - load GA
+      loadGoogleAnalytics();
+    } else if (consent === 'declined') {
+      // User already declined - do nothing
+    } else {
+      // No choice yet - show banner
+      showBanner();
+    }
+
+    // Handle accept button
+    const acceptBtn = document.getElementById('cookie-accept');
+    if (acceptBtn) {
+      acceptBtn.addEventListener('click', () => {
+        setConsent('accepted');
+        hideBanner();
+        loadGoogleAnalytics();
+      });
+    }
+
+    // Handle decline button
+    const declineBtn = document.getElementById('cookie-decline');
+    if (declineBtn) {
+      declineBtn.addEventListener('click', () => {
+        setConsent('declined');
+        hideBanner();
+      });
+    }
+  });
+
+  // TypeScript declarations
+  declare global {
+    interface Window {
+      dataLayer: any[];
+      gtag: (...args: any[]) => void;
+    }
+  }
+</script>

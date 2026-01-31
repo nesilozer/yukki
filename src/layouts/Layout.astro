@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import CookieConsent from '../components/CookieConsent.astro';
 
 interface Props {
   title: string;
@@ -176,15 +177,7 @@ const altPath = pathMap[currentPath] || pathMap[currentPath + '/'] ||
 <!DOCTYPE html>
 <html lang={lang}>
   <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-S7J15W6CK9"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-S7J15W6CK9');
-    </script>
-
+    <!-- Google Analytics loaded via CookieConsent after user acceptance -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
@@ -662,5 +655,7 @@ const altPath = pathMap[currentPath] || pathMap[currentPath + '/'] ||
         });
       });
     </script>
+
+    <CookieConsent lang={lang} />
   </body>
 </html>
