@@ -6,6 +6,9 @@ import Layout from '../layouts/Layout.astro';
   title="Life with Yukki - A Shiba Inu Puppy's Journey"
   description="Welcome to Life with Yukki! Follow the adventures, stories, and daily life of Yukki, an adorable Shiba Inu puppy."
 >
+  <Fragment slot="head">
+    <link rel="preload" as="image" href="/yukki-family-portrait.webp" fetchpriority="high" />
+  </Fragment>
   <!-- Hero Section -->
   <section class="hero">
     <div class="hero-content">
@@ -37,10 +40,11 @@ import Layout from '../layouts/Layout.astro';
           <img
             src="/yukki-family-portrait.webp"
             alt="Yukki the Shiba Inu puppy with his loving family"
-            width="960"
-            height="1280"
+            width="1536"
+            height="2048"
             loading="eager"
             decoding="async"
+            fetchpriority="high"
           />
         </div>
       </div>
@@ -390,6 +394,7 @@ import Layout from '../layouts/Layout.astro';
       overflow: hidden;
       box-shadow: var(--shadow-xl);
       transform: rotate(2deg);
+      aspect-ratio: 3 / 4;
       transition: transform var(--transition-base);
     }
 
@@ -399,7 +404,7 @@ import Layout from '../layouts/Layout.astro';
 
     .image-wrapper img {
       width: 100%;
-      max-height: 750px;
+      height: 100%;
       object-fit: cover;
       object-position: top;
       display: block;
