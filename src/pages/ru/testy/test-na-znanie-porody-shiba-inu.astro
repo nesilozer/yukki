@@ -348,10 +348,21 @@ const quizSchema = {
     const userAnswers: { correct: boolean }[] = [];
 
     function scrollToQuiz() {
-      const header = document.querySelector('.quiz-header');
-      if (header) {
-        header.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
+      requestAnimationFrame(() => {
+        const anchor = document.querySelector('.progress-container') || document.querySelector('.quiz-header');
+        if (anchor) {
+          anchor.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    }
+
+    function scrollToNextButton() {
+      requestAnimationFrame(() => {
+        const nextBtn = document.getElementById('nextBtn');
+        if (nextBtn) {
+          nextBtn.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' });
+        }
+      });
     }
 
     function renderQuestion() {
@@ -440,6 +451,7 @@ const quizSchema = {
 
       const nextBtn = document.getElementById('nextBtn');
       if (nextBtn) nextBtn.style.display = 'inline-flex';
+      scrollToNextButton();
     }
 
     function showResults() {
