@@ -1,0 +1,913 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+
+const quizSchema = {
+  "@context": "https://schema.org",
+  "@type": "Quiz",
+  "name": "Тест на знание породы сиба-ину",
+  "description": "Тест из 15 вопросов об истории, внешности, здоровье и характере сиба-ину. Факты проверены по официальному стандарту породы AKC, National Shiba Club of America и VCA Animal Hospitals.",
+  "educationalLevel": "beginner",
+  "about": {
+    "@type": "Thing",
+    "name": "Сиба-ину",
+    "description": "Японская порода собак"
+  }
+};
+---
+
+<Layout
+  title="Тест на знание породы сиба-ину | Жизнь с Юкки"
+  description="15 проверенных фактов об истории, внешности, здоровье и характере сиба-ину. Каждый ответ основан на официальном стандарте породы AKC, National Shiba Club of America и VCA Animal Hospitals."
+  lang="ru"
+  alternateUrls={{ en: '/quizzes/shiba-inu-breed-quiz/', ru: '/ru/testy/test-na-znanie-porody-shiba-inu/' }}
+>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(quizSchema)} />
+
+  <div class="section">
+    <div class="container">
+      <div class="quiz-container">
+        <!-- Quiz Header -->
+        <div class="quiz-header">
+          <nav class="breadcrumb">
+            <a href="/ru/">Главная</a>
+            <span class="separator">&rarr;</span>
+            <a href="/ru/testy/">Тесты</a>
+            <span class="separator">&rarr;</span>
+            <span>Тест на знание породы сиба-ину</span>
+          </nav>
+          <h1>Тест на знание породы сиба-ину</h1>
+          <p class="quiz-intro">15 вопросов об истории, внешности, здоровье и характере сиба-ину. Каждый ответ взят прямо из стандарта породы AKC, National Shiba Club of America и VCA Animal Hospitals.</p>
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="progress-container">
+          <div class="progress-bar" id="progressBar"></div>
+          <span class="progress-text" id="progressText">Вопрос 1 из 15</span>
+        </div>
+
+        <!-- Quiz Questions -->
+        <div class="quiz-content" id="quizContent">
+          <!-- Questions will be rendered by JavaScript -->
+        </div>
+
+        <!-- Quiz Results (hidden initially) -->
+        <div class="quiz-results" id="quizResults" style="display: none;">
+          <!-- Results will be rendered by JavaScript -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    interface Question {
+      id: number;
+      category: string;
+      question: string;
+      options: string[];
+      correctIndex: number;
+      explanation: string;
+      source: string;
+    }
+
+    const questions: Question[] = [
+      {
+        id: 1,
+        category: "История",
+        question: "Сиба-ину — самая маленькая среди какой группы собак?",
+        options: ["Европейские декоративные породы", "Японские аборигенные породы собак", "Северные шпицы", "Азиатские гончие"],
+        correctIndex: 1,
+        explanation: "Официальный стандарт породы начинается так: «Сиба — самая маленькая среди японских аборигенных пород собак».",
+        source: "Официальный стандарт породы сиба-ину, AKC"
+      },
+      {
+        id: 2,
+        category: "История",
+        question: "Для чего изначально выводили сиба-ину?",
+        options: [
+          "Пасти овец на равнинах",
+          "Охранять императорские дворцы",
+          "Охотиться по зрению и запаху в густых зарослях горных районов Японии",
+          "Тянуть упряжки по снегу"
+        ],
+        correctIndex: 2,
+        explanation: "В стандарте породы указано: сиба «изначально выводилась для охоты по зрению и запаху в густых зарослях горных районов Японии».",
+        source: "Официальный стандарт породы сиба-ину, AKC"
+      },
+      {
+        id: 3,
+        category: "История",
+        question: "В каком году AKC официально признал породу сиба-ину, и какой по счёту это была порода?",
+        options: ["1975, 98-я порода", "1992, 136-я порода", "2005, 150-я порода", "1960, 80-я порода"],
+        correctIndex: 1,
+        explanation: "В истории породы на сайте AKC указано: «Порода получила официальное признание AKC в 1992 году и стала 136-й породой клуба».",
+        source: "AKC, история породы сиба-ину"
+      },
+      {
+        id: 4,
+        category: "История",
+        question: "Согласно AKC, в какой период порода второй раз оказалась на грани исчезновения?",
+        options: [
+          "В эпоху Мэйдзи (1868-1912)",
+          "Во время и после Второй мировой войны из-за нехватки еды, бомбардировок и послевоенной депрессии",
+          "В 1980-х из-за запрета на экспорт",
+          "В период Эдо из-за запрета на охоту"
+        ],
+        correctIndex: 1,
+        explanation: "AKC пишет: «Второй раз порода оказалась на грани исчезновения во время и после Второй мировой войны. Нехватка еды, бомбардировки и послевоенная депрессия были среди факторов, повлиявших на численность сиба».",
+        source: "AKC, история породы сиба-ину"
+      },
+      {
+        id: 5,
+        category: "История",
+        question: "AKC описывает раннюю роль сиба-ину в Японии как охотников и компаньонов кого?",
+        options: ["Рыбаков", "Самураев в Японии X века", "Только императоров", "Странствующих торговцев"],
+        correctIndex: 1,
+        explanation: "В истории породы AKC указано, что сиба «начинала как охотник и компаньон самураев в Японии X века».",
+        source: "AKC, история породы сиба-ину"
+      },
+      {
+        id: 6,
+        category: "Внешность",
+        question: "Сколько весит взрослый кобель сиба-ину согласно официальному стандарту?",
+        options: ["7 кг", "10,5 кг (23 фунта)", "14,5 кг", "20 кг"],
+        correctIndex: 1,
+        explanation: "Стандарт указывает средний вес около 23 фунтов (примерно 10,5 кг) для кобелей и 17 фунтов (примерно 7,7 кг) для сук.",
+        source: "Официальный стандарт породы сиба-ину, AKC"
+      },
+      {
+        id: 7,
+        category: "Внешность",
+        question: "Стандарт признаёт всего три окраса. Какой из этих НЕ входит в их число?",
+        options: ["Сезам", "Чёрно-подпалый", "Рыжий", "Кремовый"],
+        correctIndex: 3,
+        explanation: "Признаны только три окраса: рыжий, чёрно-подпалый и сезам. Кремового среди них нет. Стандарт прямо называет кремовый окрас «очень серьёзным недостатком».",
+        source: "Официальный стандарт породы сиба-ину, AKC"
+      },
+      {
+        id: 8,
+        category: "Внешность",
+        question: "Как официальный стандарт описывает шерсть сиба-ину?",
+        options: [
+          "Однослойная, шелковистая и длинная",
+          "Двойная шерсть: жёсткий прямой остевой волос и мягкий густой подшёрсток",
+          "Жёсткая, однослойная",
+          "Волнистая и почти не линяющая"
+        ],
+        correctIndex: 1,
+        explanation: "В стандарте сказано: «Двойная шерсть, остевой волос жёсткий и прямой, подшёрсток мягкий и густой».",
+        source: "Официальный стандарт породы сиба-ину, AKC"
+      },
+      {
+        id: 9,
+        category: "Здоровье",
+        question: "Какова типичная продолжительность жизни сиба-ину согласно VCA Animal Hospitals?",
+        options: ["6-9 лет", "8-11 лет", "12-15 лет", "18-20 лет"],
+        correctIndex: 2,
+        explanation: "Ветеринарная сеть VCA указывает ожидаемую продолжительность жизни сиба-ину в 12-15 лет.",
+        source: "VCA Animal Hospitals"
+      },
+      {
+        id: 10,
+        category: "Здоровье",
+        question: "Какую проблему с суставами National Shiba Club of America называет главной проблемой здоровья породы?",
+        options: ["Дисплазия локтевого сустава", "Вывих коленной чашечки", "Остеохондрит", "Заболевания межпозвоночных дисков"],
+        correctIndex: 1,
+        explanation: "National Shiba Club of America называет вывих коленной чашечки, когда коленка выскакивает из сустава, «самой распространённой и потенциально серьёзной» проблемой породы. Дисплазия тазобедренного сустава и болезни глаз тоже встречаются часто.",
+        source: "National Shiba Club of America, страница здоровья; подтверждено VCA Animal Hospitals"
+      },
+      {
+        id: 11,
+        category: "Характер",
+        question: "Какой именно фразой официальный стандарт открывает описание характера сиба-ину?",
+        options: ["Яростная независимость", "Смелость духа (spirited boldness)", "Мягкое упрямство", "Сдержанное достоинство"],
+        correctIndex: 1,
+        explanation: "Раздел о темпераменте в стандарте начинается так: «Смелость духа, добродушие и неподдельная прямота, которые вместе создают достоинство и природную красоту».",
+        source: "Официальный стандарт породы сиба-ину, AKC"
+      },
+      {
+        id: 12,
+        category: "Характер",
+        question: "Как, согласно официальному стандарту, сиба-ину обычно ведёт себя с другими собаками?",
+        options: [
+          "Всегда дружелюбно и покорно",
+          "Полностью безразлично",
+          "Порой агрессивно с другими собаками, но всегда под контролем хозяина",
+          "Пугливо и избегающе"
+        ],
+        correctIndex: 2,
+        explanation: "В стандарте указано: «Порой агрессивна к другим собакам, но сиба всегда находится под контролем хозяина».",
+        source: "Официальный стандарт породы сиба-ину, AKC"
+      },
+      {
+        id: 13,
+        category: "Характер",
+        question: "Почему AKC считает, что сиба-ину больше подходит опытным владельцам, чем новичкам?",
+        options: [
+          "У них низкий уровень энергии, и им быстро становится скучно",
+          "Они упрямые и независимые, поэтому дрессировать их сложнее",
+          "Им нужен профессиональный груминг каждую неделю",
+          "У AKC нет официальной позиции по этому вопросу"
+        ],
+        correctIndex: 1,
+        explanation: "AKC пишет: «Из-за упрямого характера сиба-ину лучше подходит опытному владельцу собак». Также сиба называют «более упрямой породой», чей сильный характер «может сделать дрессировку утомительной».",
+        source: "AKC, «Подходит ли вам сиба-ину?»"
+      },
+      {
+        id: 14,
+        category: "Характер",
+        question: "С каким животным AKC и заводчики часто сравнивают независимый, самостоятельно ухаживающий за собой характер сиба-ину?",
+        options: ["С лисой", "С кошкой", "С волком", "С енотом"],
+        correctIndex: 1,
+        explanation: "AKC цитирует заводчика, описывающего сиба как «независимую, умную, похожую на кошку», а в отдельной статье AKC говорится: «Во многом сиба-ину больше похожа на кошку, чем на собаку».",
+        source: "AKC, «Акита против сиба-ину»; AKC, факты о сиба-ину"
+      },
+      {
+        id: 15,
+        category: "Характер",
+        question: "Сиба-ину выводили для охоты. Что это значит для владельцев сегодня?",
+        options: [
+          "Они игнорируют мелких животных из-за низкой энергии",
+          "Они всё ещё гоняются за птицами, белками и другими мелкими животными",
+          "Их специально вывели безопасными для всех мелких питомцев",
+          "Охотничий инстинкт полностью исчез у современных сиба"
+        ],
+        correctIndex: 1,
+        explanation: "AKC пишет, что сиба «определённо сохранили свои охотничьи инстинкты» и будут гоняться за птицами, кроликами, белками и другой мелкой живностью. Современные сиба всё так же любят погоню.",
+        source: "AKC, «Акита против сиба-ину»; AKC, история породы сиба-ину"
+      }
+    ];
+
+    const resultTiers = [
+      { min: 13, title: "Эксперт по сиба-ину! 🏆", emoji: "🥇", description: "Вы знаете эту породу от и до. И знаете её правильно, не по тому, что просто повторяют в интернете.", color: "#22c55e" },
+      { min: 10, title: "Хорошо подготовлены! 🎓", emoji: "🥈", description: "Отличное понимание истории, здоровья и характера сиба-ину. Пара деталей всё же ускользнула.", color: "#eab308" },
+      { min: 6, title: "Есть куда расти 📚", emoji: "🥉", description: "Вы знаете основы, но несколько фактов здесь наверняка вас удивили. Стоит перечитать ответы ещё раз.", color: "#f97316" },
+      { min: 0, title: "Пора изучить подробнее 🐕", emoji: "📖", description: "У этой породы больше сюрпризов, чем кажется. Посмотрите пояснения ниже — у каждого есть источник.", color: "#ef4444" }
+    ];
+
+    // Counter API configuration for anonymous result tracking
+    const COUNTER_NAMESPACE = 'shibayukki-breed-quiz-ru';
+    const SCORE_BUCKETS = ['expert', 'researched', 'gettingThere', 'studyUp'];
+
+    function bucketForScore(score: number): string {
+      if (score >= 13) return 'expert';
+      if (score >= 10) return 'researched';
+      if (score >= 6) return 'gettingThere';
+      return 'studyUp';
+    }
+
+    async function incrementResultCount(bucket: string) {
+      try {
+        await fetch(`https://api.counterapi.dev/v1/${COUNTER_NAMESPACE}/${bucket}/up`);
+      } catch (e) {
+        // Silently fail - stats are non-critical
+      }
+    }
+
+    async function fetchAllCounts(): Promise<Record<string, number>> {
+      const counts: Record<string, number> = {};
+      try {
+        const responses = await Promise.all(
+          SCORE_BUCKETS.map(key =>
+            fetch(`https://api.counterapi.dev/v1/${COUNTER_NAMESPACE}/${key}`)
+              .then(r => r.json())
+              .catch(() => ({ count: 0 }))
+          )
+        );
+        SCORE_BUCKETS.forEach((key, i) => {
+          counts[key] = responses[i]?.count || 0;
+        });
+      } catch (e) {
+        SCORE_BUCKETS.forEach(key => counts[key] = 0);
+      }
+      return counts;
+    }
+
+    async function loadCommunityStats(userBucket: string) {
+      const counts = await fetchAllCounts();
+      const total = Object.values(counts).reduce((sum, n) => sum + n, 0);
+
+      const labels: Record<string, string> = {
+        expert: 'Эксперт',
+        researched: 'Хорошо подготовлен',
+        gettingThere: 'Есть куда расти',
+        studyUp: 'Пора изучить подробнее'
+      };
+
+      const colors: Record<string, string> = {
+        expert: '#22c55e',
+        researched: '#eab308',
+        gettingThere: '#f97316',
+        studyUp: '#ef4444'
+      };
+
+      const subtitle = document.querySelector('.stats-subtitle');
+      const chart = document.getElementById('statsChart');
+
+      if (total > 0 && chart && subtitle) {
+        subtitle.textContent = `Пройдено тестов: ${total.toLocaleString()}`;
+        chart.innerHTML = SCORE_BUCKETS.map(key => {
+          const count = counts[key] || 0;
+          const percentage = Math.round((count / total) * 100);
+          const isUser = key === userBucket;
+          return `
+            <div class="stat-row ${isUser ? 'user-result' : ''}">
+              <div class="stat-label">${labels[key]} ${isUser ? '(Вы)' : ''}</div>
+              <div class="stat-bar-container">
+                <div class="stat-bar" style="width: ${percentage}%; background-color: ${colors[key]}"></div>
+              </div>
+              <div class="stat-percent">${percentage}%</div>
+            </div>
+          `;
+        }).join('');
+      } else if (subtitle) {
+        subtitle.textContent = 'Станьте первым, кто пройдёт этот тест!';
+      }
+    }
+
+    let currentQuestion = 0;
+    let correctCount = 0;
+    let answered = false;
+    const userAnswers: { correct: boolean }[] = [];
+
+    function renderQuestion() {
+      const question = questions[currentQuestion];
+      const quizContent = document.getElementById('quizContent');
+      const progressBar = document.getElementById('progressBar');
+      const progressText = document.getElementById('progressText');
+      answered = false;
+
+      if (progressBar) {
+        progressBar.style.width = `${(currentQuestion / questions.length) * 100}%`;
+      }
+      if (progressText) {
+        progressText.textContent = `Вопрос ${currentQuestion + 1} из ${questions.length}`;
+      }
+
+      if (quizContent) {
+        quizContent.innerHTML = `
+          <div class="question-card">
+            <span class="question-category">${question.category}</span>
+            <h2 class="question-number">Вопрос ${question.id}</h2>
+            <p class="question-text">${question.question}</p>
+            <div class="options-container">
+              ${question.options.map((option, index) => `
+                <button class="option-btn" data-index="${index}">
+                  ${option}
+                </button>
+              `).join('')}
+            </div>
+            <div class="feedback-box" id="feedbackBox" style="display: none;"></div>
+            <button class="btn next-btn" id="nextBtn" style="display: none;">
+              ${currentQuestion < questions.length - 1 ? 'Следующий вопрос' : 'Смотреть результат'}
+            </button>
+          </div>
+        `;
+
+        document.querySelectorAll('.option-btn').forEach(btn => {
+          btn.addEventListener('click', handleAnswer);
+        });
+
+        document.getElementById('nextBtn')?.addEventListener('click', () => {
+          if (currentQuestion < questions.length - 1) {
+            currentQuestion++;
+            renderQuestion();
+          } else {
+            showResults();
+          }
+        });
+      }
+    }
+
+    function handleAnswer(e: Event) {
+      if (answered) return;
+      answered = true;
+
+      const target = e.target as HTMLElement;
+      const selectedIndex = parseInt(target.dataset.index || '0');
+      const question = questions[currentQuestion];
+      const isCorrect = selectedIndex === question.correctIndex;
+
+      if (isCorrect) correctCount++;
+      userAnswers.push({ correct: isCorrect });
+
+      document.querySelectorAll('.option-btn').forEach((btn, index) => {
+        const el = btn as HTMLElement;
+        el.classList.add('disabled');
+        if (index === question.correctIndex) {
+          el.classList.add('correct');
+        } else if (index === selectedIndex) {
+          el.classList.add('incorrect');
+        }
+      });
+
+      const feedbackBox = document.getElementById('feedbackBox');
+      if (feedbackBox) {
+        feedbackBox.style.display = 'block';
+        feedbackBox.className = `feedback-box ${isCorrect ? 'feedback-correct' : 'feedback-incorrect'}`;
+        feedbackBox.innerHTML = `
+          <p class="feedback-verdict">${isCorrect ? '✓ Верно!' : '✗ Не совсем'}</p>
+          <p class="feedback-explanation">${question.explanation}</p>
+          <p class="feedback-source">Источник: ${question.source}</p>
+        `;
+      }
+
+      const nextBtn = document.getElementById('nextBtn');
+      if (nextBtn) nextBtn.style.display = 'inline-flex';
+    }
+
+    function showResults() {
+      const tier = resultTiers.find(t => correctCount >= t.min) || resultTiers[resultTiers.length - 1];
+      const bucket = bucketForScore(correctCount);
+
+      incrementResultCount(bucket);
+
+      const quizContent = document.getElementById('quizContent');
+      const quizResults = document.getElementById('quizResults');
+      const progressBar = document.getElementById('progressBar');
+      const progressText = document.getElementById('progressText');
+
+      if (quizContent) quizContent.style.display = 'none';
+      if (progressBar) progressBar.style.width = '100%';
+      if (progressText) progressText.textContent = `Тест завершён`;
+
+      if (quizResults) {
+        quizResults.style.display = 'block';
+        quizResults.innerHTML = `
+          <div class="results-card">
+            <div class="results-emoji">${tier.emoji}</div>
+            <h2 class="results-title" style="color: ${tier.color}">${tier.title}</h2>
+            <div class="score-display">
+              <div class="score-circle" style="border-color: ${tier.color}">
+                <span class="score-number">${correctCount}</span>
+                <span class="score-max">/ ${questions.length}</span>
+              </div>
+            </div>
+            <p class="results-description">${tier.description}</p>
+            <div class="results-actions">
+              <button class="btn" id="retakeBtn">Пройти снова</button>
+              <a href="/ru/testy/podhodit-li-vam-shiba-inu/" class="btn btn-secondary">Тест на совместимость с образом жизни</a>
+            </div>
+            <div class="share-section">
+              <p>Поделиться результатом:</p>
+              <div class="share-buttons">
+                <button class="share-btn" id="copyResultBtn" title="Скопировать ссылку">📋 Скопировать ссылку</button>
+              </div>
+            </div>
+            <div class="community-stats">
+              <h3>Как ответили другие</h3>
+              <p class="stats-subtitle">Загрузка результатов...</p>
+              <div class="stats-chart" id="statsChart"></div>
+            </div>
+            <div class="sources-footer">
+              <h3>Источники</h3>
+              <p>Каждый ответ здесь взят из официального стандарта породы сиба-ину AKC, статей AKC об истории и содержании породы, National Shiba Club of America и VCA Animal Hospitals. Блоги, форумы и сводки от ИИ как источники не использовались.</p>
+            </div>
+          </div>
+        `;
+
+        loadCommunityStats(bucket);
+
+        document.getElementById('retakeBtn')?.addEventListener('click', () => {
+          currentQuestion = 0;
+          correctCount = 0;
+          userAnswers.length = 0;
+          if (quizResults) quizResults.style.display = 'none';
+          if (quizContent) quizContent.style.display = 'block';
+          renderQuestion();
+        });
+
+        document.getElementById('copyResultBtn')?.addEventListener('click', () => {
+          navigator.clipboard.writeText(window.location.href);
+          const btn = document.getElementById('copyResultBtn');
+          if (btn) {
+            btn.textContent = '✓ Скопировано!';
+            setTimeout(() => {
+              btn.textContent = '📋 Скопировать ссылку';
+            }, 2000);
+          }
+        });
+      }
+    }
+
+    renderQuestion();
+  </script>
+
+  <style is:global>
+    .quiz-container {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      margin-bottom: var(--space-lg);
+      font-size: var(--font-size-sm);
+      color: var(--color-text-light);
+    }
+
+    .breadcrumb a {
+      color: var(--color-primary);
+      transition: color var(--transition-fast);
+    }
+
+    .breadcrumb a:hover {
+      color: var(--color-primary-dark);
+    }
+
+    .quiz-header {
+      text-align: center;
+      margin-bottom: var(--space-2xl);
+    }
+
+    .quiz-header h1 {
+      color: var(--color-primary);
+      font-size: var(--font-size-3xl);
+      margin-bottom: var(--space-md);
+    }
+
+    .quiz-intro {
+      color: var(--color-text-light);
+      font-size: var(--font-size-lg);
+      line-height: 1.6;
+    }
+
+    .progress-container {
+      background-color: var(--color-secondary);
+      border-radius: var(--radius-full);
+      height: 12px;
+      margin-bottom: var(--space-sm);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .progress-bar {
+      background: linear-gradient(90deg, var(--color-primary), var(--color-primary-dark));
+      height: 100%;
+      width: 0%;
+      transition: width var(--transition-base);
+      border-radius: var(--radius-full);
+    }
+
+    .progress-text {
+      display: block;
+      text-align: center;
+      font-size: var(--font-size-sm);
+      color: var(--color-text-light);
+      margin-bottom: var(--space-xl);
+    }
+
+    .question-card {
+      background: var(--color-white);
+      border-radius: var(--radius-xl);
+      padding: var(--space-3xl);
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+    }
+
+    .question-category {
+      display: inline-block;
+      background-color: var(--color-secondary-light);
+      color: var(--color-primary);
+      font-size: var(--font-size-xs);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 4px 12px;
+      border-radius: var(--radius-full);
+      margin-bottom: var(--space-md);
+    }
+
+    .question-number {
+      color: var(--color-primary);
+      font-size: var(--font-size-xs);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: var(--space-sm);
+      font-weight: 600;
+    }
+
+    .question-text {
+      font-size: var(--font-size-2xl);
+      color: var(--color-text);
+      margin-bottom: var(--space-2xl);
+      line-height: 1.4;
+      font-weight: 600;
+    }
+
+    .options-container {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+
+    .option-btn {
+      width: 100%;
+      padding: var(--space-lg) var(--space-xl);
+      background-color: var(--color-white);
+      border: 2px solid #e5e7eb;
+      border-radius: var(--radius-lg);
+      font-size: var(--font-size-base);
+      color: var(--color-text);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-align: left;
+      line-height: 1.5;
+    }
+
+    .option-btn:hover:not(.disabled) {
+      border-color: var(--color-primary);
+      background-color: #fff8f5;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    .option-btn.disabled {
+      cursor: default;
+    }
+
+    .option-btn.correct {
+      border-color: #22c55e;
+      background-color: #f0fdf4;
+      color: #166534;
+      font-weight: 600;
+    }
+
+    .option-btn.incorrect {
+      border-color: #ef4444;
+      background-color: #fef2f2;
+      color: #991b1b;
+    }
+
+    .feedback-box {
+      margin-top: var(--space-lg);
+      padding: var(--space-lg);
+      border-radius: var(--radius-md);
+    }
+
+    .feedback-correct {
+      background-color: #f0fdf4;
+      border: 1px solid #22c55e;
+    }
+
+    .feedback-incorrect {
+      background-color: #fef2f2;
+      border: 1px solid #ef4444;
+    }
+
+    .feedback-verdict {
+      font-weight: 700;
+      margin-bottom: var(--space-sm);
+      font-size: var(--font-size-lg);
+    }
+
+    .feedback-correct .feedback-verdict {
+      color: #166534;
+    }
+
+    .feedback-incorrect .feedback-verdict {
+      color: #991b1b;
+    }
+
+    .feedback-explanation {
+      color: var(--color-text);
+      line-height: 1.6;
+      margin-bottom: var(--space-sm);
+    }
+
+    .feedback-source {
+      font-size: var(--font-size-sm);
+      color: var(--color-text-light);
+      font-style: italic;
+    }
+
+    .next-btn {
+      margin-top: var(--space-xl);
+      width: 100%;
+      justify-content: center;
+    }
+
+    /* Results Styles */
+    .results-card {
+      background: var(--color-white);
+      border-radius: var(--radius-lg);
+      padding: var(--space-3xl);
+      box-shadow: var(--shadow-lg);
+      text-align: center;
+    }
+
+    .results-emoji {
+      font-size: 5rem;
+      margin-bottom: var(--space-lg);
+    }
+
+    .results-title {
+      font-size: var(--font-size-3xl);
+      margin-bottom: var(--space-xl);
+    }
+
+    .score-display {
+      margin-bottom: var(--space-xl);
+    }
+
+    .score-circle {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 4px solid;
+      background-color: var(--color-secondary-light);
+    }
+
+    .score-number {
+      font-size: var(--font-size-3xl);
+      font-weight: 700;
+      color: var(--color-text);
+    }
+
+    .score-max {
+      font-size: var(--font-size-sm);
+      color: var(--color-text-light);
+    }
+
+    .results-description {
+      font-size: var(--font-size-lg);
+      color: var(--color-text);
+      line-height: 1.7;
+      margin-bottom: var(--space-2xl);
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .results-actions {
+      display: flex;
+      gap: var(--space-md);
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: var(--space-xl);
+    }
+
+    .share-section {
+      padding-top: var(--space-xl);
+      border-top: 1px solid var(--color-secondary);
+    }
+
+    .share-section p {
+      color: var(--color-text-light);
+      margin-bottom: var(--space-md);
+      font-size: var(--font-size-sm);
+    }
+
+    .share-buttons {
+      display: flex;
+      justify-content: center;
+      gap: var(--space-md);
+    }
+
+    .share-btn {
+      padding: var(--space-sm) var(--space-lg);
+      background-color: var(--color-secondary);
+      border: none;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      font-size: var(--font-size-sm);
+      transition: all var(--transition-fast);
+    }
+
+    .share-btn:hover {
+      background-color: var(--color-secondary-dark);
+    }
+
+    /* Community Stats */
+    .community-stats {
+      margin-top: var(--space-2xl);
+      padding-top: var(--space-xl);
+      border-top: 1px solid var(--color-secondary);
+      text-align: left;
+    }
+
+    .community-stats h3 {
+      text-align: center;
+      color: var(--color-accent);
+      margin-bottom: var(--space-xs);
+    }
+
+    .stats-subtitle {
+      text-align: center;
+      font-size: var(--font-size-sm);
+      color: var(--color-text-light);
+      margin-bottom: var(--space-lg);
+    }
+
+    .stats-chart {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+
+    .stat-row {
+      display: grid;
+      grid-template-columns: 130px 1fr 45px;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    .stat-row.user-result .stat-label {
+      font-weight: 600;
+      color: var(--color-primary);
+    }
+
+    .stat-label {
+      font-size: var(--font-size-sm);
+      color: var(--color-text);
+    }
+
+    .stat-bar-container {
+      height: 20px;
+      background-color: var(--color-secondary);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+    }
+
+    .stat-bar {
+      height: 100%;
+      border-radius: var(--radius-sm);
+      transition: width 0.5s ease-out;
+    }
+
+    .stat-percent {
+      font-size: var(--font-size-sm);
+      font-weight: 600;
+      color: var(--color-text);
+      text-align: right;
+    }
+
+    .sources-footer {
+      margin-top: var(--space-2xl);
+      padding-top: var(--space-xl);
+      border-top: 1px solid var(--color-secondary);
+      text-align: left;
+    }
+
+    .sources-footer h3 {
+      text-align: center;
+      color: var(--color-accent);
+      margin-bottom: var(--space-md);
+    }
+
+    .sources-footer p {
+      font-size: var(--font-size-sm);
+      color: var(--color-text-light);
+      line-height: 1.6;
+    }
+
+    @media (max-width: 768px) {
+      .quiz-header h1 {
+        font-size: var(--font-size-2xl);
+      }
+
+      .question-card {
+        padding: var(--space-xl);
+        border-radius: var(--radius-lg);
+      }
+
+      .question-text {
+        font-size: var(--font-size-xl);
+        margin-bottom: var(--space-xl);
+      }
+
+      .option-btn {
+        padding: var(--space-md) var(--space-lg);
+        font-size: var(--font-size-sm);
+      }
+
+      .results-card {
+        padding: var(--space-xl);
+      }
+
+      .results-emoji {
+        font-size: 4rem;
+      }
+
+      .results-title {
+        font-size: var(--font-size-2xl);
+      }
+
+      .stat-row {
+        grid-template-columns: 110px 1fr 40px;
+      }
+
+      .stat-label {
+        font-size: var(--font-size-xs);
+      }
+
+      .stat-bar-container {
+        height: 16px;
+      }
+    }
+  </style>
+</Layout>
