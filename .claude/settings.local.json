@@ -51,7 +51,21 @@
       "Bash(xlsx2csv:*)",
       "Bash(unzip:*)",
       "Bash(cwebp:*)",
-      "WebFetch(domain:shibayukki.com)"
+      "WebFetch(domain:shibayukki.com)",
+      "WebFetch(domain:github.com)",
+      "Bash(gcloud auth application-default login:*)",
+      "Bash(export CLOUDSDK_PYTHON=/usr/local/opt/python@3.13/libexec/bin/python3:*)",
+      "Bash(/usr/local/share/google-cloud-sdk/bin/gcloud auth application-default login:*)",
+      "Bash(pipx ensurepath:*)",
+      "Bash(/usr/local/share/google-cloud-sdk/bin/gcloud config get-value project)",
+      "Bash(claude mcp add:*)",
+      "Bash(claude mcp list:*)",
+      "Bash(export PATH=\"$HOME/.local/bin:$PATH\")",
+      "Bash(pipx run:*)",
+      "Bash(claude mcp remove:*)",
+      "mcp__analytics-mcp__get_account_summaries",
+      "mcp__analytics-mcp__run_report",
+      "mcp__analytics-mcp__get_property_details"
     ]
   }
 }

@@ -7,13 +7,13 @@ const { lang = 'en' } = Astro.props;
 
 const text = {
   en: {
-    message: 'We use cookies to analyze site traffic and improve your experience.',
+    message: 'With your consent we use Google Analytics 4 (Google Ireland Ltd.) to measure page visits. Google sets cookies on your device (stored up to 2 years) and may process data in the USA. You can withdraw consent anytime via "Cookie settings" in the footer. Details:',
     accept: 'Accept',
     decline: 'Decline',
     privacy: 'Privacy Policy'
   },
   ru: {
-    message: 'Мы используем файлы cookie для анализа трафика и улучшения вашего опыта.',
+    message: 'С вашего согласия мы используем Google Analytics 4 (Google Ireland Ltd.) для измерения посещаемости. Google устанавливает cookies на вашем устройстве (хранятся до 2 лет) и может обрабатывать данные в США. Вы можете отозвать согласие в любой момент через «Настройки cookie» в подвале сайта. Подробнее:',
     accept: 'Принять',
     decline: 'Отклонить',
     privacy: 'Политика конфиденциальности'
@@ -210,7 +210,25 @@ const privacyPath = lang === 'ru' ? '/ru/privacy/' : '/privacy/';
     if (declineBtn) {
       declineBtn.addEventListener('click', () => {
         setConsent('declined');
+        // Remove any GA cookies from a previously accepted consent.
+        document.cookie.split(';').forEach((c) => {
+          const name = c.split('=')[0].trim();
+          if (name.startsWith('_ga')) {
+            document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/; domain=.${location.hostname}`;
+          }
+        });
         hideBanner();
+      });
+    }
+
+    // Withdrawal must be as easy as consent (Art. 7(3) GDPR): the footer
+    // "Cookie settings" link clears the stored choice and reopens the banner.
+    const settingsLink = document.getElementById('cookie-settings-link');
+    if (settingsLink) {
+      settingsLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        localStorage.removeItem(CONSENT_KEY);
+        showBanner();
       });
     }
   });

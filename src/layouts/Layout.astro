@@ -81,7 +81,9 @@ const nav = {
     footerTagline: "Following the adventures of a Shiba Inu puppy",
     quickLinks: 'Quick Links',
     connect: 'Connect',
-    footerCopyright: "Made with ❤️ for the best Shiba Inu."
+    footerCopyright: "Made with ❤️ for the best Shiba Inu.",
+    privacy: 'Privacy Policy',
+    cookieSettings: 'Cookie settings'
   },
   ru: {
     home: 'Главная',
@@ -94,7 +96,9 @@ const nav = {
     footerTagline: 'Следим за приключениями щенка сиба-ину',
     quickLinks: 'Быстрые ссылки',
     connect: 'Соцсети',
-    footerCopyright: 'Сделано с ❤️ для лучшего сиба-ину.'
+    footerCopyright: 'Сделано с ❤️ для лучшего сиба-ину.',
+    privacy: 'Политика конфиденциальности',
+    cookieSettings: 'Настройки cookie'
   }
 };
 
@@ -294,7 +298,11 @@ const altPath = pathMap[currentPath] || pathMap[currentPath + '/'] ||
         </div>
 
         <div class="footer-bottom">
-          <p>&copy; {new Date().getFullYear()} {t.logoText}. {t.footerCopyright}</p>
+          <p>
+            &copy; {new Date().getFullYear()} {t.logoText}. {t.footerCopyright}
+            &middot; <a href={lang === 'ru' ? '/ru/privacy/' : '/privacy/'}>{t.privacy}</a>
+            &middot; <a href="#" id="cookie-settings-link">{t.cookieSettings}</a>
+          </p>
         </div>
       </div>
     </footer>
