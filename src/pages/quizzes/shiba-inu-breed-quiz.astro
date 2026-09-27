@@ -346,6 +346,13 @@ const quizSchema = {
     let answered = false;
     const userAnswers: { correct: boolean }[] = [];
 
+    function scrollToQuiz() {
+      const header = document.querySelector('.quiz-header');
+      if (header) {
+        header.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
     function renderQuestion() {
       const question = questions[currentQuestion];
       const quizContent = document.getElementById('quizContent');
@@ -388,8 +395,10 @@ const quizSchema = {
           if (currentQuestion < questions.length - 1) {
             currentQuestion++;
             renderQuestion();
+            scrollToQuiz();
           } else {
             showResults();
+            scrollToQuiz();
           }
         });
       }
@@ -491,6 +500,7 @@ const quizSchema = {
           if (quizResults) quizResults.style.display = 'none';
           if (quizContent) quizContent.style.display = 'block';
           renderQuestion();
+          scrollToQuiz();
         });
 
         document.getElementById('copyResultBtn')?.addEventListener('click', () => {
