@@ -221,7 +221,7 @@ const quizSchema = {
         question: "Why does AKC say a Shiba Inu suits experienced dog owners better than first-timers?",
         options: [
           "They have low energy and get bored easily",
-          "They're stubborn and independent, which makes training harder",
+          "They're stubborn and independent, which can make training tedious",
           "They need professional grooming every week",
           "AKC has no stated position on this"
         ],
@@ -235,7 +235,7 @@ const quizSchema = {
         question: "AKC articles and breeders commonly compare the Shiba Inu's independent, self-grooming personality to which animal?",
         options: ["A fox", "A cat", "A wolf", "A raccoon"],
         correctIndex: 1,
-        explanation: "AKC quotes a breeder describing the Shiba as \"independent, intelligent, catlike,\" and a separate AKC article states: \"In many ways, the Shiba Inu is more like a cat than a dog.\"",
+        explanation: "An AKC breeder describes the Shiba as independent, intelligent, and catlike, and a separate AKC article says it straight: \"In many ways, the Shiba Inu is more like a cat than a dog.\"",
         source: "AKC, Akita Versus Shiba Inu; AKC, Facts About the Shiba Inu"
       },
       {
@@ -630,6 +630,7 @@ const quizSchema = {
       transition: all 0.2s ease;
       text-align: left;
       line-height: 1.5;
+      touch-action: manipulation;
     }
 
     .option-btn:hover:not(.disabled) {
@@ -802,6 +803,7 @@ const quizSchema = {
       cursor: pointer;
       font-size: var(--font-size-sm);
       transition: all var(--transition-fast);
+      touch-action: manipulation;
     }
 
     .share-btn:hover {
