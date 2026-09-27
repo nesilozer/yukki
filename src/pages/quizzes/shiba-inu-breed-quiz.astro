@@ -68,6 +68,24 @@ const quizSchema = {
       source: string;
     }
 
+    const SOURCE_URLS: Record<string, string> = {
+      "AKC Official Standard of the Shiba Inu": "https://images.akc.org/pdf/breeds/standards/ShibaInu.pdf",
+      "AKC Shiba Inu Breed History": "https://www.akc.org/expert-advice/dog-breeds/shiba-inu-breed-history/",
+      "AKC, Is the Shiba Inu Right for You?": "https://www.akc.org/expert-advice/dog-breeds/shiba-inu-right-for-you/",
+      "AKC, Akita Versus Shiba Inu": "https://www.akc.org/expert-advice/dog-breeds/akita-versus-shiba-inu-how-to-tell-the-difference/",
+      "AKC, Facts About the Shiba Inu": "https://www.akc.org/expert-advice/lifestyle/fun-facts-shiba-inu/",
+      "National Shiba Club of America, Health page": "https://www.shibas.org/newstand/health.html",
+      "corroborated by VCA Animal Hospitals": "https://vcahospitals.com/know-your-pet/shiba-inu",
+      "VCA Animal Hospitals": "https://vcahospitals.com/know-your-pet/shiba-inu"
+    };
+
+    function linkifySource(source: string): string {
+      return source.split("; ").map(part => {
+        const url = SOURCE_URLS[part.trim()];
+        return url ? `<a href="${url}" target="_blank" rel="noopener nofollow">${part}</a>` : part;
+      }).join("; ");
+    }
+
     const questions: Question[] = [
       {
         id: 1,
@@ -406,7 +424,7 @@ const quizSchema = {
         feedbackBox.innerHTML = `
           <p class="feedback-verdict">${isCorrect ? '✓ Correct!' : '✗ Not quite'}</p>
           <p class="feedback-explanation">${question.explanation}</p>
-          <p class="feedback-source">Source: ${question.source}</p>
+          <p class="feedback-source">Source: ${linkifySource(question.source)}</p>
         `;
       }
 
@@ -678,6 +696,15 @@ const quizSchema = {
       font-size: var(--font-size-sm);
       color: var(--color-text-light);
       font-style: italic;
+    }
+
+    .feedback-source a {
+      color: var(--color-primary);
+      text-decoration: underline;
+    }
+
+    .feedback-source a:hover {
+      color: var(--color-primary-dark);
     }
 
     .next-btn {
